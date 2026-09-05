@@ -1,8 +1,8 @@
-# 4. Tipos por Referência e Objetos em Memória
+# 5. Tipos por Referência e Objetos em Memória
 
-Nos capítulos anteriores, exploramos os tipos primitivos (`number`, `string`,
-`boolean`...) e aprendemos que cada variável armazena um único dado isolado por
-vez.
+No capítulo anterior, dominamos as regras de declaração com `const` e `let`, a
+importância do escopo de bloco e como a inferência de tipos do TypeScript
+funciona para dados primitivos.
 
 No entanto, no mundo real do desenvolvimento de software, as informações quase
 nunca andam sozinhas. Uma aplicação precisa representar entidades completas —
@@ -13,7 +13,7 @@ Neste capítulo, vamos entender o que são **Objetos Literais**, como definir
 modelos de dados tipados no TypeScript e como esses dados se comportam na
 memória como **Tipos por Referência**.
 
-## 1. O Que São Objetos em JavaScript e TypeScript?
+## O Que São Objetos em JavaScript e TypeScript?
 
 ### A Dor: Variáveis Primitivas Desconexas
 
@@ -88,7 +88,7 @@ const propertyToRead = "course";
 console.log(studentProfile[propertyToRead]); // "Desenvolvimento Web"
 ```
 
-## 2. Modelagem e Tipagem de Objetos no TypeScript
+## Modelagem e Tipagem de Objetos no TypeScript
 
 No JavaScript puro, objetos são totalmente livres: você pode adicionar ou
 remover propriedades a qualquer momento, sem nenhuma garantia de consistência.
@@ -167,7 +167,7 @@ systemAccount.balance += 200.0; // ✅ Permitido: 'balance' é mutável
 // ❌ Erro: Cannot assign to 'accountId' because it is a read-only property.
 ```
 
-## 3. Tipos por Referência: A Mecânica de Memória
+## Tipos por Referência: A Mecânica de Memória
 
 Agora que entendemos como criar e tipar objetos, precisamos analisar um aspecto
 crucial: **como os objetos são armazenados na memória do computador**.
@@ -258,9 +258,9 @@ console.log(settingsA.theme); // "light" (ambas apontam para o mesmo objeto no H
 Um mito muito comum é achar que declarar um objeto com `const` impede que suas
 propriedades sejam alteradas.
 
-A palavra-chave `const` protege apenas a **variável na Stack** (impedindo que
-ela seja reatribuída para apontar para outro endereço), mas **não congela as
-propriedades do objeto na Heap**:
+Como vimos no capítulo anterior, a palavra-chave `const` protege apenas a
+**variável na Stack** (impedindo que ela seja reatribuída para apontar para
+outro endereço), mas **não congela as propriedades do objeto na Heap**:
 
 ```typescript
 const currentConfig = {
@@ -363,16 +363,17 @@ recentes do Node.js e dos navegadores.
 ## O Que Vem a Seguir?
 
 Agora que dominamos a estrutura de objetos e o comportamento de tipos por
-referência na memória, estamos prontos para aprofundar nas regras de
-gerenciamento de variáveis.
+referência na memória, estamos prontos para explorar como transformar e avaliar
+dados em tempo de execução.
 
-No próximo capítulo, vamos entender como declarar e organizar variáveis com
-`const` e `let`, o perigo histórico do `var` e como o TypeScript realiza a
-**Inferência Estática de Tipos** de forma inteligente sem que precisemos digitar
-anotações de tipo em todas as linhas.
+No próximo capítulo, vamos desvendar os **Operadores, Expressões e a Coerção de
+Tipos**, entendendo a diferença crucial entre a igualdade estrita (`===`) e a
+igualdade fraca (`==`), além de conhecer operadores modernos como **Coalescência
+Nula (`??`)** e **Encadeamento Opcional (`?.`)**.
 
 ---
 
-<a href="03-string.md">← Manipulação de Strings e Template Literals</a>
+<a href="04-variaveis-e-constantes.md">← Declaração de Variáveis, Constantes e
+Inferência de Tipos</a>
 
-<p align="right"><a href="05-variaveis-e-constantes.md">Próximo: Declaração de Variáveis, Constantes e Inferência de Tipos →</a></p>
+<p align="right"><a href="06-expressoes-e-operadores.md">Próximo: Expressões, Operadores e Coerção de Tipos →</a></p>

@@ -334,4 +334,4 @@ a divisão entre **Stack** e **Heap** no runtime.
 
 <a href="02-tipos-primitivos.md">← Tipos Primitivos em TypeScript</a>
 
-<p align="right"><a href="04-tipos-por-referencia-e-objetos.md">Próximo: Tipos por Referência e Objetos em Memória →</a></p>
+<p align="right"><a href="04-variaveis-e-constantes.md">Próximo: Declaração de Variáveis, Constantes e Inferência de Tipos →</a></p>
