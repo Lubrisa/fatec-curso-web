@@ -1,4 +1,4 @@
-# 4. Declaração de Variáveis, Constantes e Inferência de Tipos
+# 4. Variáveis e Constantes
 
 Nos capítulos anteriores, exploramos os tipos primitivos fundamentais da
 linguagem (`number`, `string`, `boolean`...) e vimos como eles representam dados
@@ -221,6 +221,10 @@ const productPrice = 250;
 console.log(productPrice); // ✅ 250
 ```
 
+As mecânicas detalhadas de como o motor de execução do JavaScript realiza o
+içamento (_hoisting_) e gerencia a TDZ na fase de criação de escopo serão
+aprofundadas no [Capítulo 11: Escopo e Closures](11-escopo-e-closures.md).
+
 ## Inferência Estática de Tipos: Deixe o TypeScript Trabalhar
 
 Uma das maiores qualidades do TypeScript é que ele possui um poderoso motor de
@@ -353,6 +357,6 @@ Referência**.
 
 ---
 
-<a href="03-string.md">← Manipulação de Strings e Template Literals</a>
+<a href="03-string.md">← String</a>
 
-<p align="right"><a href="05-tipos-por-referencia-e-objetos.md">Próximo: Tipos por Referência e Objetos em Memória →</a></p>
+<p align="right"><a href="05-objetos.md">Próximo: Objetos →</a></p>
