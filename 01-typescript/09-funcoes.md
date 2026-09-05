@@ -266,8 +266,8 @@ Tipos](04-variaveis-e-constantes.md). Isso permite que elas sejam invocadas em
 linhas anteriores à sua declaração no mesmo arquivo.
 
 As regras completas de como o motor de execução organiza o _hoisting_ de funções
-e variáveis na memória serão aprofundadas em detalhes no [Capítulo 11: Escopo e
-Closures](11-escopo-e-closures.md).
+e variáveis na memória serão aprofundadas em detalhes no [Capítulo 10: Escopo e
+Closures](10-escopo-e-closures.md).
 
 ### 2. Expressão de Função (_Function Expression_)
 
@@ -563,4 +563,4 @@ uma seta (`=>`) apontando para o tipo de retorno:
 
 <a href="08-lacos.md">← Laços</a>
 
-<p align="right"><a href="10-desestruturacao-rest-e-spread.md">Próximo: Desestruturação, Rest e Spread →</a></p>
+<p align="right"><a href="10-escopo-e-closures.md">Próximo: Escopo e Closures →</a></p>

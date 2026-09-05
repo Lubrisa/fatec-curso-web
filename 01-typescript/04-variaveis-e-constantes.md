@@ -223,7 +223,7 @@ console.log(productPrice); // ✅ 250
 
 As mecânicas detalhadas de como o motor de execução do JavaScript realiza o
 içamento (_hoisting_) e gerencia a TDZ na fase de criação de escopo serão
-aprofundadas no [Capítulo 11: Escopo e Closures](11-escopo-e-closures.md).
+aprofundadas no [Capítulo 10: Escopo e Closures](10-escopo-e-closures.md).
 
 ## Inferência Estática de Tipos: Deixe o TypeScript Trabalhar
 
