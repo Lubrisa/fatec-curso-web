@@ -207,6 +207,6 @@ entre declarações tradicionais e _Arrow Functions_, e como aplicar a técnica 
 
 ---
 
-<a href="07-condicionais.md">← Estruturas de Decisão e Fluxo de Controle</a>
+<a href="07-condicionais.md">← Condicionais</a>
 
 <p align="right"><a href="09-funcoes.md">Próximo: Funções →</a></p>

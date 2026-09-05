@@ -1,4 +1,4 @@
-# 3. Manipulação de Strings e Template Literals
+# 3. String
 
 No capítulo anterior, conhecemos o catálogo de tipos primitivos e aprendemos a
 blindar nosso código contra dados inesperados.
@@ -332,6 +332,6 @@ a divisão entre **Stack** e **Heap** no runtime.
 
 ---
 
-<a href="02-tipos-primitivos.md">← Tipos Primitivos em TypeScript</a>
+<a href="02-tipos-primitivos.md">← Tipos Primitivos</a>
 
-<p align="right"><a href="04-variaveis-e-constantes.md">Próximo: Declaração de Variáveis, Constantes e Inferência de Tipos →</a></p>
+<p align="right"><a href="04-variaveis-e-constantes.md">Próximo: Variáveis e Constantes →</a></p>

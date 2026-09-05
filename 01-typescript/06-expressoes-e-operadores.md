@@ -1,4 +1,4 @@
-# 6. Expressões, Operadores e Coerção de Tipos
+# 6. Expressões e Operadores
 
 Nos capítulos anteriores, aprendemos como armazenar e estruturar dados na
 memória, seja através de tipos primitivos ou de objetos literais.
@@ -346,7 +346,6 @@ pela indústria: as **Guard Clauses (Cláusulas de Guarda / Early Return)**.
 
 ---
 
-<a href="05-tipos-por-referencia-e-objetos.md">← Tipos por Referência e Objetos
-em Memória</a>
+<a href="05-objetos.md">← Objetos</a>
 
-<p align="right"><a href="07-condicionais.md">Próximo: Estruturas de Decisão e Fluxo de Controle →</a></p>
+<p align="right"><a href="07-condicionais.md">Próximo: Condicionais →</a></p>

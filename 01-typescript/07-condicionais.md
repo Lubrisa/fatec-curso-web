@@ -1,4 +1,4 @@
-# 7. Estruturas de Decisão e Fluxo de Controle
+# 7. Condicionais
 
 No capítulo anterior, aprendemos a calcular valores e avaliar expressões
 booleanas (`isLogged && hasAccess`, `age >= 18`).
@@ -185,7 +185,6 @@ No próximo capítulo, vamos explorar as **Estruturas de Repetição (`for`,
 
 ---
 
-<a href="06-expressoes-e-operadores.md">← Expressões, Operadores e Coerção de
-Tipos</a>
+<a href="06-expressoes-e-operadores.md">← Expressões e Operadores</a>
 
-<p align="right"><a href="08-lacos.md">Próximo: Estruturas de Repetição e Laços →</a></p>
+<p align="right"><a href="08-lacos.md">Próximo: Laços →</a></p>

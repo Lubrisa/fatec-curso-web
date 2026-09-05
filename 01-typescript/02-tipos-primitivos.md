@@ -1,4 +1,4 @@
-# 2. Tipos Primitivos em TypeScript
+# 2. Tipos Primitivos
 
 No capítulo anterior, preparamos o terreno: configuramos o compilador `tsc`,
 desvendamos as opções do `tsconfig.json` e executamos nosso primeiro programa.
@@ -307,4 +307,4 @@ transformação.
 <a href="01-instalacao-e-primeiro-programa.md">← Instalação e Primeiro Programa
 em TypeScript</a>
 
-<p align="right"><a href="03-string.md">Próximo: Manipulação de Strings e Template Literals →</a></p>
+<p align="right"><a href="03-string.md">Próximo: String →</a></p>

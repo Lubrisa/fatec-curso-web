@@ -277,4 +277,4 @@ Estática de Tipos**.
 <a href="../00-ferramental/05-o-que-e-typescript-e-por-que-ele-existe.md">← O
 Que É o TypeScript e Por Que Ele Existe?</a>
 
-<p align="right"><a href="02-tipos-primitivos.md">Próximo: Tipos Primitivos em TypeScript →</a></p>
+<p align="right"><a href="02-tipos-primitivos.md">Próximo: Tipos Primitivos →</a></p>

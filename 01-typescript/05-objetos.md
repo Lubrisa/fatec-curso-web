@@ -1,4 +1,4 @@
-# 5. Tipos por Referência e Objetos em Memória
+# 5. Objetos
 
 No capítulo anterior, dominamos as regras de declaração com `const` e `let`, a
 importância do escopo de bloco e como a inferência de tipos do TypeScript
@@ -373,7 +373,6 @@ Nula (`??`)** e **Encadeamento Opcional (`?.`)**.
 
 ---
 
-<a href="04-variaveis-e-constantes.md">← Declaração de Variáveis, Constantes e
-Inferência de Tipos</a>
+<a href="04-variaveis-e-constantes.md">← Variáveis e Constantes</a>
 
-<p align="right"><a href="06-expressoes-e-operadores.md">Próximo: Expressões, Operadores e Coerção de Tipos →</a></p>
+<p align="right"><a href="06-expressoes-e-operadores.md">Próximo: Expressões e Operadores →</a></p>
