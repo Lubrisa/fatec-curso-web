@@ -269,12 +269,11 @@ entranhas da linguagem:
 > (`number`, `string`, `boolean`, `null`, `undefined`) e como ele infere tipos
 > automaticamente sem que precisemos digitar tudo manualmente?"_
 
-No próximo capítulo, vamos explorar os **Tipos Primitivos e a Inferência
-Estática de Tipos**.
+No próximo capítulo, vamos explorar os **Tipos Primitivos e Especiais**.
 
 ---
 
 <a href="../00-ferramental/05-o-que-e-typescript-e-por-que-ele-existe.md">← O
 Que É o TypeScript e Por Que Ele Existe?</a>
 
-<p align="right"><a href="02-tipos-primitivos.md">Próximo: Tipos Primitivos →</a></p>
+<p align="right"><a href="02-tipos-primitivos-e-especiais.md">Próximo: Tipos Primitivos e Especiais →</a></p>

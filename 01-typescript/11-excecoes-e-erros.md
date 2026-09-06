@@ -231,9 +231,10 @@ configurações estritas do TypeScript tipam a variável de erro como
 
 ### Afunilamento Seguro com `instanceof Error`
 
-Como vimos no [Capítulo 02: Tipos Primitivos](02-tipos-primitivos.md), o tipo
-`unknown` nos impede de acessar propriedades como `.message` diretamente sem
-antes verificar o que aquele dado realmente é.
+Como vimos no [Capítulo 02: Tipos Primitivos e
+Especiais](02-tipos-primitivos-e-especiais.md), o tipo `unknown` nos impede de
+acessar propriedades como `.message` diretamente sem antes verificar o que
+aquele dado realmente é.
 
 A maneira idiomática e segura de manipular erros no TypeScript é utilizando o
 operador **`instanceof`** para realizar o afunilamento (_narrowing_):

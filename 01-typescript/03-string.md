@@ -332,6 +332,6 @@ a divisão entre **Stack** e **Heap** no runtime.
 
 ---
 
-<a href="02-tipos-primitivos.md">← Tipos Primitivos</a>
+<a href="02-tipos-primitivos-e-especiais.md">← Tipos Primitivos e Especiais</a>
 
 <p align="right"><a href="04-variaveis-e-constantes.md">Próximo: Variáveis e Constantes →</a></p>
