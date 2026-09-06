@@ -288,16 +288,14 @@ e `Map`.
 No próximo bloco, entraremos em uma das áreas mais poderosas e elegantes do
 TypeScript: **Bloco 4: Tipagem Avançada & Contratos**.
 
-Iniciaremos pelo **[Capítulo 22: Type vs Interface e Duck
-Typing](22-type-vs-interface-e-duck-typing.md)**, onde você aprenderá quando
-utilizar `type alias` ou `interface`, como funcionam a extensão e a união de
-contratos, e o conceito fundamental de **tipagem estrutural (_Duck Typing_)**,
-que define a forma como o compilador avalia compatibilidade entre objetos na Web
-moderna.
+Iniciaremos pelo **[Capítulo 22: Interfaces](22-interfaces.md)**, onde você
+aprenderá a definir contratos formais de dados, criar hierarquias com
+`extends` e comparar as diferenças práticas e de uso entre `interface` e `type
+alias` na Web moderna.
 
 ---
 
 <a href="20-closures-e-fabricas-de-funcoes.md">← Closures e Fábricas de
 Funções</a>
 
-<p align="right"><a href="22-type-vs-interface-e-duck-typing.md">Próximo: Type vs Interface e Duck Typing →</a></p>
+<p align="right"><a href="22-interfaces.md">Próximo: Interfaces →</a></p>
