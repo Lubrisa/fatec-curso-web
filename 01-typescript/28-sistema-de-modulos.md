@@ -258,15 +258,17 @@ que torna frameworks como React e Next.js tão rápidos!
 ## O Que Vem a Seguir?
 
 Agora que você compreende como modularizar e organizar seus arquivos com ES
-Modules e `import type`, estamos prontos para explorar a modelagem orientada a
-objetos no TypeScript.
+Modules e `import type`, estamos prontos para discutir a modelagem orientada a
+objetos no ecossistema JavaScript e TypeScript.
 
-No **[Capítulo 29: Classes](29-classes.md)**, aprenderemos a criar classes
-modernas no TypeScript, compreendendo propriedades, métodos, construtores e o
-atalho de atribuição automática em parâmetros (`Parameter Properties`).
+No **[Capítulo 29: O Paradigma Orientado a Objetos na
+Web](29-o-paradigma-orientado-a-objetos-na-web.md)**, faremos uma imersão
+conceitual sobre o papel da orientação a objetos na Web moderna, compreendendo a
+natureza multiparadigma do ecossistema, a história da cadeia de protótipos e
+quando realmente faz sentido utilizar classes em projetos profissionais.
 
 ---
 
 <a href="27-tipos-utilitarios.md">← Tipos Utilitários</a>
 
-<p align="right"><a href="29-classes.md">Próximo: Classes →</a></p>
+<p align="right"><a href="29-o-paradigma-orientado-a-objetos-na-web.md">Próximo: O Paradigma Orientado a Objetos na Web →</a></p>
