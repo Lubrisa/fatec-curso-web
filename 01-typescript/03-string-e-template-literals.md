@@ -277,4 +277,4 @@ abandono do `var` e o poder da **Inferência Estática de Tipos**.
 
 <a href="02-tipos-primitivos-e-especiais.md">← Tipos Primitivos e Especiais</a>
 
-<p align="right"><a href="04-variaveis-e-constantes.md">Próximo: Variáveis e Constantes →</a></p>
+<p align="right"><a href="04-variaveis.md">Próximo: Variáveis →</a></p>

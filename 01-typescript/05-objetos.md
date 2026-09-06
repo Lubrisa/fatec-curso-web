@@ -373,6 +373,6 @@ Nula (`??`)** e **Encadeamento Opcional (`?.`)**.
 
 ---
 
-<a href="04-variaveis-e-constantes.md">← Variáveis e Constantes</a>
+<a href="04-variaveis.md">← Variáveis</a>
 
 <p align="right"><a href="06-expressoes-e-operadores.md">Próximo: Expressões e Operadores →</a></p>
