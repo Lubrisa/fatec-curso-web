@@ -1,4 +1,4 @@
-# 8. Estruturas de Repetição e Laços
+# 10. Laços de Repetição
 
 Nos capítulos anteriores, aprendemos a calcular expressões e tomar decisões
 pontuais com estruturas como `if` e `switch`.
@@ -10,9 +10,8 @@ de um carrinho de compras ou tentar reconectar a um servidor até obter sucesso.
 
 Neste capítulo, vamos dominar os **Laços de Repetição (Loops)** do TypeScript: o
 `for` clássico, `while`, `do-while`, o controle de fluxo com `break` e
-`continue`, além de entender por que estruturas como **`for..of`** e
-**`for..in`** costumam ser evitadas no desenvolvimento moderno em favor de
-métodos funcionais de arrays e objetos.
+`continue`, além de entender as particularidades de estruturas como
+**`for..of`** e **`for..in`**.
 
 ## O Laço `for` Tradicional
 
@@ -155,42 +154,28 @@ for (const configKey in serverConfig) {
 }
 ```
 
-### Por Que Evitar `for..of` e `for..in` no Dia a Dia?
+### Quando Usar Cada Abordagem?
 
-1. **Confusão e Ambiguidade:** A semelhança sintática entre `in` e `of` leva a
-   erros frequentes. Usar `for..in` em arrays é uma das armadilhas mais comuns
-   de JavaScript (itera sobre os índices como texto `"0"`, `"1"` e pode puxar
-   propriedades herdadas do protótipo).
-2. **Código Menos Idiomático:** No desenvolvimento moderno com TypeScript e
-   frameworks como React, você raramente usará laços imperativos para manipular
-   listas ou objetos.
-3. **Alternativas Mais Expressivas:**
-   - Para **Arrays**: veremos métodos funcionais declarativos (`map`, `filter`,
-     `forEach`, `reduce`) nos capítulos adiante, que evitam mutações e expressam
-     diretamente a intenção do código.
-   - Para **Objetos**: métodos utilitários como `Object.keys()`,
-     `Object.values()` e `Object.entries()` oferecem controle explícito e seguro
-     sobre chaves e valores.
-
-> **💡 Recomendação Prática:**
->
-> - Use **`for` tradicional** ou **`while`** quando precisar de controle
->   imperativo estrito de fluxo (como índices manuais, buscas com `break` ou
->   retentativas).
-> - Para processamento de coleções e listas, prefira os **métodos de Array**
->   (que estudaremos em detalhes no Bloco 2).
-> - **Evite `for..in` e `for..of`**, reduzindo a chance de erros sutis e
->   mantendo o código alinhado aos padrões mais modernos do ecossistema.
+1. **`for..of` é excelente para iteração direta:** Quando você precisa percorrer
+   os elementos de uma lista e quer a flexibilidade de usar `break` ou
+   `continue` para interromper ou pular passos.
+2. **Evite `for..in` em Arrays:** O `for..in` itera sobre as chaves/propriedades
+   como strings (`"0"`, `"1"`) e pode incluir propriedades herdadas da cadeia de
+   protótipos. Para arrays, use sempre `for..of` ou o `for` tradicional.
+3. **No desenvolvimento moderno (React / Web):** Para operações de transformação
+   e filtragem de dados, veremos mais adiante que métodos funcionais
+   declarativos (`map`, `filter`, `reduce`) são os mais adotados por evitarem
+   efeitos colaterais e mutações.
 
 ## Resumo das Estruturas de Repetição
 
 | Estrutura      | Quando Utilizar?                                                | Exemplo de Sintaxe                     |
 | :------------- | :-------------------------------------------------------------- | :------------------------------------- |
-| **`for`**      | Número fixo de passos, controle manual de índice                | `for (let i = 0; i < 10; i++) { ... }` |
+| **`for`**      | Número fixo de iterações, controle manual de índice             | `for (let i = 0; i < 10; i++) { ... }` |
 | **`while`**    | Repetição condicional avaliada **antes** do bloco               | `while (hasMoreItems) { ... }`         |
 | **`do-while`** | Repetição condicional avaliada **depois** (ao menos 1 execução) | `do { ... } while (hasErrors);`        |
-| **`for..of`**  | _Evite_: prefira métodos de array (`forEach`, `map`, `filter`)  | `for (const item of list) { ... }`     |
-| **`for..in`**  | _Evite_: propenso a bugs em arrays; prefira `Object.entries()`  | `for (const key in object) { ... }`    |
+| **`for..of`**  | Percorrer **valores** de iteráveis (arrays, strings)            | `for (const item of list) { ... }`     |
+| **`for..in`**  | Percorrer **chaves** de objetos (_evite usar em arrays_)        | `for (const key in object) { ... }`    |
 
 ## O Que Vem a Seguir?
 
@@ -201,12 +186,12 @@ Agora que dominamos tipos primitivos, objetos, operadores, tomada de decisões e
 laços de repetição, estamos prontos para avançar para o **Bloco 2: Funções,
 Operadores Modernos & Coleções**.
 
-No próximo capítulo, vamos desvendar como criar e tipar **Funções**, a diferença
-entre declarações tradicionais e _Arrow Functions_, e como aplicar a técnica de
-**Guard Clauses (Early Return)**.
+No próximo capítulo, vamos desvendar como criar e tipar **Funções**, os
+diferentes tipos de sintaxe (_Function Declaration_, _Function Expression_,
+_Arrow Function_) e como estruturar contratos de parâmetros e retorno.
 
 ---
 
-<a href="07-condicionais.md">← Condicionais</a>
+<a href="09-estruturas-condicionais.md">← Estruturas Condicionais</a>
 
-<p align="right"><a href="09-funcoes.md">Próximo: Funções →</a></p>
+<p align="right"><a href="11-funcoes-anatomia-e-sintaxe.md">Próximo: Funções: Anatomia e Sintaxe →</a></p>
