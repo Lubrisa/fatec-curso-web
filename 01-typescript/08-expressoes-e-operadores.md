@@ -1,7 +1,7 @@
-# 6. Expressões e Operadores
+# 8. Expressões e Operadores
 
 Nos capítulos anteriores, aprendemos como armazenar e estruturar dados na
-memória, seja através de tipos primitivos ou de objetos literais.
+memória com tipos primitivos, objetos literais e Type Aliases.
 
 Agora daremos o próximo passo fundamental: **como transformar, calcular,
 comparar e avaliar esses dados em tempo de execução**.
@@ -31,43 +31,92 @@ userScore >= 60; // Produz true ou false
 ```
 
 Sempre que o TypeScript ou o JavaScript encontram uma expressão, eles a
-"avaliam" (_evaluate_) para encontrar seu resultado final.
+"avaliam" para encontrar seu resultado final.
 
 ### 2. Operador
 
 Um **operador** é um símbolo especial que instrui o interpretador a realizar uma
 operação específica sobre um ou mais valores (chamados de **operandos**).
 
-Os operadores são classificados pela quantidade de operandos que recebem:
+Podemos classificar os operadores a partir de diferentes critérios:
 
-- **Unários:** Operam sobre um único operando (ex: `!isLoggedIn`,
-  `-temperature`);
-- **Binários:** Operam sobre dois operandos (ex: `total + shipping`, `a === b`);
-- **Ternários:** Operam sobre três operandos (ex: `score >= 60 ? "Aprovado" :
-"Reprovado"`).
+- **Quantidade de Operandos (Aridade):**
+  - **Unários:** Operam sobre um único operando (ex: `!isLoggedIn`,
+    `-temperature`);
+  - **Binários:** Operam sobre dois operandos (ex: `total + shipping`, `a === b`);
+  - **Ternários:** Operam sobre três operandos (ex: `score >= 60 ? "Aprovado" : "Reprovado"`).
+- **Tipo de Operação e Finalidade:** A natureza do cálculo ou transformação
+  realizada (operações matemáticas, comparações lógicas, atribuições, navegação
+  em dados, etc.);
+- **Precedência e Associatividade:** A ordem de prioridade e a direção de
+  avaliação quando múltiplos operadores aparecem juntos em uma mesma expressão.
 
-## Operadores Aritméticos e de Atribuição
+A seguir, vamos explorar os operadores mais utilizados no desenvolvimento
+moderno organizados pelo **tipo de operação** que realizam.
 
-São utilizados para cálculos numéricos e manipulação de valores:
+## Operadores Aritméticos
+
+São utilizados para realizar cálculos matemáticos com valores numéricos:
 
 ```typescript
 const basePrice = 100;
 const taxRate = 0.15;
 
-// Operações Aritméticas:
 const subtotal = basePrice * 2; // Multiplicação: 200
-const finalPrice = subtotal + subtotal * taxRate; // Soma e multiplicação: 230
+const finalPrice = subtotal + subtotal * taxRate; // Adição e multiplicação: 230
 const divisionResult = 10 / 4; // Divisão: 2.5
 const remainder = 10 % 3; // Módulo (Resto da divisão inteira): 1
 const exponential = 2 ** 3; // Exponenciação (2³): 8
+```
 
-// Atribuição Composta (atalhos de atualização):
-let currentScore = 50;
+### Incremento (`++`) e Decremento (`--`)
+
+Os operadores unários `++` e `--` adicionam ou subtraem `1` de uma variável:
+
+```typescript
+let counter = 0;
+
+counter++; // Incremento: equivale a counter = counter + 1 (agora vale 1)
+counter--; // Decremento: equivale a counter = counter - 1 (agora vale 0)
+```
+
+> **Prefixado vs. Posfixado:**
+>
+> Quando usados em expressões, `++counter` (prefixado) incrementa o valor
+> **antes** de avaliá-lo, enquanto `counter++` (posfixado) retorna o valor atual
+> e incrementa **depois**. Em código moderno, a boa prática é usá-los em linhas
+> isoladas ou optar pela atribuição explícita `counter += 1`.
+
+## Operadores de Atribuição
+
+Permitem armazenar ou atualizar valores em variáveis:
+
+```typescript
+let currentScore = 50; // Atribuição simples
+
+// Atribuição Composta (atalhos de operação + atribuição):
 currentScore += 10; // Equivalente a: currentScore = currentScore + 10 (60)
 currentScore -= 5; // Equivalente a: currentScore = currentScore - 5 (55)
 currentScore *= 2; // Equivalente a: currentScore = currentScore * 2 (110)
 currentScore /= 2; // Equivalente a: currentScore = currentScore / 2 (55)
 ```
+
+## Concatenação de Strings (`+`)
+
+Além de somar números, o operador binário `+` pode ser utilizado para unir
+textos:
+
+```typescript
+const firstName = "Luigi";
+const lastName = "França";
+
+const fullName = firstName + " " + lastName; // "Luigi França"
+```
+
+> **Lembrete:** Conforme vimos no [Capítulo 03: String e Template
+> Literals](03-string-e-template-literals.md), no TypeScript moderno priorizamos
+> **Template Literals** (`` `${firstName} ${lastName}` ``) para montar textos
+> dinâmicos, reservando o operador `+` para operações matemáticas.
 
 ## Operadores de Comparação e Igualdade
 
@@ -123,6 +172,33 @@ const studentAge: number = 20;
 // ❌ Erro: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
 ```
 
+### Igualdade de Objetos: Comparando Referências
+
+Uma dúvida clássica surge ao comparar objetos com o operador `===`. Como
+aprendemos no [Capítulo 06: Tipos por Referência e
+Memória](06-tipos-por-referencia-e-memoria.md), variáveis de objetos armazenam
+**endereços de memória na Stack** apontando para o dado na Heap.
+
+Por isso, o operador `===` ao comparar objetos **não verifica se as propriedades
+internas são idênticas**, mas sim se ambas as variáveis apontam para o
+**mesmíssimo endereço de memória**:
+
+```typescript
+type User = {
+  name: string;
+};
+
+// Dois objetos distintos criados na Heap (endereços diferentes):
+const userA: User = { name: "Luigi" };
+const userB: User = { name: "Luigi" };
+
+// Uma variável recebendo a referência de userA (mesmo endereço):
+const userC: User = userA;
+
+console.log(userA === userB); // false (conteúdos idênticos, mas endereços de memória diferentes!)
+console.log(userA === userC); // true (ambas as variáveis apontam para o mesmo objeto na Heap)
+```
+
 ## Operadores Lógicos e Curto-Circuito
 
 Os operadores lógicos combinam condições booleanas:
@@ -146,46 +222,82 @@ const isGuestUser = !isUserAuthenticated; // false
 ### Valores _Truthy_ e _Falsy_
 
 No JavaScript e no TypeScript, qualquer tipo de dado pode ser avaliado em um
-contexto lógico.
+**contexto lógico** — ou seja, quando é combinado com operadores lógicos (`&&`,
+`||`, `!`) ou quando alimenta decisões em estruturas condicionais e laços de
+repetição (que estudaremos nos próximos capítulos).
 
-Existem apenas **6 valores Falsy** que são tratados como falso:
+Quando um valor não-booleano é testado em um contexto lógico, ele é
+implicitamente interpretado como `true` (**Truthy**) ou `false` (**Falsy**).
 
-1. `false`
+Existem apenas **6 valores Falsy** na linguagem:
+
+1. `false` (o próprio booleano falso)
 2. `0` (e `-0`)
 3. `""` (string vazia)
 4. `null`
 5. `undefined`
-6. `NaN`
+6. `NaN` (Not-a-Number / cálculo numérico inválido)
 
-**Todos os demais valores são Truthy**, incluindo objetos vazios `{}` e arrays
-vazios `[]`!
+**Todos os demais valores são Truthy**, incluindo números negativos (`-10`),
+textos com espaço (`" "`), objetos vazios `{}` e arrays vazios `[]`!
 
 ### Avaliação de Curto-Circuito (_Short-Circuit_)
 
-Os operadores `&&` e `||` não convertem o resultado para booleano; eles retornam
-o **próprio valor** que determinou a parada da avaliação:
+Uma característica fundamental dos operadores `&&` e `||` é a **avaliação de
+curto-circuito**: o interpretador avalia as expressões da esquerda para a
+direita e **interrompe a execução assim que o resultado puder ser determinado**,
+sem avaliar as expressões seguintes.
 
-```typescript
-// Curto-circuito com '&&': Para no primeiro Falsy ou retorna o último valor
-const serverGreeting = isUserAuthenticated && "Bem-vindo de volta!";
-// Se isUserAuthenticated for true, o resultado é "Bem-vindo de volta!"
+- **Curto-circuito com `&&`:** Se a primeira expressão for **Falsy**, o operador
+  para imediatamente e não executa o restante (pois a operação inteira já não
+  pode ser verdadeira). Esse comportamento é amplamente usado como **mecanismo de
+  proteção** para só acessar um dado se a condição anterior for válida:
 
-// Curto-circuito com '||': Retorna o primeiro valor Truthy encontrado
-const userInputName = "";
-const displayName = userInputName || "Usuário Anônimo";
-console.log(displayName); // "Usuário Anônimo" (pois "" é falsy)
-```
+  ```typescript
+  type User = {
+    name: string;
+  };
+
+  const loggedUser: User | null = null;
+
+  // Como loggedUser é null (Falsy), a verificação para imediatamente.
+  // O lado direito nem chega a ser executado, evitando erros de leitura:
+  const isUserValid = loggedUser !== null && loggedUser.name.length > 0;
+  console.log(isUserValid); // false
+  ```
+
+- **Curto-circuito com `||`:** Se a primeira expressão for **Truthy**, o
+  operador para imediatamente e ignora o restante (pois um único valor verdadeiro
+  já é suficiente). Esse comportamento é muito utilizado para fornecer **valores
+  de substituição (fallbacks)**:
+
+  ```typescript
+  const userInputName = ""; // String vazia é Falsy
+
+  // Como o primeiro valor é Falsy, o operador avança e assume a alternativa:
+  const displayName = userInputName || "Usuário Anônimo";
+  console.log(displayName); // "Usuário Anônimo"
+  ```
+
+> **Conexão:** Nas próximas seções, vamos conhecer operadores modernos como o
+> **Encadeamento Opcional (`?.`)** e a **Coalescência Nula (`??`)**, criados
+> justamente para tornar esses padrões de proteção e valores padrão muito mais
+> robustos e seguros.
 
 ## Operadores Modernos da Web
 
-### 1. Operador Ternário (`condicao ? exprTrue : exprFalse`)
+### 1. Operador Ternário (`condicao ? valorSeVerdadeiro : valorSeFalso`)
 
-É uma expressão compacta de decisão que **retorna diretamente um valor**:
+O operador ternário é uma expressão compacta de decisão baseada em uma condição:
+
+- Se a condição for **verdadeira** (Truthy), o valor da **esquerda** dos
+  dois-pontos (`:`) é selecionado;
+- Se a condição for **falsa** (Falsy), o valor da **direita** é selecionado.
 
 ```typescript
 const score = 75;
 
-// Produz o valor "Aprovado" ou "Reprovado" em uma única linha:
+// Como (75 >= 60) é verdadeiro, seleciona o valor da esquerda ("Aprovado"):
 const statusResult = score >= 60 ? "Aprovado" : "Reprovado";
 console.log(statusResult); // "Aprovado"
 ```
@@ -201,13 +313,17 @@ O operador **`?.`** interrompe a navegação e retorna `undefined` com seguranç
 caso a propriedade anterior seja `null` ou `undefined`:
 
 ```typescript
-const userProfile: {
+type Address = {
+  street?: string;
+  city?: string;
+};
+
+type UserProfile = {
   name: string;
-  address?: {
-    street?: string;
-    city?: string;
-  };
-} = {
+  address?: Address;
+};
+
+const userProfile: UserProfile = {
   name: "Luigi",
   // 'address' é opcional e não foi definido
 };
@@ -215,16 +331,6 @@ const userProfile: {
 // Navegação segura:
 const streetName = userProfile.address?.street;
 console.log(streetName); // undefined (sem travar a aplicação!)
-```
-
-Também pode ser usado em chamadas de métodos e índices de arrays:
-
-```typescript
-// Executa o método apenas se ele existir:
-apiCallback?.();
-
-// Acessa o índice apenas se o array existir:
-itemsList?.[0];
 ```
 
 ### 3. Coalescência Nula (`??` — _Nullish Coalescing_)
@@ -313,27 +419,6 @@ define a direção em que a expressão é avaliada:
 > const finalAmount = (basePrice + shippingFee) * (1 - discountPercentage);
 > ```
 
-## Resumo dos Operadores Mais Utilizados
-
-| Operador | Categoria             | Exemplo                     | Finalidade / Comportamento                         |
-| :------- | :-------------------- | :-------------------------- | :------------------------------------------------- |
-| `===`    | Igualdade Estrita     | `5 === "5"`                 | `false` (Compara valor e tipo sem coerção)         |
-| `!==`    | Desigualdade Estrita  | `10 !== 20`                 | `true`                                             |
-| `**`     | Exponenciação         | `2 ** 3`                    | `8` ($2^3$)                                        |
-| `%`      | Módulo (Resto)        | `10 % 3`                    | `1`                                                |
-| `&&`     | E Lógico              | `isLogged && hasAccess`     | Retorna verdadeiro se ambos forem verdadeiros      |
-| `\|\|`   | OU Lógico             | `isMobile \|\| isTablet`    | Retorna verdadeiro se ao menos um for verdadeiro   |
-| `? :`    | Operador Ternário     | `age >= 18 ? "Sim" : "Não"` | Retorna um valor baseado em uma condição           |
-| `?.`     | Encadeamento Opcional | `user?.address?.city`       | Navega em objetos aninhados com segurança          |
-| `??`     | Coalescência Nula     | `count ?? 1`                | Aplica valor padrão apenas para `null`/`undefined` |
-
-> **Regra de Ouro:**
->
-> 1. **Sempre utilize igualdade estrita (`===` e `!==`)**. Abandone o uso de
->    `==` e `!=`.
-> 2. **Para valores padrão, prefira `??` em vez de `||`**. Isso impede que o
->    número `0` ou textos vazios `""` sejam substituídos indevidamente.
-
 ## O Que Vem a Seguir?
 
 Agora que dominamos a avaliação de expressões, operadores aritméticos, lógicos e
@@ -346,6 +431,6 @@ pela indústria: as **Guard Clauses (Cláusulas de Guarda / Early Return)**.
 
 ---
 
-<a href="05-objetos.md">← Objetos</a>
+<a href="07-type-aliases.md">← Type Aliases</a>
 
-<p align="right"><a href="07-condicionais.md">Próximo: Condicionais →</a></p>
+<p align="right"><a href="09-estruturas-condicionais.md">Próximo: Estruturas Condicionais →</a></p>
