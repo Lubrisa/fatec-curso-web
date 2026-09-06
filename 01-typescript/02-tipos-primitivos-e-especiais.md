@@ -258,4 +258,4 @@ transformação.
 <a href="01-instalacao-e-primeiro-programa.md">← Instalação e Primeiro Programa
 em TypeScript</a>
 
-<p align="right"><a href="03-string.md">Próximo: String →</a></p>
+<p align="right"><a href="03-string-e-template-literals.md">Próximo: String e Template Literals →</a></p>

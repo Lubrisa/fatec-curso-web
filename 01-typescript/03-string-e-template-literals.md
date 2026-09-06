@@ -1,4 +1,4 @@
-# 3. String
+# 3. String e Template Literals
 
 No capítulo anterior, conhecemos o catálogo de tipos primitivos e aprendemos a
 blindar nosso código contra dados inesperados.
@@ -13,7 +13,7 @@ princípio da **imutabilidade** em memória, explorar os métodos essenciais de
 inspeção, limpeza e transformação e conhecer a elegância dos **Template
 Literals**.
 
-## 1. Princípio Fundamental: Strings São Imutáveis
+## Princípio Fundamental: Strings São Imutáveis
 
 Um dos conceitos mais importantes que todo desenvolvedor Web precisa
 internalizar é que, no JavaScript e no TypeScript, **strings são primitivos 100%
@@ -36,7 +36,7 @@ const formattedStudentName = studentName.toUpperCase();
 console.log(formattedStudentName); // Imprime "ANA SILVA"
 ```
 
-## 2. Métodos Essenciais de Manipulação
+## Métodos Essenciais de Manipulação
 
 O JavaScript e o TypeScript fornecem um conjunto robusto de métodos nativos para
 manipular textos com eficiência e segurança.
@@ -96,19 +96,10 @@ const partialCleanPhone: string = rawPhone.replace("-", ""); // "1199999-8888"
 
 // replaceAll(): Substitui todas as ocorrências no texto inteiro
 const cleanPhone: string = rawPhone.replaceAll("-", ""); // "11999998888"
-```
 
-> **Dica Prática: Uso com Expressões Regulares (RegEx)**
->
-> Os métodos `replace` e `replaceAll` também aceitam expressões regulares para
-> localizar padrões avançados. Por exemplo, para remover qualquer caractere que
-> não seja número de um telefone ou CPF, usamos a expressão `/\D/g`:
->
-> ```typescript
-> const formattedDocument: string = "123.456.789-00";
-> const rawNumbersOnly: string = formattedDocument.replace(/\D/g, "");
-> console.log(rawNumbersOnly); // "12345678900"
-> ```
+// Suporte a Expressões Regulares (RegEx) para substituições avançadas:
+const numbersOnly: string = rawPhone.replace(/\D/g, ""); // "11999998888" (remove qualquer caractere não numérico)
+```
 
 ### Fatiamento e Divisão
 
@@ -177,7 +168,7 @@ console.log(maskedCard); // "************1234"
 > retorno do método em uma nova constante (`const clean = raw.trim();`) ou
 > reatribua a variável para evitar bugs silenciosos de dados não sanitizados.
 
-## 3. Interpolação de Strings: Textos Dinâmicos
+## Interpolação de Strings: Textos Dinâmicos
 
 Agora que conhecemos as operações sobre strings individuais, como compomos
 textos dinâmicos complexos?
@@ -207,7 +198,7 @@ function createWelcomeCard(userName, role, unreadMessages) {
 console.log(createWelcomeCard("Luigi", "Instrutor", 3));
 ```
 
-Essa abordagem apresenta dores graves no dia a dia:
+Essa abordagem traz problemas recorrentes na manutenção do código:
 
 1. **Dificuldade de leitura:** A profusão de aspas (`" + variable + "`) polui o
    código visualmente;
@@ -229,14 +220,26 @@ function createWelcomeCard(
   role: string,
   unreadMessages: number,
 ): string {
-  // O texto preserva quebras de linha e espaços exatamente como digitados:
-  return `Olá, ${userName}!
+  const statusMessage =
+    unreadMessages > 0
+      ? `Você possui ${unreadMessages} mensagem(ns) não lida(s).`
+      : "Caixa de entrada limpa!";
+
+  const cardContent = `Olá, ${userName}!
 Seu perfil: ${role.toUpperCase()}.
-Status: ${unreadMessages > 0 ? `Você possui ${unreadMessages} mensagem(ns) não lida(s).` : "Caixa de entrada limpa!"}`;
+Status: ${statusMessage}`;
+
+  return cardContent;
 }
 
-const cardContent = createWelcomeCard("Luigi", "Instrutor", 3);
-console.log(cardContent);
+const card = createWelcomeCard("Luigi", "Instrutor", 3);
+
+console.log(card);
+/*
+ * Olá, Luigi!
+ * Seu perfil: INSTRUTOR.
+ * Status: Você possui 3 mensagem(ns) não lida(s).
+ */
 ```
 
 #### O Que Pode Entrar no `${...}`?
@@ -260,75 +263,15 @@ const rawUsername: string = "  aluno_fatec  ";
 console.log(`Usuário sanitizado: @${rawUsername.trim().toLowerCase()}`);
 ```
 
-<details>
-<summary>🔍 Aprofundamento: O Que São "Tagged Template Literals"?</summary>
-
-Além do uso convencional com `${...}`, o JavaScript e o TypeScript possuem um
-recurso avançado chamado **Tagged Template Literals** (Templates Etiquetados).
-
-Esse recurso permite criar funções que interceptam os pedaços estáticos e os
-valores dinâmicos de um template literal antes que eles sejam transformados em
-uma string final. Note que a sintaxe é diferente de uma invocação de função
-comum:
-
-```typescript
-taggerFunction`Texto estático ${dinamicValue} texto estático`;
-```
-
-### Como isso funciona por baixo dos panos?
-
-Em vez de simplesmente concatenar tudo em um texto final, o runtime divide a
-expressão e entrega duas coisas para a sua função:
-
-1. **Pedaços de texto fixo (1º parâmetro):** Um array contendo os textos
-   estáticos que estavam ao redor das variáveis;
-2. **Valores interpolados (parâmetros seguintes):** Os valores que você passou
-   dentro de cada `${...}`.
-
-Veja um exemplo direto e intuitivo:
-
-```typescript
-// A função 'tag' intercepta os pedaços estáticos e a variável interpolada:
-function uppercaseTag(pieces: TemplateStringsArray, name: string): string {
-  const firstPart = pieces[0]; // "Olá, "
-  const secondPart = pieces[1]; // "! Bem-vindo ao curso."
-  const interpolatedValue = name; // "Luigi"
-
-  // A função pode transformar o valor antes de montar o resultado:
-  return `${firstPart}${interpolatedValue.toUpperCase()}${secondPart}`;
-}
-
-const studentName: string = "Luigi";
-
-// Invocamos a função diretamente antes das crases (sem parênteses):
-const customMessage = uppercaseTag`Olá, ${studentName}! Bem-vindo ao curso.`;
-
-console.log(customMessage);
-// Saída: "Olá, LUIGI! Bem-vindo ao curso."
-```
-
-### Por que isso é útil na Web?
-
-Mais adiante em seus estudos, você notará que esse mecanismo é a base de muitas
-ferramentas populares do ecossistema Web:
-
-- **Segurança:** Sanitizar e escapar dados de formulários antes de inseri-los em
-  bancos de dados;
-- **Estilização:** Processar blocos de CSS dinamicamente;
-- **Tradução:** Traduzir textos de interfaces automaticamente para múltiplos
-  idiomas mantendo as variáveis intactas.
-
-</details>
-
 ## O Que Vem a Seguir?
 
-Agora que dominamos a manipulação de primitivos textuais e sua imutabilidade, é
-hora de entender como o JavaScript e o TypeScript gerenciam estruturas mais
-complexas na memória do computador.
+Agora que dominamos a manipulação de strings e a interpolação com Template
+Literals, o próximo passo é aprofundar em como gerenciar e atribuir dados na
+memória.
 
-No próximo capítulo, vamos analisar a diferença crucial entre **cópia por
-valor** (primitivos) e **cópia por referência** (objetos e arrays), visualizando
-a divisão entre **Stack** e **Heap** no runtime.
+No próximo capítulo, vamos explorar as regras modernas de **Variáveis e
+Constantes**, entendendo a diferença entre `const` e `let`, o motivo do
+abandono do `var` e o poder da **Inferência Estática de Tipos**.
 
 ---
 

@@ -357,6 +357,6 @@ Referência**.
 
 ---
 
-<a href="03-string.md">← String</a>
+<a href="03-string-e-template-literals.md">← String e Template Literals</a>
 
 <p align="right"><a href="05-objetos.md">Próximo: Objetos →</a></p>
