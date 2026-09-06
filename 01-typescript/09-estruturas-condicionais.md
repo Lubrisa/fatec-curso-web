@@ -1,4 +1,4 @@
-# 7. Condicionais
+# 9. Estruturas Condicionais
 
 No capítulo anterior, aprendemos a calcular valores e avaliar expressões
 booleanas (`isLogged && hasAccess`, `age >= 18`).
@@ -185,6 +185,6 @@ No próximo capítulo, vamos explorar as **Estruturas de Repetição (`for`,
 
 ---
 
-<a href="06-expressoes-e-operadores.md">← Expressões e Operadores</a>
+<a href="08-expressoes-e-operadores.md">← Expressões e Operadores</a>
 
-<p align="right"><a href="08-lacos.md">Próximo: Laços →</a></p>
+<p align="right"><a href="10-lacos-de-repeticao.md">Próximo: Laços de Repetição →</a></p>
