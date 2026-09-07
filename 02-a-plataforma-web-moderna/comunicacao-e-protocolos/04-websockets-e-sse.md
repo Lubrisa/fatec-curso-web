@@ -305,21 +305,13 @@ type: "pong" }`. Se a resposta não chegar em alguns segundos, o cliente assume
 
 ## O Que Vem a Seguir?
 
-Com este capítulo, concluímos o **Submódulo 01: Comunicação & Protocolos**.
-Agora você possui uma base sólida sobre a infraestrutura da Web: desde o tráfego
-de pacotes e resolução DNS até a anatomia de requisições HTTP, o consumo prático
+Com este capítulo, concluímos o submódulo de **Comunicação & Protocolos**. Agora
+você possui uma base sólida sobre a infraestrutura da Web: desde o tráfego de
+pacotes e resolução DNS até a anatomia de requisições HTTP, o consumo prático
 com a Fetch API e a comunicação em tempo real com SSE e WebSockets.
-
-No próximo submódulo, mudaremos o foco da rede para a tela do usuário.
-
-No **[Submódulo 02: Manipulação do
-DOM](../02-manipulacao-do-dom/01-a-arvore-do-dom-e-renderizacao.md)**, vamos
-desvendar como o navegador transforma arquivos HTML e CSS na **Árvore do DOM**,
-entender o custo computacional de renderização e aprender a interagir com
-elementos da interface de forma reativa e tipada com TypeScript.
 
 ---
 
 <a href="03-fetch-api-e-consumo-nativo.md">← Consumo Nativo com a Fetch API</a>
 
-<p align="right"><a href="../02-manipulacao-do-dom/01-a-arvore-do-dom-e-renderizacao.md">Próximo: A Árvore do DOM e Renderização →</a></p>
+<p align="right"><a href="../manipulacao-do-dom/01-a-arvore-do-dom-e-renderizacao.md">Explorar: Manipulação do DOM →</a></p>
