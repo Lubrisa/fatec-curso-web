@@ -326,13 +326,14 @@ No entanto, à medida que interfaces web crescem, surge uma nova necessidade:
 como criar componentes visuais reutilizáveis, com estilos encapsulados e tags
 customizadas sem depender de bibliotecas pesadas?
 
-No **[Capítulo 04: Web Components Nativos](04-web-components-nativos.md)**,
-vamos desvendar a tríade de componentização nativa da plataforma Web: **Custom
-Elements**, **Shadow DOM** e tags `<template>` / `<slot>`.
+No **[Capítulo 04: Introdução aos Web
+Components](04-introducao-aos-web-components.md)**, vamos desvendar a tríade de
+componentização nativa da plataforma Web: **Custom Elements**, **Shadow DOM** e
+tags `<template>` / `<slot>`.
 
 ---
 
 <a href="02-selecao-e-manipulacao-com-typescript.md">← Seleção e Manipulação com
 TypeScript</a>
 
-<p align="right"><a href="04-web-components-nativos.md">Próximo: Web Components Nativos →</a></p>
+<p align="right"><a href="04-introducao-aos-web-components.md">Próximo: Introdução aos Web Components →</a></p>
