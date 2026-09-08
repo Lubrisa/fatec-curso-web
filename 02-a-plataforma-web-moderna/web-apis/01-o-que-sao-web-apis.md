@@ -208,7 +208,8 @@ principais APIs utilizadas no dia a dia da indústria:
 | **Banco de Dados no Cliente** | `IndexedDB`                       | Armazenar grandes volumes de dados estruturados, coleções e arquivos offline.                              |
 | **Sensores do Dispositivo**   | `Geolocation API`                 | Obter coordenadas geográficas (latitude/longitude) do usuário com consentimento.                           |
 | **Performance e Layout**      | `IntersectionObserver API`        | Detectar quando elementos entram na tela para _Lazy Loading_ e rolagem infinita sem travar a renderização. |
-| **Interação com o Sistema**   | `Permissions` & `Notifications`   | Consultar permissões do usuário e exibir notificações nativas na área de trabalho.                         |
+| **Interação com o Sistema**   | `Permissions API`                 | Consultar e monitorar o estado de consentimento de recursos protegidos sem prompts invasivos.              |
+| **Alertas do Sistema**        | `Notification API`                | Exibir notificações visuais e sonoras nativas na área de trabalho e central do sistema operacional.        |
 
 <details>
 <summary>🔍 <strong>Aprofundamento: Como as Web APIs são padronizadas (W3C e WHATWG)?</strong></summary>
