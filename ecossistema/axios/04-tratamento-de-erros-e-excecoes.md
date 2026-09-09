@@ -1,4 +1,4 @@
-# Tratamento de Erros e Tipagem
+# Tratamento de Erros e Exceções
 
 Ao realizar requisições HTTP, falhas são inevitáveis: o servidor pode retornar
 um erro de validação (`422 Unprocessable Entity`), uma rota pode não existir
@@ -7,8 +7,7 @@ ultrapassar o limite de tempo estipulado (_timeout_).
 
 Neste capítulo, aprenderemos como o Axios lida com o ciclo de vida de exceções,
 como dissecar a anatomia do objeto `AxiosError` com o _type guard_
-`axios.isAxiosError()`, como tipar contratos de sucesso e de erro com Generics
-do TypeScript e como garantir segurança em tempo de execução.
+`axios.isAxiosError()` e como tipar contratos de erro retornados pelo backend.
 
 ## O Modelo de Falhas do Axios vs. Fetch Nativo
 
@@ -151,102 +150,6 @@ async function loadUserProfile(userId: string) {
 | `error.message`         | `string`                          | Descrição textual da falha (ex: `"Request failed with status code 404"`).                |
 | `error.config`          | `InternalAxiosRequestConfig`      | A configuração original utilizada para disparar a requisição.                            |
 
-## Tipagem Estrita com Generics
-
-O TypeScript nos permite parametrizar chamadas do Axios usando **Generics**,
-definindo com precisão o tipo esperado em `response.data`.
-
-### 1. Tipando o Retorno de Sucesso
-
-Ao chamar qualquer método HTTP (`get`, `post`, `put`, `delete`), você pode
-passar o tipo do DTO (_Data Transfer Object_) esperado no corpo da resposta:
-
-```typescript
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: "admin" | "member";
-  createdAt: string;
-}
-
-// response.data é automaticamente inferido como User
-const response = await apiClient.get<User>("/users/usr_42");
-console.log(response.data.name); // ✅ TypeScript autocompleta e valida as propriedades
-```
-
-### 2. Tipando Operações de Criação e Atualização (`POST` / `PUT`)
-
-Ao disparar mutações com payload, você também pode tipar tanto a resposta
-retornada quanto o corpo enviado:
-
-```typescript
-interface CreateProductInput {
-  title: string;
-  price: number;
-  category: string;
-}
-
-interface ProductResponse {
-  id: string;
-  title: string;
-  price: number;
-  category: string;
-  createdAt: string;
-}
-
-async function createProduct(
-  payload: CreateProductInput,
-): Promise<ProductResponse> {
-  const response = await apiClient.post<ProductResponse>("/products", payload);
-  return response.data;
-}
-```
-
-<details>
-<summary>🛡️ Aprofundamento: Tipagem Segura de Respostas HTTP com Validação de Runtime (Zod)</summary>
-
-Generics no Axios oferecem suporte excelente para autocompletar e validação
-estática em tempo de desenvolvimento. Contudo, como aprendemos no módulo do
-TypeScript, **tipos estáticos são eliminados durante a compilação e não existem
-no navegador**.
-
-Se o backend alterar o contrato em produção ou retornar campos nulos
-inesperados, um cast ingênuo como `apiClient.get<User>()` pode ocultar
-inconsistências e gerar falhas silenciosas na interface.
-
-Para sistemas com alta exigência de confiabilidade, a prática recomendada na
-comunidade moderna é combinar o Axios com bibliotecas de validação em tempo de
-execução, como o **Zod**:
-
-```typescript
-import { z } from "zod";
-import { apiClient } from "./apiClient";
-
-// 1. Schema em tempo de execução
-const UserSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.email(),
-  role: z.enum(["admin", "member"]),
-});
-
-type User = z.infer<typeof UserSchema>;
-
-async function fetchSafeUser(id: string): Promise<User> {
-  const response = await apiClient.get(`/users/${id}`);
-
-  // 2. Valida o payload real recebido da rede antes de repassar para a aplicação
-  return UserSchema.parse(response.data);
-}
-```
-
-Para aprofundar em schemas, refinamentos e inferência de tipos em runtime,
-consulte o módulo dedicado ao
-[Zod](../zod/01-o-problema-do-runtime-e-introducao-ao-zod.md).
-
-</details>
-
 ## O Que Vem a Seguir?
 
 Até agora, tratamos cada chamada e erro de forma pontual nos nossos serviços. No
@@ -261,7 +164,7 @@ um único ponto da arquitetura.
 
 ---
 
-<a href="02-instancias-customizadas-e-configuracoes.md">← Anterior: Instâncias
+<a href="03-instancias-customizadas-e-configuracoes.md">← Anterior: Instâncias
 Customizadas e Configurações</a>
 
-<p align="right"><a href="04-interceptors-de-requisicao-e-resposta.md">Próximo: Interceptors de Requisição e Resposta →</a></p>
+<p align="right"><a href="05-interceptors-de-requisicao-e-resposta.md">Próximo: Interceptors de Requisição e Resposta →</a></p>

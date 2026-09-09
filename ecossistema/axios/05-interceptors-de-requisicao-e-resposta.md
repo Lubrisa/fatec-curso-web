@@ -197,5 +197,5 @@ apiClient.interceptors.request.eject(loggerInterceptorId);
 
 ---
 
-<a href="03-tratamento-de-erros-e-tipagem.md">← Anterior: Tratamento de Erros e
-Tipagem</a>
+<a href="04-tratamento-de-erros-e-excecoes.md">← Anterior: Tratamento de Erros e
+Exceções</a>

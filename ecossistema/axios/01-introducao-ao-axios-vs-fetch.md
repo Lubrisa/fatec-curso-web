@@ -10,8 +10,8 @@ de médio e grande porte, o consumo direto de `fetch()` revela uma quantidade
 considerável de código repetitivo e armadilhas sutis.
 
 Neste capítulo, você compreenderá as limitações do `fetch()` em escala,
-conhecerá o **Axios**, dominará a anatomia dos seus métodos HTTP e entenderá por
-que ele continua sendo uma das bibliotecas mais utilizadas na história da Web.
+conhecerá o **Axios** e entenderá por que ele continua sendo uma das bibliotecas
+mais utilizadas na história da Web.
 
 ## A Dor: As Limitações do `fetch()` no Dia a Dia
 
@@ -52,11 +52,11 @@ Observe os 4 problemas fundamentais:
 2. **Cabeçalhos Repetitivos:** É necessário informar explicitamente
    `"Content-Type": "application/json"` repetidas vezes;
 3. **A Pegadinha do `response.ok`:** O `fetch()` **não lança erros** quando o
-   backend responde com status `400 Bad Request`, `401 Unauthorized` ou `500 Internal Server Error`.
-   Ele só entra no bloco `catch` se houver falha total de rede (computador
-   offline, queda de DNS ou bloqueio de CORS). Se o desenvolvedor esquecer de
-   checar `if (!response.ok)`, a aplicação processará a resposta de erro como se
-   fosse um dado de sucesso!
+   backend responde com status `400 Bad Request`, `401 Unauthorized` ou `500
+Internal Server Error`. Ele só entra no bloco `catch` se houver falha total
+   de rede (computador offline, queda de DNS ou bloqueio de CORS). Se o
+   desenvolvedor esquecer de checar `if (!response.ok)`, a aplicação processará
+   a resposta de erro como se fosse um dado de sucesso!
 4. **Duplo `await`:** Você precisa de um `await` para a conexão HTTP (`fetch`) e
    outro `await` para ler o corpo (`response.json()`).
 
@@ -101,67 +101,6 @@ npm install axios
 O Axios já inclui todas as suas definições de tipos TypeScript nativamente no
 pacote, dispensando a instalação de pacotes adicionais como `@types/axios`.
 
-## Anatomia dos Métodos HTTP
-
-O Axios fornece métodos convenientes com nomes diretos para todos os verbos HTTP
-fundamentais:
-
-```typescript
-import axios from "axios";
-
-// 1. GET: Buscar recursos (recebe URL e objeto de configuração opcional)
-const getUsersResponse = await axios.get("https://api.example.com/users");
-
-// 2. POST: Criar recurso (recebe URL, corpo de dados e configuração opcional)
-const postResponse = await axios.post("https://api.example.com/users", {
-  name: "Alice",
-  email: "alice@fatec.sp.gov.br",
-});
-
-// 3. PUT: Substituir recurso integralmente
-const putResponse = await axios.put("https://api.example.com/users/1", {
-  name: "Alice Silva",
-  email: "alice.silva@fatec.sp.gov.br",
-});
-
-// 4. PATCH: Atualizar parcialmente um recurso
-const patchResponse = await axios.patch("https://api.example.com/users/1", {
-  name: "Alice S.",
-});
-
-// 5. DELETE: Remover recurso
-const deleteResponse = await axios.delete("https://api.example.com/users/1");
-```
-
-## A Estrutura do Objeto `AxiosResponse<T>`
-
-Quando uma requisição é concluída com sucesso (códigos de status HTTP na faixa
-`2xx`), o Axios resolve a Promise entregando um objeto com a interface
-**`AxiosResponse`**:
-
-```typescript
-import axios from "axios";
-
-const response = await axios.get("https://api.example.com/users/1");
-
-console.log(response.data); // O payload JSON retornado pela API (já convertido em objeto JS)
-console.log(response.status); // Código de status HTTP numérico (ex: 200, 201)
-console.log(response.statusText); // Mensagem de status do servidor (ex: "OK", "Created")
-console.log(response.headers); // Cabeçalhos HTTP enviados pelo servidor
-console.log(response.config); // Objeto de configuração original utilizado na requisição
-```
-
-```mermaid
-flowchart LR
-    AxiosReq["axios.get('/users/1')"] --> Network["📡 Rede / API"]
-    Network --> Res["AxiosResponse"]
-
-    Res --> D["<b>.data</b><br/>Payload JSON já convertido"]
-    Res --> S["<b>.status</b><br/>200, 201, 204..."]
-    Res --> H["<b>.headers</b><br/>Content-Type, Cache-Control..."]
-    Res --> C["<b>.config</b><br/>URL, timeout, headers enviados"]
-```
-
 ## Tabela Comparativa: `fetch()` vs. `axios`
 
 | Recurso / Comportamento                      |                  `fetch()` Nativo                  |                     `axios`                      |
@@ -177,16 +116,17 @@ flowchart LR
 
 ## O Que Vem a Seguir?
 
-Neste capítulo introdutório, compreendemos a motivação do Axios, a anatomia das
-chamadas e a estrutura de respostas.
+Neste capítulo introdutório, compreendemos a motivação do Axios e suas
+principais vantagens sobre o `fetch()` nativo.
 
-No próximo capítulo, aprenderemos a criar **Instâncias Customizadas
-(`axios.create`)**, centralizar configurações de `baseURL`, definir limites de
-`timeout` e gerenciar múltiplos serviços de backend de forma profissional.
+No próximo capítulo, exploraremos a fundo todos os **Métodos HTTP (`get`,
+`post`, `put`, `patch`, `delete`)**, a estrutura do objeto **`AxiosResponse`**,
+a passagem limpa de **Query Parameters com `params`** e a **Tipagem Estrita de
+Dados com TypeScript Generics**.
 
 ---
 
 <a href="../zod/06-tratamento-de-erros-e-casos-reais.md">← Zod: Tratamento de
 Erros e Casos Reais</a>
 
-<p align="right"><a href="02-instancias-customizadas-e-configuracoes.md">Próximo: Instâncias Customizadas e Configurações →</a></p>
+<p align="right"><a href="02-metodos-http-query-params-e-tipagem.md">Próximo: Métodos HTTP, Query Params e Tipagem →</a></p>

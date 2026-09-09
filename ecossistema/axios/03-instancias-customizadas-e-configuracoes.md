@@ -1,14 +1,14 @@
 # Instâncias Customizadas e Configurações
 
-No capítulo anterior, vimos como o Axios simplifica requisições HTTP básicas em
-comparação ao `fetch()` nativo. No entanto, em aplicações reais, raramente
-fazemos chamadas isoladas passando URLs completas e cabeçalhos repetidos em
-dezenas de arquivos diferentes.
+No capítulo anterior, aprendemos como executar operações HTTP com o Axios,
+manipular parâmetros de consulta e tipar contratos de dados. No entanto, em
+aplicações reais, raramente fazemos chamadas passando URLs completas e
+configurações repetidas em dezenas de arquivos diferentes.
 
 Neste capítulo, aprenderemos a criar **instâncias customizadas** com
 `axios.create()`, definir configurações padrão como `baseURL`, `timeout` e
 cabeçalhos compartilhados, entender a ordem de precedência de configurações e
-manipular parâmetros de busca (_query strings_) de forma elegante e segura.
+gerenciar múltiplos serviços de backend de forma isolada e profissional.
 
 ## O Problema: A Dor da Repetição de Configurações
 
@@ -110,8 +110,9 @@ detalhes de transporte.
 
 ## Anatomia das Opções de Configuração
 
-Ao criar ou executar requisições no Axios, passamos um objeto de configuração do
-tipo `AxiosRequestConfig`. As propriedades mais comuns e importantes são:
+Ao criar instâncias ou executar requisições no Axios, passamos um objeto de
+configuração do tipo `AxiosRequestConfig`. As propriedades mais comuns e
+importantes são:
 
 | Propriedade      | Tipo                          | Descrição                                                                                                               |
 | :--------------- | :---------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
@@ -138,92 +139,6 @@ const paymentClient = axios.create({
   timeout: 3000, // Aborta automaticamente se demorar mais de 3 segundos
 });
 ```
-
-## Serialização Automática de Query Parameters com `params`
-
-Frequentemente precisamos enviar parâmetros de consulta na URL para operações de
-listagem, paginação, busca e filtros (ex:
-`/products?page=2&limit=10&search=teclado`).
-
-Concatenar strings manualmente para construir URLs é propenso a falhas de
-sintaxe e exige codificação manual de caracteres especiais
-(`encodeURIComponent`). Com a propriedade `params`, o Axios monta a query string
-de forma automática:
-
-```typescript
-// ❌ Concatenação manual propensa a erros de formatação e encoding
-const page = 2;
-const search = "café com leite";
-const url = `https://api.loja.com/v1/products?page=${page}&search=${encodeURIComponent(search)}`;
-await axios.get(url);
-
-// ✅ Uso limpo da propriedade 'params' do Axios
-interface ProductFilters {
-  page: number;
-  limit: number;
-  search?: string;
-  inStock?: boolean;
-}
-
-async function searchProducts(filters: ProductFilters) {
-  const response = await apiClient.get("/products", {
-    params: filters,
-  });
-
-  return response.data;
-}
-
-// Execução: o Axios converte para:
-// /products?page=1&limit=20&search=caf%C3%A9%20com%20leite&inStock=true
-searchProducts({
-  page: 1,
-  limit: 20,
-  search: "café com leite",
-  inStock: true,
-});
-```
-
-```mermaid
-flowchart TD
-    Params["Objeto params:<br/>{ page: 1, search: 'café' }"]
-    Base["baseURL:<br/>https://api.loja.com/v1"]
-    Path["Caminho:<br/>/products"]
-
-    Base --> AxiosEngine["Motor do Axios"]
-    Path --> AxiosEngine
-    Params --> AxiosEngine
-
-    AxiosEngine --> FinalURL["URL Final Serializada:<br/><b>https://api.loja.com/v1/products?page=1&search=caf%C3%A9</b>"]
-```
-
-<details>
-<summary>🔍 Aprofundamento: Serialização de Arrays em Query Strings (`paramsSerializer`)</summary>
-
-Diferentes frameworks de backend interpretam arrays na URL de maneiras
-distintas:
-
-- Formato de repetição: `?tags=javascript&tags=typescript`
-- Formato de colchetes: `?tags[]=javascript&tags[]=typescript`
-- Formato separado por vírgula: `?tags=javascript,typescript`
-
-Por padrão nas versões recentes, o Axios utiliza o formato de colchetes. Caso
-sua API backend exija outro formato, você pode customizar o `paramsSerializer`
-nas configurações da instância:
-
-```typescript
-import axios from "axios";
-
-export const catalogApi = axios.create({
-  baseURL: "https://api.loja.com",
-  paramsSerializer: {
-    // Exemplo: 'repeat' produz ?category=livros&category=games
-    // Outras opções: 'brackets' (padrão ?category[]=...), 'comma' (?category=livros,games)
-    indexes: null,
-  },
-});
-```
-
-</details>
 
 ## Ordem de Precedência de Configurações
 
@@ -330,14 +245,13 @@ async function checkoutOrder(orderId: string, merchantToken: string) {
 Agora que dominamos a criação e configuração de instâncias reutilizáveis,
 precisamos aprender como o Axios lida com falhas.
 
-No próximo capítulo, exploraremos a fundo o **Tratamento de Erros e Tipagem**,
-aprendendo a utilizar a classe `AxiosError`, o _type guard_
-`axios.isAxiosError()` e a tipagem estrita de payloads de resposta com
-TypeScript.
+No próximo capítulo, exploraremos a fundo o **Tratamento de Erros e Exceções**,
+aprendendo a utilizar a classe `AxiosError` e o _type guard_
+`axios.isAxiosError()`.
 
 ---
 
-<a href="01-introducao-ao-axios-vs-fetch.md">← Anterior: Introdução ao Axios vs.
-Fetch Nativo</a>
+<a href="02-metodos-http-query-params-e-tipagem.md">← Anterior: Métodos HTTP,
+Query Params e Tipagem</a>
 
-<p align="right"><a href="03-tratamento-de-erros-e-tipagem.md">Próximo: Tratamento de Erros e Tipagem →</a></p>
+<p align="right"><a href="04-tratamento-de-erros-e-excecoes.md">Próximo: Tratamento de Erros e Exceções →</a></p>
