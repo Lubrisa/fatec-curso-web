@@ -1,9 +1,10 @@
 # 01. Fundamentos de Redes na Web
 
-Nos módulos anteriores, dominamos as ferramentas de desenvolvimento e a
-linguagem TypeScript. No entanto, uma aplicação web não vive isolada dentro do
-computador do desenvolvedor: seu objetivo fundamental é **conectar pessoas e
-sistemas através da Internet**.
+Nos módulos anteriores, compreendemos as bases do modelo cliente-servidor e
+exploramos as linguagens que movem a Web tanto no frontend quanto no backend. No
+entanto, uma aplicação web não vive isolada dentro do computador do
+desenvolvedor: seu objetivo fundamental é **conectar pessoas e sistemas através
+da Internet**.
 
 Toda vez que você digita uma URL no navegador e pressiona `Enter`, uma cadeia de
 eventos invisível e incrivelmente rápida é disparada. Em frações de segundo,
