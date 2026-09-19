@@ -1,19 +1,17 @@
-# 03. Consumo Nativo com a Fetch API
+# Fetch API e Consumo Nativo de Dados
 
-Nos capítulos anteriores, desvendamos como a Internet conecta máquinas através
-de endereços IP e da _Stack_ TCP/IP, e aprendemos como estruturar mensagens no
-protocolo HTTP/HTTPS utilizando métodos, códigos de status, cabeçalhos e túneis
-criptografados com TLS.
-
-Agora, chegou o momento de colocar essa teoria em prática no código.
+Dentre todas as capacidades fornecidas pela plataforma Web moderna, nenhuma é
+tão central no dia a dia do desenvolvimento quanto a **Fetch API** — o padrão
+nativo dos navegadores para comunicação de rede, disparo de requisições HTTP e
+consumo de APIs REST.
 
 Historicamente, realizar requisições HTTP no JavaScript do navegador exigia o
 uso do prolixo e complexo objeto `XMLHttpRequest` ou a inclusão obrigatória de
 bibliotecas externas como jQuery e Axios.
 
 Hoje, os navegadores modernos e os novos ambientes de execução (Node.js 18+,
-Deno e Bun) possuem uma interface nativa, padronizada e baseada em Promises para
-comunicação HTTP: a **Fetch API**.
+Deno e Bun) possuem a **Fetch API** embutida nativamente, orientada a Promises e
+completamente tipada no TypeScript.
 
 Neste capítulo, você aprenderá a dominar a função `fetch()` com TypeScript,
 entender a sua execução em duas etapas, contornar a sua pegadinha mais comum de
@@ -339,7 +337,4 @@ posteriormente o cliente **Axios** no módulo de **Ecossistema**.
 
 ---
 
-<a href="../manipulacao-do-dom/01-a-arvore-do-dom-e-renderizacao.md">←
-Manipulação do DOM</a>
-
-<p align="right"><a href="../web-apis/01-o-que-sao-web-apis.md">Explorar: Catálogo de Web APIs →</a></p>
+<a href="01-o-que-sao-web-apis.md">← O Que São Web APIs?</a>

@@ -237,6 +237,8 @@ Laravel._
 - **Catálogo de Web APIs (`web-apis/`):**
   - [01. O Que São Web
     APIs?](02-plataformas-e-integracao/browser/web-apis/01-o-que-sao-web-apis.md)
+  - [Fetch API e Consumo Nativo de
+    Dados](02-plataformas-e-integracao/browser/web-apis/fetch-api-e-consumo-nativo.md)
   - [Local Storage e Session
     Storage](02-plataformas-e-integracao/browser/web-apis/local-storage-e-session-storage.md)
   - [IndexedDB](02-plataformas-e-integracao/browser/web-apis/indexeddb.md)
@@ -248,9 +250,6 @@ Laravel._
     API](02-plataformas-e-integracao/browser/web-apis/permissions.md)
   - [Notifications
     API](02-plataformas-e-integracao/browser/web-apis/notifications.md)
-- **Consumo de APIs (`consumo-de-apis/`):**
-  - [01. Consumo Nativo com a Fetch
-    API](02-plataformas-e-integracao/browser/consumo-de-apis/01-consumo-de-apis-com-fetch.md)
 
 #### ⚙️ Submódulo: Backend Agnóstico (`02-plataformas-e-integracao/backend/`) ⚪
 

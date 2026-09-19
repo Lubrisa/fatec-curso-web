@@ -202,14 +202,15 @@ facilitar seu aprendizado prático, este submódulo está organizado em formato 
 A partir do próximo capítulo, você poderá consultar e explorar detalhadamente as
 principais APIs utilizadas no dia a dia da indústria:
 
-| Categoria                     | API / Tópico                      | O que ela permite fazer?                                                                                   |
-| :---------------------------- | :-------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| **Armazenamento de Dados**    | `localStorage` & `sessionStorage` | Salvar preferências, rascunhos e tokens simples de forma síncrona no navegador.                            |
-| **Banco de Dados no Cliente** | `IndexedDB`                       | Armazenar grandes volumes de dados estruturados, coleções e arquivos offline.                              |
-| **Sensores do Dispositivo**   | `Geolocation API`                 | Obter coordenadas geográficas (latitude/longitude) do usuário com consentimento.                           |
-| **Performance e Layout**      | `IntersectionObserver API`        | Detectar quando elementos entram na tela para _Lazy Loading_ e rolagem infinita sem travar a renderização. |
-| **Interação com o Sistema**   | `Permissions API`                 | Consultar e monitorar o estado de consentimento de recursos protegidos sem prompts invasivos.              |
-| **Alertas do Sistema**        | `Notification API`                | Exibir notificações visuais e sonoras nativas na área de trabalho e central do sistema operacional.        |
+| Categoria                      | API / Tópico                      | O que ela permite fazer?                                                                                   |
+| :----------------------------- | :-------------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| **Comunicação de Rede & APIs** | `Fetch API` (`fetch()`)           | Realizar requisições HTTP/HTTPS assíncronas, envio de dados e consumo de APIs REST.                        |
+| **Armazenamento de Dados**     | `localStorage` & `sessionStorage` | Salvar preferências, rascunhos e tokens simples de forma síncrona no navegador.                            |
+| **Banco de Dados no Cliente**  | `IndexedDB`                       | Armazenar grandes volumes de dados estruturados, coleções e arquivos offline.                              |
+| **Sensores do Dispositivo**    | `Geolocation API`                 | Obter coordenadas geográficas (latitude/longitude) do usuário com consentimento.                           |
+| **Performance e Layout**       | `IntersectionObserver API`        | Detectar quando elementos entram na tela para _Lazy Loading_ e rolagem infinita sem travar a renderização. |
+| **Interação com o Sistema**    | `Permissions API`                 | Consultar e monitorar o estado de consentimento de recursos protegidos sem prompts invasivos.              |
+| **Alertas do Sistema**         | `Notification API`                | Exibir notificações visuais e sonoras nativas na área de trabalho e central do sistema operacional.        |
 
 <details>
 <summary>🔍 <strong>Aprofundamento: Como as Web APIs são padronizadas (W3C e WHATWG)?</strong></summary>
@@ -238,14 +239,13 @@ Docs](https://developer.mozilla.org).
 ## O Que Vem a Seguir?
 
 Agora que você compreende o papel das Web APIs como pontes entre a lógica da sua
-aplicação e os recursos nativos do navegador, vamos explorar o primeiro grupo de
-ferramentas essenciais para qualquer aplicação web: **a persistência de dados no
-lado do cliente**.
+aplicação e os recursos nativos do navegador, vamos explorar a API mais
+utilizada de toda a Web contemporânea: a **Fetch API**.
 
-No próximo capítulo, você aprenderá a dominar o **`localStorage` e o
-`sessionStorage`**, compreendendo seus ciclos de vida, seus limites práticos e
-como serializar objetos complexos com TypeScript.
+No próximo capítulo, você aprenderá a dominar a função **`fetch()`** com
+TypeScript, tratando respostas tipadas, capturando erros de rede e gerenciando
+cancelamentos com `AbortController`.
 
 ---
 
-<p align="right"><a href="local-storage-e-session-storage.md">Próximo: LocalStorage e SessionStorage →</a></p>
+<p align="right"><a href="fetch-api-e-consumo-nativo.md">Próximo: Fetch API e Consumo Nativo →</a></p>
