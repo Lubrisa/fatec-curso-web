@@ -1,8 +1,8 @@
 # 04. Instalação e Primeiro Programa em TypeScript
 
-No módulo anterior, construímos todo o mapa conceitual da Web moderna:
-entendemos o papel dos runtimes, dos gerenciadores de pacotes, das linhas de
-montagem de código e por que a indústria adotou o TypeScript como padrão.
+Nos capítulos anteriores, construímos todo o alicerce conceitual: entendemos por
+que o TypeScript foi criado, como o runtime executa o código compilado e como o
+NPM gerencia nossas dependências.
 
 Agora é o momento de colocar a mão na massa.
 

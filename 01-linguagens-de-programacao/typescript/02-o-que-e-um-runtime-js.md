@@ -1,9 +1,11 @@
 # 02. O Que É um Runtime JavaScript?
 
-No capítulo anterior, vimos que o JavaScript é a linguagem responsável pelo
-comportamento e pela lógica na Web. Mas já parou para pensar no que realmente
-acontece quando você clica em "Salvar" no seu editor de código e aquele texto
-ganha vida?
+No capítulo anterior, descobrimos que o TypeScript nos protege com tipagem
+estática durante o desenvolvimento e que, ao final da compilação, ele é
+transformado em JavaScript puro.
+
+Mas já parou para pensar no que realmente acontece quando esse código precisa
+ser executado pelo computador para ganhar vida?
 
 Um arquivo `.js` nada mais é do que um arquivo de texto comum. O seu computador,
 por si só, não sabe o que significa `function`, `const` ou `console.log`. Ele só
@@ -15,7 +17,8 @@ um **ambiente de execução** — conhecido no mundo do desenvolvimento como
 
 Neste capítulo, vamos desmistificar o que é um runtime, entender por que o
 navegador é um ambiente com regras de segurança estritas e como a criação de
-runtimes independentes permitiu que o JavaScript conquistasse os servidores.
+runtimes independentes como o **Node.js** permitiu que o ecossistema
+conquistasse os servidores e a linha de comando.
 
 ## O Que É um Runtime?
 
@@ -240,6 +243,7 @@ anatomia do ecossistema **NPM**.
 
 ---
 
-<a href="01-o-que-e-typescript-e-por-que-ele-existe.md">← O Que É o TypeScript e Por Que Ele Existe?</a>
+<a href="01-o-que-e-typescript-e-por-que-ele-existe.md">← O Que É o TypeScript e
+Por Que Ele Existe?</a>
 
 <p align="right"><a href="03-gerenciadores-de-pacotes.md">Próximo: Gerenciadores de Pacotes e o Ecossistema NPM →</a></p>

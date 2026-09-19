@@ -1,20 +1,19 @@
 # 01. O Que É o TypeScript e Por Que Ele Existe?
 
-No capítulo anterior, descobrimos que ferramentas modernas de transpilação
-conseguem pegar código escrito em linguagens avançadas e traduzi-lo para
-JavaScript padrão compatível com qualquer navegador.
+Quando começamos a construir aplicações para a Web moderna, nos deparamos com um
+ecossistema vibrante e em constante evolução. No centro desse universo está uma
+das ferramentas mais adotadas e queridas por equipes de engenharia de software
+no mundo inteiro: o **TypeScript**.
 
-Isso nos coloca diante da ferramenta que será o alicerce de toda a nossa jornada
-daqui para frente: o **TypeScript**.
-
-Mas antes de escrevermos qualquer linha de código tipado, precisamos entender a
-motivação: **qual dor real o JavaScript causou na indústria para que o
-TypeScript se tornasse indispensável em praticamente todas as grandes empresas
-de tecnologia do mundo?**
+Mas antes de configurarmos compiladores ou escrevermos qualquer linha de código
+tipado, precisamos dar um passo atrás e responder a uma pergunta essencial:
+**qual dor real o JavaScript causou na indústria para que o TypeScript se
+tornasse indispensável em praticamente todas as grandes empresas de
+tecnologia?**
 
 Neste capítulo, vamos compreender a transição do dinamismo puro do JavaScript
 para a segurança estática do TypeScript e como essa camada nos protege contra os
-bugs mais comuns do desenvolvimento web.
+erros mais comuns e caros do desenvolvimento de software.
 
 ## A Dor: O JavaScript em Projetos Grandes
 
@@ -179,20 +178,18 @@ Existem dois motivos arquiteturais principais:
 
 ## O Que Vem a Seguir?
 
-Parabéns! Você concluiu com sucesso o **Módulo 00 — Ferramental & Ecossistema
-Web**.
+Agora que você compreende **por que** o TypeScript existe e como seu sistema de
+tipagem estática opera como um escudo durante o desenvolvimento, surge uma
+dúvida prática fundamental:
 
-Agora você tem o mapa mental completo de como a Web moderna opera:
+> _"Se o TypeScript é convertido para JavaScript puro no final, onde e como esse
+> código realmente roda no computador ou no servidor?"_
 
-1. Conhece os papéis do HTML, CSS e JavaScript na arquitetura distribuída;
-2. Entende o que é um Runtime e por que usamos o Node.js fora do navegador;
-3. Sabe como o NPM gerencia dependências e a importância do `package.json`;
-4. Compreende a linha de montagem da Web (transpilação, minificação e bundling);
-5. Entende a motivação e o poder da tipagem estática com TypeScript.
-
-No próximo módulo, vamos colocar a mão na massa: faremos o setup prático do
-compilador TypeScript (`tsconfig.json`) e iniciaremos nosso mergulho profundo na
-sintaxe e nas estruturas da linguagem!
+No **[Capítulo 02: O Que É um Runtime
+JavaScript?](02-o-que-e-um-runtime-js.md)**, vamos desmistificar o que é um
+ambiente de execução (_runtime_), entender por que o navegador possui regras de
+segurança estritas e descobrir como ferramentas como o **Node.js** permitiram
+que o JavaScript conquistasse o mundo dos servidores e da linha de comando.
 
 ---
 

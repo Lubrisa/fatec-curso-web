@@ -175,6 +175,18 @@ assinatura criptográfica de segurança.
 > que estavam funcionando na sua máquina, evitando o temido _"na minha máquina
 > funciona"_.
 
+## O Que Vem a Seguir?
+
+Com os três pilares fundamentais estabelecidos — a motivação do **TypeScript**,
+o funcionamento do **Runtime** e o gerenciamento de dependências com o **NPM**
+—, temos todo o alicerce teórico necessário para começar a programar.
+
+No **[Capítulo 04: Instalação e Primeiro Programa em
+TypeScript](04-instalacao-e-primeiro-programa.md)**, vamos colocar a mão na
+massa: inicializaremos nosso primeiro projeto, instalaremos o compilador oficial
+(`tsc`), configuraremos o arquivo `tsconfig.json` e executaremos nosso primeiro
+código tipado!
+
 ---
 
 <a href="02-o-que-e-um-runtime-js.md">← O Que É um Runtime JavaScript?</a>
