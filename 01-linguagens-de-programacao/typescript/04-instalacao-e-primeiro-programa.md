@@ -13,6 +13,61 @@ programa em TypeScript.
 Ao final desta aula, você terá um fluxo de trabalho profissional funcionando
 diretamente no seu terminal e editor de código.
 
+## Pré-requisito: Instalando o Node.js na Sua Máquina
+
+Para compilar arquivos TypeScript e executar código JavaScript no seu
+computador, você precisa ter o **Node.js (versão LTS)** e o **NPM** instalados.
+
+Escolha as instruções de acordo com o seu sistema operacional:
+
+### 1. No Windows
+
+A forma mais rápida e moderna é utilizar o gerenciador de pacotes nativo do
+Windows (**winget**) no PowerShell:
+
+```powershell
+# Instala a versão estável de suporte a longo prazo (LTS) do Node.js
+winget install OpenJS.NodeJS.LTS
+```
+
+> **Instalação Manual Alternativa:**
+>
+> Você também pode acessar o site oficial [nodejs.org](https://nodejs.org),
+> baixar o instalador recomendado (**LTS**) e seguir o assistente de instalação
+> padrão (_Next $\rightarrow$ Next $\rightarrow$ Finish_), garantindo que a
+> opção de adicionar ao `Path` esteja marcada.
+
+### 2. No Linux (Ubuntu / Debian / WSL)
+
+No terminal do Linux (ou no subsistema WSL do Windows), a forma recomendada para
+obter a versão LTS atualizada é utilizar o repositório oficial da NodeSource:
+
+```bash
+# Baixa e configura o repositório LTS do Node.js
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+# Instala o Node.js e o NPM
+sudo apt install -y nodejs
+```
+
+### 3. No macOS
+
+No macOS, utilize o gerenciador **Homebrew**:
+
+```bash
+brew install node
+```
+
+### 4. Verificando a Instalação no Terminal
+
+Após a instalação, abra uma nova janela de terminal e execute os comandos para
+confirmar que o interpretador e o gerenciador de pacotes estão funcionando:
+
+```bash
+node -v   # Ex: v20.14.0 (ou superior)
+npm -v    # Ex: 10.7.0 (ou superior)
+```
+
 ## A Estrutura do Nosso Projeto
 
 Antes de rodar qualquer comando, vamos visualizar a estrutura de pastas e
@@ -273,6 +328,7 @@ No próximo capítulo, vamos explorar os **Tipos Primitivos e Especiais**.
 
 ---
 
-<a href="03-gerenciadores-de-pacotes.md">← Gerenciadores de Pacotes e o Ecossistema NPM</a>
+<a href="03-gerenciadores-de-pacotes.md">← Gerenciadores de Pacotes e o
+Ecossistema NPM</a>
 
 <p align="right"><a href="05-tipos-primitivos-e-especiais.md">Próximo: Tipos Primitivos e Especiais →</a></p>
