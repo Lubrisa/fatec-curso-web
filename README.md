@@ -86,17 +86,15 @@ flowchart TD
 
 ## 📚 Sumário Completo do Curso
 
-### 📦 Módulo 00: Bases da Web & Modelo Cliente-Servidor
+### 📦 Módulo 00: Bases da Web & Modelo Cliente-Servidor ✅
 
 _A fundação conceitual da Web: compreendendo a arquitetura distribuída, o ciclo
 de vida de uma requisição e a divisão de papéis entre cliente e servidor._
 
 - [01. Como a Web Funciona e o Modelo
   Cliente-Servidor](00-bases-da-web/01-como-a-web-funciona-e-o-modelo-cliente-servidor.md)
-  _(⚪ Planejado)_
 - [02. As Duas Pontas da Web: Frontend e
-  Backend](00-bases-da-web/02-as-duas-pontas-da-web-frontend-e-backend.md) _(⚪
-  Planejado)_
+  Backend](00-bases-da-web/02-as-duas-pontas-da-web-frontend-e-backend.md)
 
 ---
 
