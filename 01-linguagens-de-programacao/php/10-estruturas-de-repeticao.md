@@ -25,8 +25,6 @@ Sua sintaxe é composta por três expressões separadas por ponto e vírgula:
 ```php
 <?php
 
-declare(strict_types=1);
-
 // for (inicializacao; condicao_de_continuidade; incremento)
 for ($index = 0; $index < 5; $index += 1) {
     echo "Iteração número: {$index}\n";
@@ -57,8 +55,6 @@ $N$ vezes):
 ```php
 <?php
 
-declare(strict_types=1);
-
 $retryAttempts = 0;
 $maxRetries = 3;
 
@@ -85,8 +81,6 @@ condição:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $workerJobsProcessed = 0;
 
 do {
@@ -112,8 +106,6 @@ controle do programa para a primeira linha após o fechamento do bloco `{ ... }`
 ```php
 <?php
 
-declare(strict_types=1);
-
 $searchTarget = 7;
 
 for ($currentNumber = 1; $currentNumber <= 10; $currentNumber += 1) {
@@ -134,8 +126,6 @@ para a próxima iteração (executando o incremento):
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 for ($numberItem = 1; $numberItem <= 6; $numberItem += 1) {
     // Pula números pares:
@@ -186,8 +176,6 @@ Quando precisamos apenas dos elementos contidos no array:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $frameworks = ["Laravel", "Symfony", "Slim"];
 
 foreach ($frameworks as $framework) {
@@ -202,8 +190,6 @@ associativa) quanto o valor correspondente:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $serverEnvironment = [
     "APP_ENV" => "production",
@@ -224,8 +210,6 @@ não altera o array original:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $productPrices = [100.0, 250.0, 50.0];
 

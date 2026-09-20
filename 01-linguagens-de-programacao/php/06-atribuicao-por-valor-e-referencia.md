@@ -85,7 +85,6 @@ Veja isso acontecendo no código:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $originalPrice = 100.0;
 
@@ -107,7 +106,6 @@ valor**:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $originalTags = ["php", "backend"];
 
@@ -145,7 +143,6 @@ Veja o impacto no código:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $baseScore = 50;
 
@@ -193,7 +190,6 @@ e **retorna um novo valor explicitamente**:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ✅ CÓDIGO MODERNO: Função pura, explícita e sem efeitos colaterais
 function calculateBonus(float $salary): float

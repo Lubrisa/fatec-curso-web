@@ -10,9 +10,8 @@ de erro se o saldo for insuficiente ou redirecionar o fluxo se o pagamento for
 confirmado.
 
 Neste capítulo, vamos dominar as estruturas de controle de fluxo fundamentais do
-PHP: **`if` / `elseif` / `else`** e **`switch / case`**, explorando boas
-práticas de legibilidade como as **Cláusulas de Guarda** e compreendendo as
-nuances de comparação da linguagem.
+PHP: **`if` / `elseif` / `else`** e **`switch / case`**, compreendendo a ordem
+de avaliação e as nuances de comparação da linguagem.
 
 ## A Estrutura `if` e `else`
 
@@ -22,8 +21,6 @@ resolvida como verdadeira (_truthy_), o bloco de código delimitado por chaves `
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $studentScore = 7.5;
 
@@ -39,8 +36,6 @@ Quando precisamos definir uma ação alternativa caso a condição seja falsa
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $isUserAuthenticated = false;
 
@@ -64,8 +59,6 @@ tratamento padrão (_fallback_):
 ```php
 <?php
 
-declare(strict_types=1);
-
 $currentTrafficLight = "yellow";
 
 if ($currentTrafficLight === "green") {
@@ -87,8 +80,6 @@ subsequentes são imediatamente ignoradas, mesmo que também fossem verdadeiras:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $customerPoints = 120;
 
@@ -135,8 +126,6 @@ chamados `case`, evitando longas cadeias repetitivas de `if / elseif`:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $userRole = "editor";
 
 switch ($userRole) {
@@ -168,8 +157,6 @@ dos casos seguintes em cascata, independentemente de seus valores coincidirem
 ```php
 <?php
 
-declare(strict_types=1);
-
 $chosenTier = "gold";
 
 switch ($chosenTier) {
@@ -190,8 +177,6 @@ executar exatamente a mesma regra de negócio:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $selectedDay = "sábado";
 
@@ -224,8 +209,6 @@ valor testado e cada `case` são realizadas utilizando **igualdade fraca
 ```php
 <?php
 
-declare(strict_types=1);
-
 $inputStatus = 0;
 
 switch ($inputStatus) {
@@ -245,71 +228,13 @@ switch ($inputStatus) {
 > `break`, o PHP 8+ introduziu a expressão **`match`**, que estudaremos
 > detalhadamente no próximo capítulo!
 
-## Cláusulas de Guarda (_Guard Clauses_) e _Early Return_
-
-À medida que as regras de negócio crescem, é muito comum cairmos na armadilha de
-aninhar múltiplos blocos `if / else`, criando o que a engenharia de software
-chama de _código em formato de flecha_ (ou _Hadouken anti-pattern_):
-
-```php
-<?php
-
-// ❌ Difícil leitura e alto acoplamento visual (aninhamento profundo)
-function processPayment(bool $isAccountActive, float $accountBalance, float $orderAmount): string
-{
-    if ($isAccountActive) {
-        if ($orderAmount > 0) {
-            if ($accountBalance >= $orderAmount) {
-                return "Pagamento de R$ {$orderAmount} processado com sucesso!";
-            } else {
-                return "Erro: Saldo insuficiente.";
-            }
-        } else {
-            return "Erro: Valor do pedido deve ser maior que zero.";
-        }
-    } else {
-        return "Erro: Conta do cliente está inativa.";
-    }
-}
-```
-
-A técnica de **Cláusulas de Guarda (_Guard Clauses_)** inverte a lógica:
-tratamos as condições de erro e casos excepcionais **primeiro**, interrompendo a
-execução imediatamente com um retorno antecipado (_early return_). O caminho
-feliz (_happy path_) permanece sempre no nível principal de indentação:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-// ✅ Legibilidade linear, rápida compreensão e fácil manutenção
-function processPayment(bool $isAccountActive, float $accountBalance, float $orderAmount): string
-{
-    if (!$isAccountActive) {
-        return "Erro: Conta do cliente está inativa.";
-    }
-
-    if ($orderAmount <= 0) {
-        return "Erro: Valor do pedido deve ser maior que zero.";
-    }
-
-    if ($accountBalance < $orderAmount) {
-        return "Erro: Saldo insuficiente.";
-    }
-
-    return "Pagamento de R$ {$orderAmount} processado com sucesso!";
-}
-```
-
 ## Resumo das Estruturas de Decisão
 
-| Estrutura               | Quando Utilizar?                                          | Exemplo Típico                           |
-| :---------------------- | :-------------------------------------------------------- | :--------------------------------------- |
-| **`if / else`**         | Decisões booleanas simples ou bifurcações binárias        | `if ($score >= 6.0) { ... }`             |
-| **`elseif`**            | Múltiplas faixas numéricas ou condições lógicas compostas | `elseif ($score >= 5.0 && $score < 6.0)` |
-| **`switch / case`**     | Mapeamento clássico de um único valor contra literais     | `switch ($role) { case 'admin': ... }`   |
-| **Cláusulas de Guarda** | Validações prévias e tratamento antecipado de erros       | `if (!$isValid) { return false; }`       |
+| Estrutura           | Quando Utilizar?                                          | Exemplo Típico                           |
+| :------------------ | :-------------------------------------------------------- | :--------------------------------------- |
+| **`if / else`**     | Decisões booleanas simples ou bifurcações binárias        | `if ($score >= 6.0) { ... }`             |
+| **`elseif`**        | Múltiplas faixas numéricas ou condições lógicas compostas | `elseif ($score >= 5.0 && $score < 6.0)` |
+| **`switch / case`** | Mapeamento clássico de um único valor contra literais     | `switch ($role) { case 'admin': ... }`   |
 
 > **Regras de Ouro:**
 >
@@ -317,8 +242,9 @@ function processPayment(bool $isAccountActive, float $accountBalance, float $ord
 >    clareza e evitar efeitos colaterais.
 > 2. **Adote `elseif`** (palavra unificada) para seguir as recomendações de
 >    estilo PSR-12.
-> 3. **Prefira Cláusulas de Guarda** em funções e métodos para manter o código
->    linear e reduzir a complexidade ciclomática.
+> 3. **Evite `if`s aninhados desnecessários**, preferindo encadear condições
+>    mutuamente exclusivas com `elseif` ou combiná-las com operadores lógicos
+>    (`&&`, `||`).
 
 ## O Que Vem a Seguir?
 

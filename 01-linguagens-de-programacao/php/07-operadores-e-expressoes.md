@@ -23,7 +23,6 @@ em um valor**:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Exemplos de expressões no PHP:
 true;                   // Produz o booleano true
@@ -60,7 +59,6 @@ decimais:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $basePrice = 100.0;
 $taxRate = 0.15;
@@ -78,7 +76,6 @@ Os operadores unários `++` e `--` adicionam ou subtraem `1` de uma variável:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $counter = 0;
 
@@ -100,7 +97,6 @@ Permitem armazenar ou atualizar valores em variáveis:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $currentScore = 50; // Atribuição simples
 
@@ -120,7 +116,6 @@ ou `false`).
 
 ```php
 <?php
-declare(strict_types=1);
 
 $studentGrade = 8.5;
 
@@ -138,7 +133,6 @@ automáticas:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ✅ RECOMENDADO: Comparações estritas e seguras
 var_dump(10 === 10);   // bool(true)
@@ -179,7 +173,6 @@ Os operadores lógicos combinam condições booleanas:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $isUserAuthenticated = true;
 $hasAdminPermission = false;
@@ -263,7 +256,6 @@ partes:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $score = 7.5;
 
@@ -282,7 +274,6 @@ operador ternário. Essa sintaxe é carinhosamente conhecida na comunidade como
 
 ```php
 <?php
-declare(strict_types=1);
 
 $customUsername = "mariana_dev";
 
@@ -305,7 +296,6 @@ Veja a falha clássica em um contador de notificações:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ❌ FALHA COM ELVIS OPERATOR (Baseado em Truthiness):
 $unreadAlerts = 0; // O usuário leu tudo, possui 0 alertas pendentes
@@ -321,7 +311,6 @@ e não é `null`**, preservando valores legítimos como `0`, `""` ou `false`:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ✅ SEGURANÇA TOTAL COM COALESCÊNCIA NULA (??):
 $unreadAlerts = 0;
@@ -335,14 +324,13 @@ $finalPrefix = $customPrefix ?? "padrao_";
 echo $finalPrefix; // "" (A string vazia foi preservada)
 ```
 
-### 3. Operador de Atribuição Coalescente Nula (`??=`)
+### 4. Operador de Atribuição Coalescente Nula (`??=`)
 
 Introduzido no PHP 7.4, o operador `??=` atribui um valor à variável **apenas se
 ela for atualmente `null` ou inexistente**:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $userPreferences = [
     "theme" => "dark",
@@ -371,7 +359,6 @@ divisões possuem maior prioridade que somas e subtrações:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Multiplicação (*) tem maior precedência que adição (+):
 $total = 10 + 5 * 2;
@@ -417,9 +404,9 @@ Agora que dominamos a avaliação de expressões, operadores aritméticos, lógi
 de igualdade estrita, estamos prontos para controlar o fluxo de execução dos
 nossos programas no servidor.
 
-> *"Como estruturar desvios de fluxo com `if`, `elseif` e `else`, e como as
-> Cláusulas de Guarda (*Guard Clauses*) tornam o código de backend muito mais
-> limpo e legível?"*
+> _"Como estruturar desvios de fluxo com `if`, `elseif` e `else`, e como as
+> Cláusulas de Guarda (Guard Clauses) tornam o código de backend muito mais
+> limpo e legível?"_
 
 No **[Capítulo 08: Estruturas Condicionais](08-estruturas-condicionais.md)**,
 vamos aprender a direcionar o fluxo de execução das regras de negócio com
@@ -427,7 +414,6 @@ elegância e clareza.
 
 ---
 
-<a href="06-atribuicao-por-valor-e-referencia.md">← Atribuição por Valor e
-Referência</a>
+<a href="06-atribuicao-por-valor-e-referencia.md">← Atribuição por Valor e Referência</a>
 
 <p align="right"><a href="08-estruturas-condicionais.md">Próximo: Estruturas Condicionais →</a></p>

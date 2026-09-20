@@ -142,7 +142,6 @@ Crie um arquivo chamado `index.php` com o seguinte conteúdo:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $applicationName = "FATEC Web App";
 $currentYear = 2026;
@@ -179,7 +178,6 @@ function getStatus(): string
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ✅ PADRÃO MODERNO: Deixar o arquivo aberto no final
 function getStatus(): string
@@ -332,18 +330,16 @@ as fundações operacionais prontas.
 
 A partir daqui, iniciaremos o **Bloco 2: Fundamentos, Tipos & Memória**.
 
-> _"Como o PHP organiza seus tipos primitivos de dados, como a tipagem estrita
-> nos protege contra coerções indesejadas e como declarar variáveis no PHP
-> moderno?"_
+> _"Como o PHP organiza seus tipos primitivos de dados e como declarar variáveis
+> no PHP moderno?"_
 
-No **[Capítulo 03: Tipos Primitivos e Tipagem
-Estrita](03-tipos-primitivos.md)**, vamos mergulhar no sistema de tipos
-escalares (`int`, `float`, `string`, `bool`, `null`) e dominar o funcionamento
-da diretiva `declare(strict_types=1);`.
+No **[Capítulo 03: Tipos Primitivos Escalares](03-tipos-primitivos.md)**, vamos
+mergulhar no sistema de tipos escalares (`int`, `float`, `string`, `bool`) e
+compreender a representação de ausência com `null`.
 
 ---
 
 <a href="01-o-que-e-php-e-o-modelo-de-execucao-web.md">← O Que É o PHP e o
 Modelo de Execução Web?</a>
 
-<p align="right"><a href="03-tipos-primitivos.md">Próximo: Tipos Primitivos e Tipagem Estrita →</a></p>
+<p align="right"><a href="03-tipos-primitivos.md">Próximo: Tipos Primitivos Escalares →</a></p>

@@ -26,8 +26,6 @@ para não esquecer os comandos `break`:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $httpStatusCode = 200;
 $statusMessage = "";
 
@@ -62,8 +60,6 @@ podemos atribuir seu resultado diretamente a uma variável:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $httpStatusCode = 200;
 
 // ✅ Conciso, direto e sem necessidade de break
@@ -92,8 +88,6 @@ No `switch`, a coerção implícita pode causar execuções indesejadas:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $userRole = "0"; // String contendo o caractere zero
 
 // ❌ Perigo com switch (comparações soltas ==)
@@ -111,8 +105,6 @@ Com o `match`, os tipos devem ser estritamente correspondentes:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $userRole = "0";
 
@@ -133,8 +125,6 @@ por **vírgulas**:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $orderStatus = "shipped";
 
@@ -159,8 +149,6 @@ lançará uma exceção nativa chamada **`UnhandledMatchError`**:
 
 ```php
 <?php
-
-declare(strict_types=1);
 
 $paymentMethod = "bitcoin";
 
@@ -188,8 +176,6 @@ valores** passando `true` como valor de controle:
 ```php
 <?php
 
-declare(strict_types=1);
-
 $customerPoints = 350;
 
 $loyaltyTier = match (true) {
@@ -205,31 +191,6 @@ echo $loyaltyTier; // Saída: Ouro
 Nesse padrão, cada braço contém uma expressão booleana. O PHP avalia as
 condições de cima para baixo e executa o primeiro braço cuja expressão for
 estritamente igual a `true`.
-
-## Retorno Direto de Funções
-
-Por ser uma expressão, o `match` pode ser retornado diretamente pelo comando
-`return` de uma função, tornando as funções de mapeamento extremamente limpas e
-declarativas:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-function getAccountDiscount(string $accountPlan): float
-{
-    return match ($accountPlan) {
-        "enterprise" => 0.30,
-        "professional" => 0.15,
-        "starter" => 0.05,
-        default => 0.00,
-    };
-}
-
-$discount = getAccountDiscount("professional");
-echo "Desconto aplicado: " . ($discount * 100) . "%";
-```
 
 ## Comparativo: `switch` vs `match`
 

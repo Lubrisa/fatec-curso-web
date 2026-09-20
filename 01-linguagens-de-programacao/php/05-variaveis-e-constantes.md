@@ -24,7 +24,6 @@ interpretador, indicando que a palavra a seguir é um identificador de memória.
 
 ```php
 <?php
-declare(strict_types=1);
 
 $userName = "Mariana Costa";
 $totalAttempts = 3;
@@ -62,7 +61,6 @@ momento durante a execução do script:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $currentStep = 1;
 $currentStep = 2; // Reatribuição simples
@@ -114,7 +112,6 @@ constantes em arquivos e dentro de classes:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // ✅ CONSTANTE IMUTÁVEL: Impossível de ser sobrescrita
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -135,7 +132,6 @@ o nome da constante ou seu valor sejam calculados dinamicamente:
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Sintaxe: define("NOME_DA_CONSTANTE", $valor);
 define("ENVIRONMENT", "production");
@@ -166,7 +162,6 @@ começam e terminam com dois caracteres _underscore_ (`__`):
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Retorna o caminho absoluto do diretório onde este arquivo está salvo:
 echo __DIR__;
@@ -192,7 +187,6 @@ echo __LINE__; // 14
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Exemplo clássico de inclusão segura de arquivos usando __DIR__:
 $configFilePath = __DIR__ . "/config/database.php";

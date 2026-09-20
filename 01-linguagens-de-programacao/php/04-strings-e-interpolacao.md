@@ -38,7 +38,6 @@ caractere literal. O PHP não perde tempo procurando variáveis dentro dela:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $course = "PHP 8";
 
@@ -55,7 +54,6 @@ sequências de escape (como `\n` para quebra de linha ou `\t` para tabulação):
 
 ```php
 <?php
-declare(strict_types=1);
 
 $course = "PHP 8";
 
@@ -71,7 +69,6 @@ imediatamente após a variável:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $item = "teclado";
 
@@ -94,7 +91,6 @@ duas ou mais strings, utilizamos o **operador ponto (`.`)**:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $firstName = "Carlos";
 $lastName = "Eduardo";
@@ -135,7 +131,6 @@ Iniciado por `<<<` seguido por um identificador (geralmente em maiúsculas, como
 
 ```php
 <?php
-declare(strict_types=1);
 
 $customerName = "Beatriz";
 $orderId = 1042;
@@ -161,7 +156,6 @@ templates brutos que não devem avaliar variáveis:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $documentation = <<<'DOCS'
 Para exibir uma variável em PHP, utilize a sintaxe:
@@ -182,7 +176,6 @@ expressivas:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $endpointUrl = "https://api.empresa.com/v1/users/export.csv";
 
@@ -210,7 +203,6 @@ $hasVersion = str_contains($endpointUrl, "/v1/");      // true
 
 ```php
 <?php
-declare(strict_types=1);
 
 // Exemplo: Limpeza e divisão de dados
 $rawTags = "  tecnologia, backend , php8 , fatec  ";
@@ -246,7 +238,6 @@ português:
 
 ```php
 <?php
-declare(strict_types=1);
 
 $phrase = "café com maçã";
 
@@ -267,7 +258,6 @@ família de funções **`mb_*`** (_Multibyte String_):
 
 ```php
 <?php
-declare(strict_types=1);
 
 $phrase = "café com maçã";
 
@@ -314,6 +304,6 @@ valores imutáveis no PHP.
 
 ---
 
-<a href="03-tipos-primitivos.md">← Tipos Primitivos e Tipagem Estrita</a>
+<a href="03-tipos-primitivos.md">← Tipos Primitivos Escalares</a>
 
 <p align="right"><a href="05-variaveis-e-constantes.md">Próximo: Variáveis e Constantes →</a></p>
