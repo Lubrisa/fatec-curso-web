@@ -59,70 +59,78 @@ console.log(applyDiscount(100, 0.1)); // 90 (10% de desconto)
 console.log(applyDiscount(100, 0.3)); // 70 (30% de desconto)
 ```
 
-Isso resolve com perfeição as chamadas avulsas e pontuais. Mas o que acontece
-quando entramos no mundo real do desenvolvimento web moderno, processando
-coleções através de **Pipelines Funcionais** (como vimos no [Capítulo
-19](19-metodos-funcionais-de-array.md))?
+Isso resolve com perfeição as chamadas avulsas e pontuais onde todos os
+argumentos são conhecidos no mesmo instante. No entanto, no desenvolvimento web
+moderno, frequentemente precisamos de **funções especializadas com
+comportamentos pré-configurados** (como 10% para catálogo padrão, 15% para
+clientes VIP e 30% para Black Friday) para alimentar pipelines funcionais como
+`.map()`, `.filter()` ou chamadas assíncronas.
 
-### O Novo Problema: O Retorno da Duplicação em Pipelines
+### O Novo Problema: Múltiplas Variações e Fragilidade de Regras de Negócio
 
-Métodos como `.map()` esperam um callback com assinatura unária (`(item: number)
-=> number`), recebendo apenas o elemento da iteração. Para usar nossa função
-`applyDiscount(price, discountRate)` dentro de `.map()`, somos obrigados a
-escrever _Arrow Functions_ intermediárias repetitivas em cada ponto da
-aplicação:
+Se precisarmos de diferentes comportamentos de desconto em múltiplos pontos da
+aplicação, poderíamos ser tentados a declarar funções anônimas manuais para cada
+taxa:
 
 ```typescript
-const cartPrices = [100, 250, 400];
-const catalogPrices = [80, 150, 300];
-
-// ⚠️ REPETIÇÃO DE CALLBACKS: Toda vez precisamos redeclarar a mesma arrow function
-const discountedCart = cartPrices.map((price) => applyDiscount(price, 0.1));
-const discountedCatalog = catalogPrices.map((price) =>
-  applyDiscount(price, 0.1),
-);
+// ⚠️ Múltiplos callbacks manuais: a regra de como calcular o desconto é duplicada
+const applyStandardDiscount = (price: number): number => price * (1 - 0.1);
+const applyVipDiscount = (price: number): number => price * (1 - 0.15);
+const applyBlackFriday = (price: number): number => price * (1 - 0.3);
 ```
 
-Perceba que voltamos a ter o mesmo problema do Nível 0, só que em uma escala
-diferente:
+Perceba os problemas dessa abordagem:
 
-1. **Repetição de código decorativo:** Sempre que precisamos aplicar o desconto
-   padrão de 10% em uma lista, temos que redigitar `(price) =>
-applyDiscount(price, 0.1)`.
-2. **Fragilidade:** Se a taxa do desconto mudar ou precisarmos alterar a regra,
-   teremos que rastrear e alterar dezenas de _Arrow Functions_ idênticas
-   espalhadas por múltiplos arquivos.
+1. **Dispersão da Regra de Negócio:** A fórmula de cálculo e a lógica de
+   precificação ficam duplicadas e espalhadas por cada callback manual.
+2. **Fragilidade de Manutenção Extrema:** Se a estratégia de cálculo mudar (por
+   exemplo, se o sistema exigir arredondamento financeiro com
+   `Number(val.toFixed(2))`, validação contra preços negativos ou taxa de
+   conveniência), teremos que rastrear e alterar **todas** as funções criadas
+   manualmente pelo código.
 
 ### Nível 2: Parametrização de Comportamento (Fábricas de Funções)
 
 E se aplicarmos **a mesma lógica de generalização**, mas em vez de parametrizar
-um cálculo para ser executado imediatamente, parametrizarmos a **geração do
-próprio callback**?
+apenas dados para um cálculo imediato, parametrizarmos a **geração do próprio
+comportamento**?
 
-É exatamente isso que uma **Fábrica de Funções** (_Function Factory_) faz: ela
-recebe a configuração uma única vez e devolve uma nova função pré-configurada
-sob medida:
+É exatamente isso que uma **Fábrica de Funções** (_Function Factory_) realiza:
+ela centraliza a **estratégia e a regra de negócio em um único ponto**,
+recebendo a configuração desejada e devolvendo uma nova função unária sob
+medida:
 
 ```typescript
-// ✅ NÍVEL 2: Fábrica geradora de comportamentos
+// ✅ NÍVEL 2: Fábrica que encapsula a estratégia e gera funções especializadas
 function createDiscountCalculator(discountRate: number) {
-  // Retorna uma função unária pronta que "lembra" da taxa recebida
+  // A regra de negócio completa fica centralizada aqui:
   return function (price: number): number {
-    return price * (1 - discountRate);
+    const finalPrice = price * (1 - discountRate);
+    return Number(finalPrice.toFixed(2));
   };
 }
 
-// 1. Geramos funções especializadas reutilizáveis
-const applyTenPercentDiscount = createDiscountCalculator(0.1);
-const applyBlackFridayDiscount = createDiscountCalculator(0.3);
+// 1. Geramos funções especializadas reutilizáveis a partir da mesma estratégia
+const applyTenPercent = createDiscountCalculator(0.1);
+const applyVipDiscount = createDiscountCalculator(0.15);
+const applyBlackFriday = createDiscountCalculator(0.3);
+
+const cartPrices = [100, 250, 400];
+const catalogPrices = [80, 150, 300];
 
 // 2. Passamos as funções diretamente por referência para qualquer pipeline!
-const discountedCart = cartPrices.map(applyTenPercentDiscount);
-const discountedCatalog = catalogPrices.map(applyTenPercentDiscount);
+const discountedCart = cartPrices.map(applyTenPercent);
+const discountedCatalog = catalogPrices.map(applyBlackFriday);
 
 console.log(discountedCart); // [90, 225, 360]
-console.log(discountedCatalog); // [72, 135, 270]
+console.log(discountedCatalog); // [56, 105, 210]
 ```
+
+Se a diretoria comercial decidir alterar a estratégia de cálculo, alteramos
+**apenas o corpo de `createDiscountCalculator`** e, automaticamente, todas as
+funções especializadas geradas na aplicação (`applyTenPercent`,
+`applyVipDiscount`, `applyBlackFriday`) passarão a aplicar a nova regra com
+total consistência!
 
 Mas como a função interna gerada sabe qual era o valor de `discountRate`, se a
 função externa `createDiscountCalculator` já terminou de executar? A resposta
@@ -200,7 +208,7 @@ flowchart LR
 #### Múltiplas Instâncias e Isolamento de Estado
 
 O que acontece quando chamamos a mesma fábrica novamente para criar
-`applyBlackFridayDiscount = createDiscountCalculator(0.3)`?
+`applyBlackFriday = createDiscountCalculator(0.3)`?
 
 Cada chamada a uma função cria um **novo contexto de execução independente**.
 Por isso, o motor do JavaScript aloca um **novo escopo separado no Heap** para
