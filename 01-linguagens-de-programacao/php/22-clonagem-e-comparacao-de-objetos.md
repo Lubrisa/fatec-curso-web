@@ -431,16 +431,15 @@ No entanto, à medida que um sistema cresce, diferentes classes de negócio
 começam a compartilhar comportamentos e estruturas em comum (como diferentes
 tipos de usuários, formas de pagamento ou contas bancárias).
 
-No **[Capítulo 23: Herança e Classes
-Abstratas](23-heranca-e-classes-abstratas.md)**, aprenderemos a especializar
-classes com **`extends`**, reaproveitar construtores com
-**`parent::__construct()`**, proteger métodos com **`final`** e definir modelos
-parciais com classes e métodos **`abstract`**.
+No **[Capítulo 23: Herança e Sobrescrita de
+Métodos](23-heranca-e-sobrescrita-de-metodos.md)**, aprenderemos a especializar
+classes com **`extends`**, controlar o acesso em subclasses com **`protected`**,
+reaproveitar inicializações e comportamentos com **`parent::`** e redefinir
+comportamentos através da **Sobrescrita de Métodos**.
 
 ---
 
 <a href="21-modificadores-de-acesso-e-encapsulamento.md">← Modificadores de
 Acesso e Encapsulamento</a>
 
-<p align="right"><a href="23-heranca-e-classes-abstratas.md">Próximo: Herança e Classes
-Abstratas →</a></p>
+<p align="right"><a href="23-heranca-e-sobrescrita-de-metodos.md">Próximo: Herança e Sobrescrita de Métodos →</a></p>
