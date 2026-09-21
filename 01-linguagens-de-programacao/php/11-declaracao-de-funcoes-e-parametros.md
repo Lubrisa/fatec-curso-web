@@ -296,6 +296,7 @@ muitos parâmetros é a passagem posicional:
 O **PHP 8.0 introduziu os Argumentos Nomeados (_Named Arguments_)**, permitindo
 passar argumentos especificando o nome do parâmetro seguido por dois-pontos
 (`nomeDoParametro: $valor`):
+
 ```php
 <?php
 
@@ -444,20 +445,21 @@ funções e torna cada regra de validação independente e fácil de testar.
 
 ## O Que Vem a Seguir?
 
-Agora que dominamos a criação e tipagem de funções, precisamos entender como as
-variáveis interagem entre o interior das funções e o restante do script.
+Agora que dominamos a anatomia e a declaração de funções formais, precisamos
+explorar um dos recursos mais poderosos do paradigma funcional no PHP: tratar
+**funções como valores de primeira classe**.
 
-> _"Por que uma variável criada fora de uma função no PHP não pode ser acessada
-> diretamente dentro dela por padrão? Qual é o papel da palavra-chave `global` e
-> como funcionam as variáveis `static` locais que mantêm seu valor entre
-> chamadas consecutivas?"_
+> _"E se precisarmos passar uma regra de cálculo como argumento para outra
+> função, criar funções anônimas descartáveis ou declarar funções de forma
+> concisa?"_
 
-No **[Capítulo 12: Escopo de Variáveis](12-escopo-de-variaveis.md)**, vamos
-desvendar o modelo de isolamento de escopo estrito do PHP e o ciclo de vida das
-variáveis na memória.
+No **[Capítulo 12: Funções de Primeira Classe e
+Callables](12-funcoes-de-primeira-classe-e-callables.md)**, vamos aprender a
+manipular funções anônimas, Arrow Functions (`fn() => ...`), First-Class
+Callables (`funcao(...)`) e a tipagem estrita com `Closure` e `callable`.
 
 ---
 
 <a href="10-estruturas-de-repeticao.md">← Estruturas de Repetição</a>
 
-<p align="right"><a href="12-escopo-de-variaveis.md">Próximo: Escopo de Variáveis →</a></p>
+<p align="right"><a href="12-funcoes-de-primeira-classe-e-callables.md">Próximo: Funções de Primeira Classe e Callables →</a></p>

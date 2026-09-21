@@ -1,4 +1,4 @@
-# 15. Desestruturação e Operador Spread
+# 16. Desestruturação e Operador Spread
 
 No capítulo anterior, aprendemos como os arrays atuam como a espinha dorsal de
 coleções e mapas estruturados no PHP, permitindo agrupar listas de elementos e
@@ -407,15 +407,15 @@ Neste capítulo, vimos como extrair dados com precisão e elegância através da
 desestruturação posicional e associativa, além de compor coleções e criar
 assinaturas flexíveis de funções com o operador spread e parâmetros variádicos.
 
-No [Capítulo 16: Funções de Primeira Classe, Closures e Arrow Functions](16-funcoes-de-primeira-classe-closures-e-arrow-functions.md),
-daremos o próximo passo na programação funcional em PHP: entenderemos como
-funções podem ser tratadas como valores, a captura explícita de escopo externo
-com `use ($var)` em Closures e a sintaxe concisa de expressão única das _Arrow
-Functions_ (`fn() => $val`).
+No [Capítulo 17: Closures e Fábricas de
+Funções](17-closures-e-fabricas-de-funcoes.md), daremos o próximo passo na
+programação funcional em PHP: entenderemos a retenção de escopo na memória, a
+captura explícita de variáveis com `use ($var)` (por valor e por referência
+`&$var`) e a criação de fábricas geradoras de funções sob medida.
 
 ---
 
-<a href="14-arrays-indexados-e-associativos.md">← Arrays Indexados e
+<a href="15-arrays-indexados-e-associativos.md">← Arrays Indexados e
 Associativos</a>
 
-<p align="right"><a href="16-funcoes-de-primeira-classe-closures-e-arrow-functions.md">Próximo: Funções de Primeira Classe, Closures e Arrow Functions →</a></p>
+<p align="right"><a href="17-closures-e-fabricas-de-funcoes.md">Próximo: Closures e Fábricas de Funções →</a></p>

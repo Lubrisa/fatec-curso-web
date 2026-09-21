@@ -1,4 +1,4 @@
-# 13. Tratamento de Erros e Exceções
+# 14. Tratamento de Erros e Exceções
 
 No mundo ideal, todo cálculo matemático é exato, todo banco de dados está
 acessível, arquivos nunca desaparecem e os usuários preenchem formulários com
@@ -490,14 +490,14 @@ agora possui todas as ferramentas para escrever rotinas previsíveis e
 resilientes a falhas.
 
 No próximo bloco, entraremos no coração do processamento de dados no PHP: as
-**Coleções**. No [Capítulo 14: Arrays Indexados e
-Associativos](14-arrays-indexados-e-associativos.md), exploraremos a
+**Coleções**. No [Capítulo 15: Arrays Indexados e
+Associativos](15-arrays-indexados-e-associativos.md), exploraremos a
 versatilidade dos arrays no PHP como listas ordenadas e mapas associativos
 chave-valor, sua sintaxe moderna e as operações fundamentais do dia a dia
 backend.
 
 ---
 
-<a href="12-escopo-de-variaveis.md">← Escopo de Variáveis</a>
+<a href="13-escopo-de-variaveis.md">← Escopo de Variáveis</a>
 
-<p align="right"><a href="14-arrays-indexados-e-associativos.md">Próximo: Arrays Indexados e Associativos →</a></p>
+<p align="right"><a href="15-arrays-indexados-e-associativos.md">Próximo: Arrays Indexados e Associativos →</a></p>

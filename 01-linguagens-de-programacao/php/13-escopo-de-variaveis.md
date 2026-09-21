@@ -1,7 +1,7 @@
-# 12. Escopo de Variáveis
+# 13. Escopo de Variáveis
 
-No capítulo anterior, aprendemos a modularizar nosso código criando funções com
-parâmetros tipados, contratos de retorno e argumentos nomeados.
+No capítulo anterior, aprendemos a tratar funções como cidadãs de primeira
+classe, explorando funções anônimas, Arrow Functions e Callables.
 
 No entanto, conforme nossas aplicações crescem e dividimos a lógica em múltiplos
 arquivos e funções, surge uma questão fundamental de arquitetura de software:
@@ -428,7 +428,7 @@ personalizadas de domínio.
 
 ---
 
-<a href="11-declaracao-de-funcoes-e-parametros.md">← Declaração de Funções e
-Parâmetros</a>
+<a href="12-funcoes-de-primeira-classe-e-callables.md">← Funções de Primeira
+Classe e Callables</a>
 
-<p align="right"><a href="13-tratamento-de-erros-e-excecoes.md">Próximo: Tratamento de Erros e Exceções →</a></p>
+<p align="right"><a href="14-tratamento-de-erros-e-excecoes.md">Próximo: Tratamento de Erros e Exceções →</a></p>

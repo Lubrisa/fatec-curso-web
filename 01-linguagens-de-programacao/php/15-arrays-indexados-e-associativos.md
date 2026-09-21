@@ -1,4 +1,4 @@
-# 14. Arrays Indexados e Associativos
+# 15. Arrays Indexados e Associativos
 
 Nos capítulos anteriores, aprendemos a estruturar funções, blindar tipos
 escalares, gerenciar o escopo de variáveis e tratar falhas de forma resiliente
@@ -483,15 +483,15 @@ indexadas e mapas associativos, aprendendo a inspecionar chaves de forma segura
 com `isset()` e `array_key_exists()`, além dos cuidados ao manipular índices com
 `unset()`.
 
-No [Capítulo 15: Desestruturação e Operador
-Spread](15-desestruturacao-e-operador-spread.md), aprenderemos como extrair
+No [Capítulo 16: Desestruturação e Operador
+Spread](16-desestruturacao-e-operador-spread.md), aprenderemos como extrair
 dados de coleções de forma concisa com a sintaxe de desestruturação posicional e
 associativa, e como compor e desempacotar arrays utilizando o _Spread Operator_
 (`...`).
 
 ---
 
-<a href="13-tratamento-de-erros-e-excecoes.md">← Tratamento de Erros e
+<a href="14-tratamento-de-erros-e-excecoes.md">← Tratamento de Erros e
 Exceções</a>
 
-<p align="right"><a href="15-desestruturacao-e-operador-spread.md">Próximo: Desestruturação e Operador Spread →</a></p>
+<p align="right"><a href="16-desestruturacao-e-operador-spread.md">Próximo: Desestruturação e Operador Spread →</a></p>
