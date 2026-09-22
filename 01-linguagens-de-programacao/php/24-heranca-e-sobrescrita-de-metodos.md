@@ -1,558 +1,691 @@
-# 23. Herança e Sobrescrita de Métodos
+# 24. Herança e Sobrescrita de Métodos
 
-Nos capítulos anteriores, vimos como declarar classes, encapsular o estado
-interno com modificadores de acesso e gerenciar o ciclo de vida e a cópia de
-objetos na memória. Conforme uma aplicação cresce, começam a surgir entidades
-que compartilham propriedades e comportamentos em comum, mas que também possuem
-particularidades exclusivas.
+No capítulo anterior, aprendemos a utilizar as **Interfaces** para estabelecer
+contratos formais e alcançar o **Polimorfismo**. Vimos que classes distintas
+podem cumprir o mesmo papel através de `implements`, desacoplando completamente
+os serviços consumidores das implementações concretas.
 
-Neste capítulo, aprenderemos o conceito de **Herança** — o mecanismo que permite
-criar novas classes a partir de classes existentes —, o modificador de
-visibilidade **`protected`**, a palavra-chave **`parent::`** para acessar
-membros da classe base e a **Sobrescrita de Métodos** (_Method Overriding_).
+No entanto, conforme começamos a implementar múltiplos serviços a partir de uma
+mesma interface, surge um novo desafio de design: **como compartilhar
+propriedades e rotinas concretas idênticas entre essas classes sem duplicar
+código?**
 
-## A Dor: Duplicação de Estruturas e Acoplamento
+Neste capítulo, aprenderemos o mecanismo de **Herança** no PHP — a palavra-chave
+**`extends`**, o modificador de visibilidade **`protected`**, a delegação com
+**`parent::`** e a **Sobrescrita de Métodos** (_Method Overriding_).
 
-Imagine que estejamos desenvolvendo o módulo financeiro de um e-commerce.
-Precisamos lidar com diferentes formas de pagamento: **Cartão de Crédito**,
-**PIX** e **Boleto Bancário**.
+## A Dor de Compartilhar Código entre Implementações
 
-Sem um mecanismo de especialização e herança, poderíamos ser tentados a
-concentrar todas as regras em uma única classe cheia de condicionais:
+No capítulo anterior, modelamos a interface `PaymentGatewayInterface` e criamos
+classes como `MercadoPagoGateway` e `PagarMeGateway`.
+
+Vejamos o que acontece na prática quando desenvolvemos esses gateways de forma
+isolada:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-// ❌ ABORDAGEM PROBLEMÁTICA: Uma única classe acumulando regras de todos os tipos
-class MonolithicPaymentProcessor
+interface PaymentGatewayInterface
+{
+    public function processPayment(float $amount, string $customerDocument): bool;
+    public function getGatewayName(): string;
+}
+
+// IMPLEMENTAÇÃO 1: Mercado Pago
+class MercadoPagoGateway implements PaymentGatewayInterface
 {
     public function __construct(
-        public readonly string $id,
-        public readonly float $amount,
-        public readonly string $type, // 'credit_card', 'pix', 'boleto'
-        public readonly ?int $installments = null,
-        public readonly ?string $pixKey = null,
-        public readonly ?string $barcode = null
-    ) {}
-
-    public function calculateFee(): float
-    {
-        return match ($this->type) {
-            'credit_card' => ($this->amount * 0.035) + 0.50, // 3.5% + R$ 0,50
-            'pix'         => 0.0,                           // Isento
-            'boleto'      => 2.50,                          // Taxa bancária fixa
-            default       => throw new InvalidArgumentException("Tipo de pagamento desconhecido."),
-        };
+        private string $apiKey,
+        private string $environment // 'sandbox' ou 'production'
+    ) {
+        if (empty($this->apiKey)) {
+            throw new InvalidArgumentException("API Key obrigatória.");
+        }
     }
 
-    public function process(): void
+    public function processPayment(float $amount, string $customerDocument): bool
     {
-        if ($this->type === 'credit_card') {
-            echo "Processando cartão em {$this->installments}x de R$ " . ($this->amount / (int) $this->installments) . "\n";
-        } elseif ($this->type === 'pix') {
-            echo "Gerando cobrança PIX para a chave: {$this->pixKey}\n";
-        } elseif ($this->type === 'boleto') {
-            echo "Emitindo boleto com código de barras: {$this->barcode}\n";
+        // Rotina de auditoria duplicada:
+        echo "[AUDIT - " . date('Y-m-d H:i:s') . "] Iniciando cobrança de R$ {$amount} no ambiente {$this->environment}.\n";
+
+        // Lógica específica do Mercado Pago...
+        echo "Integrando com API do Mercado Pago via token: {$this->apiKey}...\n";
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Mercado Pago";
+    }
+}
+
+// IMPLEMENTAÇÃO 2: Pagar.me (Repete praticamente toda a infraestrutura)
+class PagarMeGateway implements PaymentGatewayInterface
+{
+    public function __construct(
+        private string $apiKey,
+        private string $environment // 'sandbox' ou 'production'
+    ) {
+        if (empty($this->apiKey)) {
+            throw new InvalidArgumentException("API Key obrigatória.");
         }
+    }
+
+    public function processPayment(float $amount, string $customerDocument): bool
+    {
+        // Exatamente o mesmo formato de log e validação:
+        echo "[AUDIT - " . date('Y-m-d H:i:s') . "] Iniciando cobrança de R$ {$amount} no ambiente {$this->environment}.\n";
+
+        // Lógica específica do Pagar.me...
+        echo "Integrando com API do Pagar.me via token: {$this->apiKey}...\n";
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Pagar.me";
     }
 }
 ```
 
-Essa estrutura quebra dois princípios consolidados no design de software:
+Observe os problemas evidentes dessa abordagem:
 
-1. **Princípio da Responsabilidade Única (SRP):** Uma única classe é responsável
-   por gerenciar regras de cartões, de boletos bancários e de chaves PIX ao
-   mesmo tempo. Qualquer alteração em um meio afeta a classe inteira.
-2. **Princípio Aberto/Fechado (OCP):** Entidades de software devem estar abertas
-   para extensão, mas fechadas para modificação. Adicionar uma nova modalidade
-   (como carteira digital ou criptomoeda) exige reabrir e modificar código já
-   testado e homologado em produção.
-3. **Propriedades Nulas Irrelevantes:** Um objeto de pagamento via PIX precisa
-   carregar propriedades de parcelas de cartão e código de barras de boleto que
-   não fazem sentido para ele.
+1. **Código e Estruturas Duplicadas:** Ambas as classes precisam das
+   propriedades `$apiKey` e `$environment`, da validação no construtor e da
+   rotina de log de auditoria.
+2. **Fragilidade de Manutenção:** Se a equipe de segurança decidir alterar o
+   formato dos logs de auditoria ou adicionar um cabeçalho padrão de requisição,
+   teremos que alterar manualmente cada classe de gateway do projeto.
+3. **Interfaces não resolvem esse problema sozinhas:** Interfaces definem apenas
+   _o que_ deve ser feito (assinaturas), mas **não podem armazenar estado
+   (`$apiKey`) nem fornecer código implementado `{}`**.
 
-A **Herança** resolve essa dor permitindo extrair tudo o que é comum para uma
-classe base, delegando apenas o comportamento especializado para as subclasses.
+## O Conceito: Herança de Classes com `extends`
 
-## O Conceito: Herança e a Relação "É-UM"
+A **Herança** é o mecanismo da programação orientada a objetos que permite criar
+uma nova classe (chamada de **subclasse** ou **classe filha**) a partir de uma
+classe já existente (chamada de **superclasse** ou **classe base** / **classe
+pai**).
 
-A **Herança** é um mecanismo que permite criar uma nova classe (chamada de
-**classe filha** ou **subclasse**) a partir de uma classe existente (chamada de
-**classe pai**, **superclasse** ou **classe base**).
+A subclasse **herda automaticamente todas as propriedades e métodos** da
+superclasse, podendo:
 
-A classe filha estabelece uma relação do tipo **"É-UM"** (_Is-A_):
+- Reutilizar a implementação existente sem reescrevê-la;
+- Adicionar novas propriedades e métodos especializados;
+- Modificar comportamentos existentes através de sobrescrita.
 
-- Um `CreditCardPayment` **é um** `Payment`.
-- Um `PixPayment` **é um** `Payment`.
-- Um `BoletoPayment` **é um** `Payment`.
+### A Relação "É-UM" (_Is-A_)
+
+A herança estabelece uma relação conceitual de especialização:
+
+- `MercadoPagoGateway` **É-UM** `BasePaymentGateway`.
+- `PagarMeGateway` **É-UM** `BasePaymentGateway`.
 
 ```mermaid
-flowchart TD
-    BASE["Payment (Classe Base)\n+ id: string\n+ amount: float\n+ status: string\n+ getStatus(): string"]
+classDiagram
+    class PaymentGatewayInterface {
+        <<interface - abstrata>>
+        +processPayment(float amount, string customerDocument) bool
+        +getGatewayName() string
+    }
 
-    CC["CreditCardPayment (Subclasse)\n+ installments: int\n+ calculateFee(): float"]
-    PIX["PixPayment (Subclasse)\n+ pixKey: string\n+ calculateFee(): float"]
-    BOL["BoletoPayment (Subclasse)\n+ barcode: string\n+ calculateFee(): float"]
+    class BasePaymentGateway {
+        <<classe base>>
+        #string apiKey
+        #string environment
+        +__construct(string apiKey, string environment)
+        #logAudit(string message) void
+    }
 
-    BASE -->|"extends"| CC
-    BASE -->|"extends"| PIX
-    BASE -->|"extends"| BOL
+    class MercadoPagoGateway {
+        <<classe concreta>>
+        -int installmentsLimit
+        +processPayment(float amount, string customerDocument) bool
+        +getGatewayName() string
+    }
+
+    class PagarMeGateway {
+        <<classe concreta>>
+        -bool enablePix
+        +processPayment(float amount, string customerDocument) bool
+        +getGatewayName() string
+    }
+
+    PaymentGatewayInterface <|.. BasePaymentGateway : implements
+    BasePaymentGateway <|-- MercadoPagoGateway : extends
+    BasePaymentGateway <|-- PagarMeGateway : extends
+
+    note "A classe base implementa a infraestrutura comum; as subclasses especializam o comportamento."
 ```
 
-No PHP, a herança é expressa através da palavra-chave **`extends`**:
+## O Modificador de Visibilidade `protected`
+
+Até aqui, exploramos a fundo dois modificadores de acesso:
+
+- **`public`:** Acessível por qualquer parte do código (fora e dentro da
+  classe).
+- **`private`:** Acessível **estritamente dentro da própria classe** que o
+  declarou.
+
+Quando utilizamos herança, propriedades e métodos marcados como `private` na
+superclasse **não podem ser acessados diretamente pelas subclasses**.
+
+Para resolver isso, o PHP disponibiliza o modificador **`protected`**:
+
+| Modificador     | Acessível no Objeto Externo? | Acessível dentro da Própria Classe? | Acessível dentro das Subclasses? |
+| :-------------- | :--------------------------: | :---------------------------------: | :------------------------------: |
+| **`public`**    |            ✅ Sim            |               ✅ Sim                |              ✅ Sim              |
+| **`protected`** |            ❌ Não            |               ✅ Sim                |            ✅ **Sim**            |
+| **`private`**   |            ❌ Não            |               ✅ Sim                |            ❌ **Não**            |
+
+### Criando a Superclasse Base
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-// Classe Base (Superclasse)
-class Payment
+class BasePaymentGateway implements PaymentGatewayInterface
 {
+    // ✅ Propriedades protegidas: subclasses têm acesso direto, mas o mundo externo não!
     public function __construct(
-        public readonly string $id,
-        public readonly float $amount
+        protected string $apiKey,
+        protected string $environment = "sandbox"
     ) {
-        if ($this->amount <= 0) {
-            throw new InvalidArgumentException("O valor do pagamento deve ser positivo.");
+        if (empty($this->apiKey)) {
+            throw new InvalidArgumentException("API Key obrigatória.");
         }
     }
 
-    public function getSummary(): string
+    // ✅ Método protegido compartilhado por todos os gateways:
+    protected function logAudit(string action, float $amount): void
     {
-        return "Pagamento #{$this->id} no valor de R$ " . number_format($this->amount, 2);
+        $timestamp = date('Y-m-d H:i:s');
+        echo "[AUDIT - {$timestamp}] Gateway [{$this->getGatewayName()}] no ambiente [{$this->environment}]: {$action} R$ " . number_format($amount, 2) . "\n";
+    }
+
+    public function processPayment(float $amount, string $customerDocument): bool
+    {
+        $this->logAudit("Processando cobrança para {$customerDocument} no valor de", $amount);
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Gateway Genérico";
     }
 }
-
-// Subclasse herdando da classe base
-class PixPayment extends Payment
-{
-    public function __construct(
-        string $id,
-        float $amount,
-        public readonly string $pixKey
-    ) {
-        // Repassa a inicialização dos dados comuns para a superclasse:
-        parent::__construct($id, $amount);
-    }
-}
-
-$pix = new PixPayment("PIX-101", 350.0, "financeiro@empresa.com");
-
-// Acessa propriedades e métodos herdados diretamente:
-echo $pix->getSummary() . "\n";
-// Define as propriedades específicas da subclasse:
-echo "Chave de destino: {$pix->pixKey}\n";
-// Pagamento #PIX-101 no valor de R$ 350.00
-// Chave de destino: financeiro@empresa.com
 ```
 
-### Herança de Memória e o Modificador `protected`
+> ⚠️ **Aviso de Design: Proteja as Invariantes com `protected`**
+>
+> Marcar um campo como `protected` **não significa que ele está 100%
+> encapsulado**. Se uma superclasse expuser propriedades mutáveis sensíveis como
+> `protected` (ex: `protected string $status` ou `protected float $balance`),
+> qualquer subclasse poderá alterá-las livremente sem passar por validações,
+> **violando as invariantes de negócio da classe base por dentro da própria
+> hierarquia**.
+>
+> **Boas Práticas:**
+>
+> 1. **Prefira `protected readonly`** para campos que as subclasses apenas
+>    precisam ler (como chaves de API, credenciais ou endpoints).
+> 2. **Para estados mutáveis críticos, mantenha-os `private`** e forneça métodos
+>    `protected` controlados com validação (ex: `protected function
+setStatus(...)`) em vez de permitir reatribuição direta pelas subclasses.
 
-É importante notar que um objeto da subclasse possui **todo o estado** da classe
-pai alocado na memória (inclusive propriedades declaradas como `private`). A
-diferença diz respeito estritamente à **visibilidade de acesso** no código:
+## Estendendo Classes e Reaproveitando Construtores com `parent::`
 
-- **Membros `public`:** Acessíveis de qualquer ponto da aplicação (pela própria
-  classe, subclasses e chamadores externos).
-- **Membros `protected`:** Ocultos de chamadores externos, mas **livremente
-  acessíveis e manipuláveis pelo código das subclasses**.
-- **Membros `private`:** Acessíveis **apenas** dentro do escopo da classe onde
-  foram declarados. A subclasse herda esse estado na memória e os métodos
-  herdados continuam interagindo com ele, mas a subclasse não pode referenciá-lo
-  diretamente pelo nome.
+Agora, podemos criar o `MercadoPagoGateway` utilizando a palavra-chave
+**`extends`**.
+
+Quando a subclasse precisa de parâmetros adicionais em seu próprio construtor
+(por exemplo, um limite de parcelas `$installmentsLimit`), ela deve invocar o
+construtor da classe base usando **`parent::__construct(...)`**:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-class BaseAccount
+class MercadoPagoGateway extends BasePaymentGateway
 {
-    public string $publicInfo = "Informação Pública";
-    protected float $balance = 1000.0;
-    private string $internalSecurityKey = "SECRET_KEY_123";
-
-    public function getBalance(): float
-    {
-        return $this->balance;
-    }
-}
-
-class SavingsAccount extends BaseAccount
-{
-    public function applyInterest(float $rate): void
-    {
-        // ✅ PERMITIDO: $balance é protected, acessível em subclasses
-        $this->balance += $this->balance * $rate;
-
-        // ❌ ERRO: $internalSecurityKey é private na classe pai
-        // echo $this->internalSecurityKey;
-    }
-}
-```
-
-## Acessando Membros da Classe Pai com `parent::`
-
-Quando uma subclasse especializa o comportamento da classe pai, é muito comum
-que ela precise referenciar ou reaproveitar rotinas e inicializações já
-definidas na classe base.
-
-Para acessar propriedades, métodos ou construtores da superclasse a partir do
-escopo da subclasse, o PHP disponibiliza a palavra-chave **`parent`** em
-conjunto com o operador de resolução de escopo (**`::`**).
-
-Isso nos permite delegar tarefas diretamente para a implementação da classe pai
-sem duplicar código.
-
-### 1. Delegando a Inicialização para o Construtor Pai (`parent::__construct()`)
-
-Quando uma subclasse declara seu próprio método construtor para receber dados
-específicos, o construtor da classe pai **não** é executado automaticamente.
-
-Para garantir que a inicialização da classe base ocorra corretamente, a
-subclasse deve invocar explicitamente o construtor pai utilizando
-`parent::__construct()`:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-class Payment
-{
-    protected string $status = "pending";
-
+    // A subclasse define seus parâmetros específicos e repassa os comuns ao pai:
     public function __construct(
-        public readonly string $id,
-        public readonly float $amount
+        string $apiKey,
+        string $environment,
+        private int $installmentsLimit = 12
     ) {
-        if ($this->amount <= 0) {
-            throw new InvalidArgumentException("O valor do pagamento deve ser positivo.");
+        // ✅ Delega a validação e inicialização de $apiKey e $environment para o pai:
+        parent::__construct($apiKey, $environment);
+
+        // Adiciona validação específica da subclasse:
+        if ($this->installmentsLimit < 1) {
+            throw new InvalidArgumentException("O limite de parcelas deve ser maior que zero.");
         }
     }
 
-    public function getStatus(): string
+    // Sobrescreve o nome do gateway:
+    public function getGatewayName(): string
     {
-        return $this->status;
+        return "Mercado Pago (Até {$this->installmentsLimit}x)";
     }
 }
-
-class CreditCardPayment extends Payment
-{
-    // A subclasse recebe os dados base e seus próprios dados adicionais:
-    public function __construct(
-        string $id,
-        float $amount,
-        public readonly int $installments // Propriedade exclusiva do cartão
-    ) {
-        if ($installments < 1 || $installments > 12) {
-            throw new InvalidArgumentException("O número de parcelas deve ser entre 1 e 12.");
-        }
-
-        // ✅ Repassa a inicialização dos dados comuns para a classe pai:
-        parent::__construct($id, $amount);
-    }
-}
-
-$cc = new CreditCardPayment("PAY-901", 1200.0, 3);
-echo "Pagamento: {$cc->id} | Valor: R$ {$cc->amount} | Parcelas: {$cc->installments}\n";
-// Pagamento: PAY-901 | Valor: R$ 1200 | Parcelas: 3
 ```
 
-### 2. Delegando e Estendendo Métodos da Classe Pai
-
-Além do construtor, qualquer método da classe pai pode ser referenciado e
-executado dentro de uma subclasse por meio de `parent::nomeDoMetodo()`.
-
-Essa técnica é ideal quando a subclasse deseja **estender** ou complementar o
-comportamento original da classe pai, executando a lógica base antes ou depois
-de sua rotina personalizada:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-class Payment
-{
-    protected string $status = "pending";
-
-    public function __construct(
-        public readonly string $id,
-        public readonly float $amount
-    ) {}
-
-    public function approve(): void
-    {
-        $this->status = "approved";
-    }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-}
-
-class PixPayment extends Payment
-{
-    public ?DateTimeImmutable $paidAt = null;
-
-    public function approve(): void
-    {
-        // 1. Executa a lógica base da classe pai:
-        parent::approve();
-
-        // 2. Adiciona o comportamento específico do PIX:
-        $this->paidAt = new DateTimeImmutable();
-    }
-}
-
-$pix = new PixPayment("PIX-300", 150.0);
-$pix->approve();
-
-echo "Status PIX: {$pix->getStatus()}\n"; // approved
-```
+> ⚠️ **Atenção ao Construtor:**
+>
+> Se a subclasse declarar seu próprio `__construct()`, o construtor da classe
+> base **não será executado automaticamente**. É fundamental chamar
+> `parent::__construct(...)` para garantir que as propriedades e validações da
+> classe pai sejam devidamente inicializadas.
 
 ## Sobrescrita de Métodos (_Method Overriding_)
 
-A **Sobrescrita de Métodos** (_Method Overriding_) ocorre quando uma subclasse
-redefine um método herdado da classe pai com a mesma assinatura, substituindo
-integralmente a implementação original sem necessariamente delegar a execução
-para `parent::`.
+A **Sobrescrita de Métodos** ocorre quando uma subclasse redefine um método que
+já foi declarado na superclasse, adaptando seu comportamento para suas próprias
+necessidades.
 
-No PHP, ao chamar o método em um objeto da classe filha, o interpretador executa
-a versão especializada definida na subclasse:
+A subclasse pode:
+
+1. **Substituir totalmente** a lógica da superclasse;
+2. **Complementar** a lógica da superclasse, invocando `parent::nomeDoMetodo()`
+   para executar o comportamento base antes ou depois de sua lógica exclusiva.
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-class Payment
+class PagarMeGateway extends BasePaymentGateway
 {
-    public function getReceipt(): string
+    public function __construct(
+        string $apiKey,
+        string $environment,
+        private bool $enablePix = true
+    ) {
+        parent::__construct($apiKey, $environment);
+    }
+
+    // ✅ SOBRESCRITA DE MÉTODO: Estende o comportamento padrão herdado
+    public function processPayment(float $amount, string $customerDocument): bool
     {
-        return "Comprovante de pagamento genérico.";
+        // 1. Executa a lógica padrão de auditoria da classe base:
+        parent::processPayment($amount, $customerDocument);
+
+        // 2. Adiciona o comportamento exclusivo do Pagar.me:
+        if ($this->enablePix) {
+            echo "⚡ [Pagar.me] Gerando payload PIX com chave vinculada à conta...\n";
+        }
+
+        echo "💳 [Pagar.me] Comunicando com adquirente Stone via chave: {$this->apiKey}\n";
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Pagar.me V5";
+    }
+}
+```
+
+### Regras do PHP Moderno para Sobrescrita de Métodos
+
+Para garantir a integridade dos contratos de tipos, o PHP impõe regras estritas
+de compatibilidade na sobrescrita:
+
+1. **Visibilidade Não Pode Ser Reduzida:** Se o método na classe base for
+   `public`, a subclasse não pode torná-lo `protected` ou `private`. Ela pode,
+   no entanto, tornar um método `protected` mais aberto (`public`).
+2. **Compatibilidade de Tipos nos Parâmetros (Contravariância):** Os tipos dos
+   parâmetros na subclasse devem ser iguais ou mais amplos (genéricos) do que na
+   superclasse.
+3. **Compatibilidade de Tipos no Retorno (Covariância):** O tipo de retorno na
+   subclasse deve ser igual ou mais restrito (específico) do que na superclasse.
+
+## Exemplo Completo do Domínio: Arquitetura em Camadas com Interfaces e Herança
+
+Vejamos a junção harmoniosa entre o contrato da **Interface** (visto no Cap. 23)
+e o compartilhamento de código da **Herança**:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+// 1. CONTRATO PÚBLICO (Interface)
+interface PaymentGatewayInterface
+{
+    public function processPayment(float $amount, string $customerDocument): bool;
+    public function getGatewayName(): string;
+}
+
+// 2. SUPERCLASSE BASE (Compartilha estado protegido, auditoria e inicialização)
+class BasePaymentGateway implements PaymentGatewayInterface
+{
+    public function __construct(
+        protected string $apiKey,
+        protected string $environment = "sandbox"
+    ) {
+        if (strlen($this->apiKey) < 8) {
+            throw new InvalidArgumentException("Chave de API inválida.");
+        }
+    }
+
+    protected function logAudit(string $action, float $amount): void
+    {
+        $envTag = strtoupper($this->environment);
+        echo "[AUDIT - {$envTag}] [{$this->getGatewayName()}]: {$action} R$ " . number_format($amount, 2) . "\n";
+    }
+
+    public function processPayment(float $amount, string $customerDocument): bool
+    {
+        $this->logAudit("Cobrança autorizada para doc {$customerDocument} no total de", $amount);
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Gateway Padrão";
     }
 }
 
-class BoletoPayment extends Payment
+// 3. SUBCLASSE 1: Mercado Pago
+class MercadoPagoGateway extends BasePaymentGateway
 {
     public function __construct(
-        public readonly string $barCode
+        string $apiKey,
+        string $environment,
+        private int $maxInstallments = 12
+    ) {
+        parent::__construct($apiKey, $environment);
+    }
+
+    public function processPayment(float $amount, string $customerDocument): bool
+    {
+        parent::processPayment($amount, $customerDocument);
+        echo "   ↳ Autorizado em até {$this->maxInstallments} parcelas sem juros.\n";
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Mercado Pago";
+    }
+}
+
+// 4. SUBCLASSE 2: Pagar.me
+class PagarMeGateway extends BasePaymentGateway
+{
+    public function __construct(
+        string $apiKey,
+        string $environment,
+        private string $postbackUrl
+    ) {
+        parent::__construct($apiKey, $environment);
+    }
+
+    public function processPayment(float $amount, string $customerDocument): bool
+    {
+        parent::processPayment($amount, $customerDocument);
+        echo "   ↳ Webhook de notificação configurado para: {$this->postbackUrl}\n";
+        return true;
+    }
+
+    public function getGatewayName(): string
+    {
+        return "Pagar.me";
+    }
+}
+
+// 5. CONSUMIDOR POLIMÓRFICO: Depende apenas da Interface
+class CheckoutService
+{
+    public function __construct(
+        private PaymentGatewayInterface $gateway
     ) {}
 
-    // Substitui integralmente o comportamento padrão da classe pai:
-    public function getReceipt(): string
+    public function handle(float $amount, string $document): void
     {
-        return "Linha digitável do Boleto: {$this->barCode}";
+        echo "Iniciando processamento com: {$this->gateway->getGatewayName()}\n";
+        $this->gateway->processPayment($amount, $document);
+        echo "Processamento concluído com sucesso!\n\n";
     }
 }
 
-$boleto = new BoletoPayment("34191.79001 01043.510047 91020.150008 5 99990000015000");
-echo $boleto->getReceipt();
-// Linha digitável do Boleto: 34191.79001 01043.510047 91020.150008 5 99990000015000
+// 6. Execução prática:
+$mp = new MercadoPagoGateway("MP_PROD_SEC_KEY_9999", "production", 6);
+$checkout1 = new CheckoutService($mp);
+$checkout1->handle(450.00, "111.222.333-44");
+
+$pagarme = new PagarMeGateway("PAGARME_LIVE_KEY_8888", "production", "https://api.fatec.sp.gov.br/webhooks");
+$checkout2 = new CheckoutService($pagarme);
+$checkout2->handle(1200.00, "555.666.777-88");
 ```
 
-<details>
-<summary>🔍 Regras de compatibilidade na sobrescrita (Assinaturas e Covariância/Contravariância)</summary>
+**Saída da Execução:**
 
-Ao sobrescrever um método, o PHP exige compatibilidade de assinatura:
+```text
+Iniciando processamento com: Mercado Pago
+[AUDIT - PRODUCTION] [Mercado Pago]: Cobrança autorizada para doc 111.222.333-44 no total de R$ 450.00
+   ↳ Autorizado em até 6 parcelas sem juros.
+Processamento concluído com sucesso!
 
-1. **Visibilidade:** O método na classe filha não pode ser mais restritivo que
-   na classe pai (ex: um método `public` no pai não pode se tornar `protected`
-   ou `private` no filho).
-2. **Tipos de Retorno (Covariância):** O tipo de retorno na subclasse pode ser
-   mais específico (subtipo), mas nunca mais amplo.
-3. **Tipos de Parâmetros (Contravariância):** O tipo dos parâmetros na subclasse
-   pode ser mais amplo (supertipo), mas nunca mais restritivo.
-4. **Assinatura:** O número de argumentos obrigatórios deve ser compatível
-   (parâmetros adicionais na classe filha devem ter valores padrão opcionais).
+Iniciando processamento com: Pagar.me
+[AUDIT - PRODUCTION] [Pagar.me]: Cobrança autorizada para doc 555.666.777-88 no total de R$ 1,200.00
+   ↳ Webhook de notificação configurado para: https://api.fatec.sp.gov.br/webhooks
+Processamento concluído com sucesso!
+```
 
-</details>
+## Composição vs Herança: Quando Usar Cada Uma?
 
-## Exemplo Completo do Domínio: Hierarquia de Notificações
+A herança é uma ferramenta poderosa, mas cria o nível mais forte de
+**acoplamento** na orientação a objetos: a subclasse fica amarrada aos detalhes
+internos de implementação da superclasse. Qualquer alteração ou chamada interna
+na classe pai pode quebrar silenciosamente as subclasses — um fenômeno clássico
+conhecido como o **Problema da Classe Base Frágil** (_Fragile Base Class
+Problem_).
 
-Vamos consolidar esses conceitos em um cenário comum: um serviço de envio de
-notificações transacionais com diferentes canais de entrega (E-mail e SMS).
+### O Risco da Herança Frágil na Prática
+
+Considere uma lista de usuários que gerencia inserções:
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-// Classe Base
-class Notification
+class UserList
 {
-    protected string $status = "created";
-    protected ?DateTimeImmutable $sentAt = null;
+    /** @var array<string> */
+    protected array $users = [];
 
-    public function __construct(
-        public readonly string $recipient,
-        public readonly string $message
-    ) {
-        if (trim($this->message) === "") {
-            throw new InvalidArgumentException("A mensagem da notificação não pode estar vazia.");
+    public function add(string $user): void
+    {
+        $this->users[] = $user;
+    }
+
+    public function addAll(array $users): void
+    {
+        foreach ($users as $user) {
+            // A classe pai optou por reutilizar internamente seu próprio método add():
+            $this->add($user);
         }
     }
 
-    public function send(): void
+    public function count(): int
     {
-        $this->status = "sent";
-        $this->sentAt = new DateTimeImmutable();
+        return count($this->users);
     }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function getFormattedLog(): string
-    {
-        $timestamp = $this->sentAt?->format("Y-m-d H:i:s") ?? "Não enviado";
-        return "[{$timestamp}] Para: {$this->recipient} | Status: {$this->status}";
-    }
-}
-
-// Subclasse Especializada: EmailNotification
-class EmailNotification extends Notification
-{
-    public function __construct(
-        string $recipient,
-        string $message,
-        public readonly string $subject
-    ) {
-        if (trim($subject) === "") {
-            throw new InvalidArgumentException("O assunto do e-mail é obrigatório.");
-        }
-
-        parent::__construct($recipient, $message);
-    }
-
-    // Sobrescrita com extensão de comportamento (chama parent::send):
-    public function send(): void
-    {
-        // 1. Executa a rotina base de auditoria e status:
-        parent::send();
-
-        // 2. Simula o disparo via protocolo SMTP:
-        echo "📧 [SMTP] Enviando e-mail '{$this->subject}' para {$this->recipient}...\n";
-    }
-}
-
-// Subclasse Especializada: SmsNotification
-class SmsNotification extends Notification
-{
-    public function __construct(
-        string $recipient,
-        string $message
-    ) {
-        if (strlen($message) > 160) {
-            throw new InvalidArgumentException("SMS excede o limite de 160 caracteres.");
-        }
-
-        parent::__construct($recipient, $message);
-    }
-
-    // Sobrescrita com extensão de comportamento:
-    public function send(): void
-    {
-        parent::send();
-
-        echo "📱 [SMS Gateway] Enviando SMS para {$this->recipient}: '{$this->message}'\n";
-    }
-}
-
-// Uso polimórfico das notificações:
-/** @var array<Notification> */
-$queue = [
-    new EmailNotification("aluno@fatec.sp.gov.br", "Sua matrícula foi confirmada.", "Confirmação de Matrícula"),
-    new SmsNotification("+5511999998888", "Código de verificação: 489201"),
-];
-
-foreach ($queue as $notification) {
-    $notification->send();
-    echo $notification->getFormattedLog() . "\n\n";
 }
 ```
 
-## Composição vs Herança: Quando NÃO Herdar
-
-A herança é uma ferramenta poderosa, mas seu uso inadequado é uma das causas
-mais comuns de acoplamento excessivo em sistemas orientados a objetos. Esse
-fenômeno é conhecido como o **Problema da Hierarquia Frágil**.
-
-### A Regra de Ouro
-
-Pergunte-se sempre:
-
-- Existe uma relação genuína de **"É-UM"** (_Is-A_)? $\rightarrow$ **Herança**
-- Existe uma relação de **"TEM-UM"** ou **"USA-UM"** (_Has-A_ / _Uses-A_)?
-  $\rightarrow$ **Composição**
+Agora, imagine que um desenvolvedor cria uma subclasse com o objetivo de
+**contabilizar quantas tentativas de inserção foram feitas**:
 
 ```php
-<?php
-
-declare(strict_types=1);
-
-// ❌ HERANÇA INDEVIDA: Um repositório de usuários NÃO "é um" banco de dados
-class DatabaseConnection
+// ❌ HERANÇA FRÁGIL: A subclasse assume premissas sobre como o pai funciona internamente
+class LoggedUserList extends UserList
 {
-    public function query(string $sql): array { return []; }
-}
+    private int $insertionCount = 0;
 
-class UserRepository extends DatabaseConnection
-{
-    public function findById(int $id): ?array
+    public function add(string $user): void
     {
-        return $this->query("SELECT * FROM users WHERE id = {$id}");
+        $this->insertionCount++;
+        parent::add($user);
+    }
+
+    public function addAll(array $users): void
+    {
+        // Incrementa pelo total de itens recebidos:
+        $this->insertionCount += count($users);
+        parent::addAll($users);
+    }
+
+    public function getInsertionCount(): int
+    {
+        return $this->insertionCount;
     }
 }
 
-// ✅ COMPOSIÇÃO CORRETA: O repositório "TEM UMA" conexão como dependência
-class CorrectUserRepository
+$list = new LoggedUserList();
+$list->addAll(["Alice", "Bob", "Carlos"]);
+
+echo "Total inserido registrado: " . $list->getInsertionCount() . "\n";
+// ❌ SAÍDA INESPERADA: Total inserido registrado: 6 (Contou em dobro!)
+```
+
+**Por que o erro aconteceu?**
+
+Quando `LoggedUserList::addAll()` somou 3 e chamou `parent::addAll()`, a classe
+pai executou um laço chamando `$this->add()` para cada elemento. Como `$this`
+aponta para a instância da subclasse, o método sobrescrito `add()` foi disparado
+mais 3 vezes, duplicando a contagem silenciosamente!
+
+Se o desenvolvedor tivesse utilizado **Composição com Interfaces** (definindo um
+contrato compartilhado e mantendo a lista original como um objeto interno
+encapsulado), esse efeito colateral oculto jamais teria ocorrido:
+
+```php
+// 1. Contrato compartilhado:
+interface UserListInterface
 {
+    public function add(string $user): void;
+    /** @param array<string> $users */
+    public function addAll(array $users): void;
+    public function count(): int;
+}
+
+// 2. Implementação básica concreta:
+class BasicUserList implements UserListInterface
+{
+    /** @var array<string> */
+    private array $users = [];
+
+    public function add(string $user): void
+    {
+        $this->users[] = $user;
+    }
+
+    public function addAll(array $users): void
+    {
+        foreach ($users as $user) {
+            $this->add($user);
+        }
+    }
+
+    public function count(): int
+    {
+        return count($this->users);
+    }
+}
+
+// 3. ✅ SOLUÇÃO COM COMPOSIÇÃO: Implementa o mesmo contrato e encapsula a lista interna
+class LoggedUserList implements UserListInterface
+{
+    private int $insertionCount = 0;
+
     public function __construct(
-        private readonly DatabaseConnection $db
+        private UserListInterface $innerList = new BasicUserList()
     ) {}
 
-    public function findById(int $id): ?array
+    public function add(string $user): void
     {
-        return $this->db->query("SELECT * FROM users WHERE id = {$id}");
+        $this->insertionCount++;
+        $this->innerList->add($user); // Delega a inserção real
+    }
+
+    public function addAll(array $users): void
+    {
+        $this->insertionCount += count($users);
+        $this->innerList->addAll($users); // ✅ Seguro: sem armadilhas de sobrescrita!
+    }
+
+    public function count(): int
+    {
+        return $this->innerList->count();
+    }
+
+    public function getInsertionCount(): int
+    {
+        return $this->insertionCount;
     }
 }
+
+// Ambas as classes cumprem UserListInterface e podem ser usadas de forma transparente:
+$list = new LoggedUserList(new BasicUserList());
+$list->addAll(["Alice", "Bob", "Carlos"]);
+
+echo "Total na lista: " . $list->count() . "\n";
+echo "Total inserido registrado: " . $list->getInsertionCount() . "\n";
+// ✅ SAÍDA CORRETA:
+// Total na lista: 3
+// Total inserido registrado: 3
 ```
 
-> **Regra de Ouro:**
+### Regra Prática de Decisão
+
+Para decidir entre herança e composição, utilize a seguinte regra prática:
+
+1. **Use Herança quando houver uma relação legítima "É-UM" (_Is-A_):**  
+   Um `MercadoPagoGateway` é, conceitualmente, um gateway de pagamentos. Ele
+   compartilha a identidade, a finalidade e a estrutura central da base.
+2. **Use Composição quando houver uma relação "TEM-UM" ou "USA-UM" (_Has-A_ /
+   _Uses-A_):**  
+   Um `OrderService` **usa** um `PaymentGatewayInterface` e **tem** um
+   `NotificationSender`. Ele não deve herdar do gateway nem do serviço de
+   notificações.
+
+> 💡 **Princípio de Design:**
 >
-> Favoreça composição sobre herança sempre que a classe apenas precisar utilizar
-> os serviços de outra classe, e não for uma especialização conceitual dela.
+> _"Prefira Composição sobre Herança."_ A herança deve ser reservada para
+> famílias de classes altamente afins que realmente compartilham regras de
+> infraestrutura e domínio.
 
 ## O Que Vem a Seguir?
 
-Neste capítulo, vimos como especializar classes e reaproveitar código comum com
-**Herança** e `parent::`.
+Neste capítulo, aprendemos a eliminar a duplicação de código criando classes
+base compartilhadas com **`extends`**, protegendo o estado interno com
+**`protected`** e estendendo comportamentos com **`parent::`**.
 
-No entanto, em arquiteturas orientadas a objetos, frequentemente precisamos:
+No entanto, observe uma brecha estrutural em nossa classe `BasePaymentGateway`:
+ela é uma classe comum, o que significa que qualquer desenvolvedor ainda pode
+executar acidentalmente `new BasePaymentGateway("CHAVE", "prod")` — criando um
+gateway genérico que não se comunica com nenhuma operadora real.
 
-1. **Impedir que uma classe base incompleta seja instanciada diretamente** com
-   `new` (forçando-a a ser apenas um molde conceitual);
-2. **Obrigar que subclasses forneçam implementações obrigatórias para métodos
-   específicos**;
-3. **Bloquear classes ou métodos para que não possam ser estendidos ou
-   sobrescritos por terceiros**.
+Além disso, como podemos **obrigar** que cada subclasse implemente sua própria
+chamada HTTP de comunicação externa, sem permitir que fiquem incompletas?
 
-No **[Capítulo 24: Controle de Herança: Classes Abstratas e Modificador
-Final](24-classes-abstratas-e-modificador-final.md)**, aprenderemos a utilizar
-os modificadores **`abstract`** e **`final`** para governar com precisão os
-limites e contratos da nossa hierarquia de tipos.
+No **[Capítulo 25: Controle de Herança: Classes Abstratas e Modificador
+Final](25-classes-abstratas-e-modificador-final.md)**, aprenderemos a utilizar o
+modificador **`abstract`** para impedir a instanciação direta e impor métodos
+obrigatórios, além de utilizar o modificador **`final`** para blindar classes e
+métodos críticos contra sobrescritas indevidas.
 
 ---
 
-<a href="22-clonagem-e-comparacao-de-objetos.md">← Clonagem e Comparação de
-Objetos</a>
+<a href="23-interfaces-e-polimorfismo.md">← Interfaces e Polimorfismo</a>
 
-<p align="right"><a href="24-classes-abstratas-e-modificador-final.md">Próximo: Controle de Herança: Classes Abstratas e Modificador Final →</a></p>
+<p align="right"><a href="25-classes-abstratas-e-modificador-final.md">Próximo: Controle de Herança: Classes Abstratas e Modificador Final →</a></p>
