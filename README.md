@@ -342,7 +342,6 @@ ecossistema Composer._
 - **Fundamentos & Ciclo de Vida (`fundamentos-e-ciclo-de-vida/`):**
   - [01. O Ciclo de Vida de uma Requisição no
     Servidor](02-plataformas-e-integracao/backend/fundamentos-e-ciclo-de-vida/01-o-ciclo-de-vida-de-uma-requisicao-no-servidor.md)
-    _(⚪ Planejado)_
   - [02. Middlewares e Pipeline de
     Execução](02-plataformas-e-integracao/backend/fundamentos-e-ciclo-de-vida/02-middlewares-e-pipeline-de-execucao.md)
     _(⚪ Planejado)_
