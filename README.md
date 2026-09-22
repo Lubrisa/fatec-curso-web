@@ -345,14 +345,13 @@ ecossistema Composer._
   - [02. Middlewares e Pipeline de
     Execução](02-plataformas-e-integracao/backend/fundamentos-e-ciclo-de-vida/02-middlewares-e-pipeline-de-execucao.md)
 - **Design & Arquitetura de APIs (`design-e-arquitetura-de-apis/`):**
-  - [01. Design de APIs e REST
-    Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/01-design-de-apis-e-rest-semantico.md)
+  - [01. O Que São APIs e Boas Práticas de
+    Design](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/01-o-que-sao-apis-e-boas-praticas-de-design.md)
+  - [02. APIs REST e Design
+    Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/02-apis-rest-e-design-semantico.md)
     _(⚪ Planejado)_
-  - [02. Panorama de Padrões de API: REST vs GraphQL vs gRPC vs
-    SOAP](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/02-panorama-de-padroes-de-api.md)
-    _(⚪ Planejado)_
-  - [03. Contratos, Versionamento e
-    Paginação](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-contratos-versionamento-e-paginacao.md)
+  - [03. Paradigmas Alternativos: SOAP, GraphQL e
+    gRPC](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-paradigmas-alternativos-soap-graphql-e-grpc.md)
     _(⚪ Planejado)_
 - **Padrões de Arquitetura (`padroes-de-arquitetura/`):**
   - [01. O Padrão MVC no Contexto de
