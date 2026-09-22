@@ -427,19 +427,17 @@ Neste capítulo, compreendemos a fundo a gestão de memória de objetos no PHP,
 dominando a duplicação segura com **`clone`**, o método mágico **`__clone()`** e
 a semântica de comparação entre **`==`** e **`===`**.
 
-No entanto, à medida que um sistema cresce, diferentes classes de negócio
-começam a compartilhar comportamentos e estruturas em comum (como diferentes
-tipos de usuários, formas de pagamento ou contas bancárias).
+No entanto, à medida que um sistema cresce, acoplar nosso código a classes
+concretas específicas torna a arquitetura rígida e difícil de estender.
 
-No **[Capítulo 23: Herança e Sobrescrita de
-Métodos](23-heranca-e-sobrescrita-de-metodos.md)**, aprenderemos a especializar
-classes com **`extends`**, controlar o acesso em subclasses com **`protected`**,
-reaproveitar inicializações e comportamentos com **`parent::`** e redefinir
-comportamentos através da **Sobrescrita de Métodos**.
+No **[Capítulo 23: Interfaces e
+Polimorfismo](23-interfaces-e-polimorfismo.md)**, aprenderemos a definir
+contratos puros com **`interface`**, implementar múltiplos papéis com
+**`implements`** e alcançar o **Polimorfismo** desacoplado no PHP moderno.
 
 ---
 
 <a href="21-modificadores-de-acesso-e-encapsulamento.md">← Modificadores de
 Acesso e Encapsulamento</a>
 
-<p align="right"><a href="23-heranca-e-sobrescrita-de-metodos.md">Próximo: Herança e Sobrescrita de Métodos →</a></p>
+<p align="right"><a href="23-interfaces-e-polimorfismo.md">Próximo: Interfaces e Polimorfismo →</a></p>
