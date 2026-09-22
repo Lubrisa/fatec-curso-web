@@ -349,7 +349,6 @@ ecossistema Composer._
     Design](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/01-o-que-sao-apis-e-boas-praticas-de-design.md)
   - [02. APIs REST e Design
     Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/02-apis-rest-e-design-semantico.md)
-    _(⚪ Planejado)_
   - [03. Paradigmas Alternativos: SOAP, GraphQL e
     gRPC](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-paradigmas-alternativos-soap-graphql-e-grpc.md)
     _(⚪ Planejado)_
