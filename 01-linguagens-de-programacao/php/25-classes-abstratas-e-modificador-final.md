@@ -621,28 +621,25 @@ Você precisa de uma classe pronta para ser instanciada no sistema?
 
 ## O Que Vem a Seguir?
 
-Neste capítulo, aprendemos a governar nossa hierarquia de classes com precisão,
-usando **`abstract`** para fornecer esqueletos parciais com estado e métodos
-modelo (_Template Method_), e **`final`** para blindar códigos críticos contra
-extensões indevidas.
+Neste capítulo, concluímos a jornada essencial pelos pilares da Orientação a
+Objetos no PHP moderno. Aprendemos a definir contratos puros com interfaces,
+reaproveitar código com herança e estruturar hierarquias seguras com classes
+abstratas e o modificador `final`.
 
-Contudo, a herança com classes abstratas possui uma limitação estrutural
-importante: o PHP permite apenas herança **simples** (uma classe só pode
-estender uma única superclasse com `extends`).
+Agora que dominamos a criação e a governança de classes de domínio, é o momento
+de conectar nosso código com o mundo exterior: **como o PHP recebe, processa e
+responde a requisições HTTP enviadas por navegadores e clientes web?**
 
-E quando precisamos compartilhar métodos concretos utilitários entre classes que
-pertencem a árvores de herança completamente diferentes (como um `User`, um
-`Product` e um `Order` que precisam de uma mesma rotina de geração de Slugs ou
-registro de Auditoria)?
-
-No **[Capítulo 26: Traits e Composição
-Horizontal](26-traits-e-composicao-horizontal.md)**, aprenderemos como utilizar
-**`trait`** e a instrução **`use`** para compor comportamentos reutilizáveis de
-forma modular e horizontal, evitando heranças forçadas.
+No **[Capítulo 26: Superglobais e Ciclo de Vida da
+Requisição](26-superglobais-e-ciclo-de-vida-da-requisicao.md)**, aprenderemos
+como o PHP lida nativamente com requisições HTTP através das **superglobais**
+(`$_GET`, `$_POST`, `$_SERVER`, `$_FILES`), manipula status codes e cabeçalhos,
+e como encapsular a entrada de dados em objetos de requisição seguros e
+profissionais.
 
 ---
 
 <a href="24-heranca-e-sobrescrita-de-metodos.md">← Herança e Sobrescrita de
 Métodos</a>
 
-<p align="right"><a href="26-traits-e-composicao-horizontal.md">Próximo: Traits e Composição Horizontal →</a></p>
+<p align="right"><a href="26-superglobais-e-ciclo-de-vida-da-requisicao.md">Próximo: Superglobais e Ciclo de Vida da Requisição →</a></p>
