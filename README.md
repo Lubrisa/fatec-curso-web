@@ -351,7 +351,6 @@ ecossistema Composer._
     Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/02-apis-rest-e-design-semantico.md)
   - [03. Paradigmas Alternativos: SOAP, GraphQL e
     gRPC](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-paradigmas-alternativos-soap-graphql-e-grpc.md)
-    _(⚪ Planejado)_
 - **Padrões de Arquitetura (`padroes-de-arquitetura/`):**
   - [01. O Padrão MVC no Contexto de
     APIs](02-plataformas-e-integracao/backend/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
