@@ -337,7 +337,7 @@ ecossistema Composer._
   - [Notifications
     API](02-plataformas-e-integracao/browser/web-apis/notifications.md)
 
-#### ⚙️ Submódulo: Backend Agnóstico (`02-plataformas-e-integracao/backend/`) ⚪
+#### ⚙️ Submódulo: Backend Agnóstico (`02-plataformas-e-integracao/backend/`) ✅
 
 - **Fundamentos & Ciclo de Vida (`fundamentos-e-ciclo-de-vida/`):**
   - [01. O Ciclo de Vida de uma Requisição no
@@ -351,15 +351,23 @@ ecossistema Composer._
     Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/02-apis-rest-e-design-semantico.md)
   - [03. Paradigmas Alternativos: SOAP, GraphQL e
     gRPC](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-paradigmas-alternativos-soap-graphql-e-grpc.md)
-- **Padrões de Arquitetura (`padroes-de-arquitetura/`):**
-  - [01. O Padrão MVC no Contexto de
-    APIs](02-plataformas-e-integracao/backend/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
-  - [02. Arquitetura em Camadas: Controllers, Services e
-    Repositories](02-plataformas-e-integracao/backend/padroes-de-arquitetura/02-arquitetura-em-camadas-controllers-services-repositories.md)
-    _(⚪ Planejado)_
-  - [03. DTOs e Transferência de
-    Dados](02-plataformas-e-integracao/backend/padroes-de-arquitetura/03-dtos-e-transferencia-de-dados.md)
-    _(⚪ Planejado)_
+
+#### 🏛️ Submódulo: Padrões de Arquitetura (`02-plataformas-e-integracao/padroes-de-arquitetura/`) ⚪
+
+- [01. O Padrão MVC no Contexto de
+  APIs](02-plataformas-e-integracao/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
+- [02. Arquitetura em Camadas: Controllers, Services e
+  Repositories](02-plataformas-e-integracao/padroes-de-arquitetura/02-arquitetura-em-camadas-controllers-services-repositories.md)
+  _(⚪ Planejado)_
+- [03. DTOs e Transferência de
+  Dados](02-plataformas-e-integracao/padroes-de-arquitetura/03-dtos-e-transferencia-de-dados.md)
+  _(⚪ Planejado)_
+- [04. Inversão de Controle e Injeção de
+  Dependências](02-plataformas-e-integracao/padroes-de-arquitetura/04-inversao-de-controle-e-injecao-de-dependencias.md)
+  _(⚪ Planejado)_
+- [05. Padrões de Apresentação e Reatividade:
+  MVVM](02-plataformas-e-integracao/padroes-de-arquitetura/05-padroes-de-apresentacao-e-reatividade-mvvm.md)
+  _(⚪ Planejado)_
 
 #### 🔒 Submódulo: Segurança & Sessão (`02-plataformas-e-integracao/seguranca-e-sessao/`) ✅
 

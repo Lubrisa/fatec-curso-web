@@ -401,6 +401,22 @@ exposto na rede**.
 
 </details>
 
+## O Que Vem a Seguir?
+
+Compreendemos a importância da Separação de Preocupações, a trajetória histórica
+do padrão MVC e como a camada de View se adaptou para atuar como formatadora e
+serializadora de dados na era das APIs modernas.
+
+No entanto, também identificamos os limites do MVC puro: o risco de criar _Fat
+Controllers_ ou sobrecarregar modelos com regras de infraestrutura e
+persistência.
+
+No **[Capítulo 02: Arquitetura em Camadas: Controllers, Services e
+Repositories](02-arquitetura-em-camadas-controllers-services-repositories.md)**,
+vamos avançar para o padrão arquitetural predominante em backends corporativos,
+dividindo a aplicação em três camadas com responsabilidades cirúrgicas e fluxo
+unidirecional!
+
 ---
 
 <p align="right"><a href="02-arquitetura-em-camadas-controllers-services-repositories.md">Próximo: Arquitetura em Camadas: Controllers, Services e Repositories →</a></p>
