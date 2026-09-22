@@ -199,7 +199,7 @@ Assincronismo._
 
 ---
 
-#### 🐘 Trilha: PHP Moderno (`01-linguagens-de-programacao/php/`) ⚪
+#### 🐘 Trilha: PHP Moderno (`01-linguagens-de-programacao/php/`) ✅
 
 _Uma formação completa em PHP 8.x Moderno para a Web: modelo de execução,
 tipagem estática com strict_types, arrays e coleções, Orientação a Objetos
@@ -210,108 +210,85 @@ ecossistema Composer._
 
 - [01. O Que É o PHP e o Modelo de Execução
   Web](01-linguagens-de-programacao/php/01-o-que-e-php-e-o-modelo-de-execucao-web.md)
-  _(⚪ Planejado)_
 - [02. Configuração do Ambiente PHP e
   CLI](01-linguagens-de-programacao/php/02-configuracao-do-ambiente-php-e-cli.md)
-  _(⚪ Planejado)_
 
 ##### Bloco 2: Fundamentos, Tipos & Memória
 
 - [03. Tipos Primitivos e Tipagem
-  Estrita](01-linguagens-de-programacao/php/03-tipos-primitivos.md) _(⚪
-  Planejado)_
+  Estrita](01-linguagens-de-programacao/php/03-tipos-primitivos.md)
 - [04. Strings e Interpolação de
-  Texto](01-linguagens-de-programacao/php/04-strings-e-interpolacao.md) _(⚪
-  Planejado)_
+  Texto](01-linguagens-de-programacao/php/04-strings-e-interpolacao.md)
 - [05. Declaração de Variáveis e
-  Constantes](01-linguagens-de-programacao/php/05-variaveis-e-constantes.md) _(⚪
-  Planejado)_
+  Constantes](01-linguagens-de-programacao/php/05-variaveis-e-constantes.md)
 - [06. Atribuição por Valor vs
   Referência](01-linguagens-de-programacao/php/06-atribuicao-por-valor-e-referencia.md)
-  _(⚪ Planejado)_
 - [07. Operadores e
   Expressões](01-linguagens-de-programacao/php/07-operadores-e-expressoes.md)
-  _(⚪ Planejado)_
 - [08. Estruturas
   Condicionais](01-linguagens-de-programacao/php/08-estruturas-condicionais.md)
-  _(⚪ Planejado)_
 - [09. Expressões
-  Match](01-linguagens-de-programacao/php/09-expressoes-match.md) _(⚪
-  Planejado)_
+  Match](01-linguagens-de-programacao/php/09-expressoes-match.md)
 - [10. Estruturas de Repetição e
-  Foreach](01-linguagens-de-programacao/php/10-estruturas-de-repeticao.md) _(⚪
-  Planejado)_
+  Foreach](01-linguagens-de-programacao/php/10-estruturas-de-repeticao.md)
 
 ##### Bloco 3: Funções, Escopo & Erros
 
-- [11. Declaração de Funções e Parâmetros
-  Nomeados](01-linguagens-de-programacao/php/11-declaracao-de-funcoes-e-parametros.md)
-  _(⚪ Planejado)_
-- [12. Escopo de
-  Variáveis](01-linguagens-de-programacao/php/12-escopo-de-variaveis.md) _(⚪
-  Planejado)_
-- [13. Tratamento de Erros e
-  Exceções](01-linguagens-de-programacao/php/13-tratamento-de-erros-e-excecoes.md)
-  _(⚪ Planejado)_
+- [11. Declaração de Funções e
+  Parâmetros](01-linguagens-de-programacao/php/11-declaracao-de-funcoes-e-parametros.md)
+- [12. Funções de Primeira Classe e
+  Callables](01-linguagens-de-programacao/php/12-funcoes-de-primeira-classe-e-callables.md)
+- [13. Escopo de
+  Variáveis](01-linguagens-de-programacao/php/13-escopo-de-variaveis.md)
+- [14. Tratamento de Erros e
+  Exceções](01-linguagens-de-programacao/php/14-tratamento-de-erros-e-excecoes.md)
 
 ##### Bloco 4: Coleções & Manipulação de Dados
 
-- [14. Arrays Indexados e
-  Associativos](01-linguagens-de-programacao/php/14-arrays-indexados-e-associativos.md)
-  _(⚪ Planejado)_
-- [15. Desestruturação e Operador
-  Spread](01-linguagens-de-programacao/php/15-desestruturacao-e-operador-spread.md)
-  _(⚪ Planejado)_
-- [16. Funções de Primeira Classe, Closures e Arrow
-  Functions](01-linguagens-de-programacao/php/16-funcoes-de-primeira-classe-closures-e-arrow-functions.md)
-  _(⚪ Planejado)_
-- [17. Funções Nativas de Manipulação de
-  Arrays](01-linguagens-de-programacao/php/17-funcoes-nativas-de-manipulacao-de-arrays.md)
-  _(⚪ Planejado)_
-- [18. Manipulação de JSON e
-  Serialização](01-linguagens-de-programacao/php/18-manipulacao-de-json-e-serializacao.md)
-  _(⚪ Planejado)_
+- [15. Arrays Indexados e
+  Associativos](01-linguagens-de-programacao/php/15-arrays-indexados-e-associativos.md)
+- [16. Desestruturação e Operador
+  Spread](01-linguagens-de-programacao/php/16-desestruturacao-e-operador-spread.md)
+- [17. Closures e Fábricas de
+  Funções](01-linguagens-de-programacao/php/17-closures-e-fabricas-de-funcoes.md)
+- [18. Funções Nativas de Manipulação de
+  Arrays](01-linguagens-de-programacao/php/18-funcoes-nativas-de-manipulacao-de-arrays.md)
+- [19. Manipulação de JSON e
+  Serialização](01-linguagens-de-programacao/php/19-manipulacao-de-json-e-serializacao.md)
 
 ##### Bloco 5: Orientação a Objetos Moderna (PHP 8+)
 
-- [19. Classes, Objetos e Property
-  Promotion](01-linguagens-de-programacao/php/19-classes-e-objetos.md) _(⚪
-  Planejado)_
-- [20. Modificadores de Acesso e Propriedades
-  Readonly](01-linguagens-de-programacao/php/20-modificadores-de-acesso-e-encapsulamento.md)
-  _(⚪ Planejado)_
-- [21. Clonagem e Comparação de
-  Objetos](01-linguagens-de-programacao/php/21-clonagem-e-comparacao-de-objetos.md)
-  _(⚪ Planejado)_
-- [22. Herança, Classes Abstratas e
-  Sobrescrita](01-linguagens-de-programacao/php/22-heranca-e-classes-abstratas.md)
-  _(⚪ Planejado)_
+- [20. Classes e
+  Objetos](01-linguagens-de-programacao/php/20-classes-e-objetos.md)
+- [21. Modificadores de Acesso e
+  Encapsulamento](01-linguagens-de-programacao/php/21-modificadores-de-acesso-e-encapsulamento.md)
+- [22. Clonagem e Comparação de
+  Objetos](01-linguagens-de-programacao/php/22-clonagem-e-comparacao-de-objetos.md)
 - [23. Interfaces e
   Polimorfismo](01-linguagens-de-programacao/php/23-interfaces-e-polimorfismo.md)
-  _(⚪ Planejado)_
-- [24. Traits e Composição
-  Horizontal](01-linguagens-de-programacao/php/24-traits-e-composicao-horizontal.md)
-  _(⚪ Planejado)_
-- [25. Enums e Backed
-  Enums](01-linguagens-de-programacao/php/25-enums-e-backed-enums.md) _(⚪
-  Planejado)_
-- [26. Métodos Mágicos](01-linguagens-de-programacao/php/26-metodos-magicos.md)
-  _(⚪ Planejado)_
-- [27. Atributos: Metadados
-  Nativos](01-linguagens-de-programacao/php/27-atributos-metadados-nativos.md)
-  _(⚪ Planejado)_
+- [24. Herança e Sobrescrita de
+  Métodos](01-linguagens-de-programacao/php/24-heranca-e-sobrescrita-de-metodos.md)
+- [25. Classes Abstratas e Modificador
+  Final](01-linguagens-de-programacao/php/25-classes-abstratas-e-modificador-final.md)
 
 ##### Bloco 6: Web Nativa, Modularização & Composer
 
-- [28. Superglobais e Ciclo de Vida da
-  Requisição](01-linguagens-de-programacao/php/28-superglobais-e-ciclo-de-vida-da-requisicao.md)
-  _(⚪ Planejado)_
-- [29. Namespaces e PSR-4
-  Autoloading](01-linguagens-de-programacao/php/29-namespaces-e-psr-4-autoloading.md)
-  _(⚪ Planejado)_
-- [30. Gerenciamento de Pacotes com
-  Composer](01-linguagens-de-programacao/php/30-gerenciamento-de-pacotes-com-composer.md)
-  _(⚪ Planejado)_
+- [26. Superglobais e Ciclo de Vida da
+  Requisição](01-linguagens-de-programacao/php/26-superglobais-e-ciclo-de-vida-da-requisicao.md)
+- [27. Namespaces e PSR-4
+  Autoloading](01-linguagens-de-programacao/php/27-namespaces-e-psr-4-autoloading.md)
+- [28. Gerenciamento de Pacotes com
+  Composer](01-linguagens-de-programacao/php/28-gerenciamento-de-pacotes-com-composer.md)
+
+##### Bloco 7: Recursos Avançados de OO, Tipagem & Metaprogramação
+
+- [29. Enums e Backed
+  Enums](01-linguagens-de-programacao/php/29-enums-e-backed-enums.md)
+- [30. Traits e Composição
+  Horizontal](01-linguagens-de-programacao/php/30-traits-e-composicao-horizontal.md)
+- [31. Métodos Mágicos](01-linguagens-de-programacao/php/31-metodos-magicos.md)
+- [32. Atributos: Metadados
+  Nativos](01-linguagens-de-programacao/php/32-atributos-metadados-nativos.md)
 
 ---
 
