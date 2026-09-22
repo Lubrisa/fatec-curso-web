@@ -358,7 +358,6 @@ ecossistema Composer._
   APIs](02-plataformas-e-integracao/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
 - [02. Arquitetura em Camadas: Controllers, Services e
   Repositories](02-plataformas-e-integracao/padroes-de-arquitetura/02-arquitetura-em-camadas-controllers-services-repositories.md)
-  _(⚪ Planejado)_
 - [03. DTOs e Transferência de
   Dados](02-plataformas-e-integracao/padroes-de-arquitetura/03-dtos-e-transferencia-de-dados.md)
   _(⚪ Planejado)_
