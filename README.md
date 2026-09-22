@@ -190,10 +190,12 @@ Assincronismo._
   TypeScript](01-linguagens-de-programacao/typescript/33-classes.md)
 - [34. Modificadores de Acesso e
   Propriedades](01-linguagens-de-programacao/typescript/34-modificadores.md)
-- [35. Herança, Classes Abstratas e
-  Polimorfismo](01-linguagens-de-programacao/typescript/35-heranca-e-classes-abstratas.md)
-- [36. Programação Assíncrona: Promises e
-  Async/Await](01-linguagens-de-programacao/typescript/36-programacao-assincrona.md)
+- [35. Herança e Sobrescrita de
+  Métodos](01-linguagens-de-programacao/typescript/35-heranca-e-sobrescrita-de-metodos.md)
+- [36. Classes Abstratas e Template
+  Method](01-linguagens-de-programacao/typescript/36-classes-abstratas.md)
+- [37. Programação Assíncrona: Promises e
+  Async/Await](01-linguagens-de-programacao/typescript/37-programacao-assincrona.md)
 
 ---
 

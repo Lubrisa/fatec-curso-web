@@ -1,9 +1,10 @@
 # 26. Tipagem Estrutural (Duck Typing)
 
-No [Capítulo 22](22-interfaces.md), aprendemos a definir contratos de dados
-utilizando `interface`. No entanto, a forma como o TypeScript avalia se um
-objeto atende ou não a esses contratos representa um dos maiores choques de
-paradigma para quem vem de linguagens clássicas como Java, C# ou C++.
+No [Capítulo 25: Interfaces](25-interfaces.md), aprendemos a definir contratos
+de dados utilizando `interface` e vimos como o polimorfismo permite trocar
+implementações sob uma mesma forma. No entanto, a maneira como o TypeScript
+avalia se um objeto atende ou não a esses contratos representa um dos maiores
+choques de paradigma para quem vem de linguagens clássicas como Java ou C#.
 
 Enquanto a maioria das linguagens estáticas tradicionais opera sob o modelo de
 **Tipagem Nominal**, o TypeScript foi construído sobre o conceito de **Tipagem
@@ -81,6 +82,82 @@ flowchart LR
         S2 -->|"Compatível ✅"| S3
     end
 ```
+
+## Duck Typing: A Forma Mais Pura de Polimorfismo
+
+Para quem aprendeu Orientação a Objetos em linguagens como Java ou C#, existe um
+mito clássico e muito difundido: _"Polimorfismo só existe quando criamos árvores
+de herança com `extends` ou declaramos interfaces nominais com `implements`"_.
+
+O **_Duck Typing_** do TypeScript desconstrói esse equívoco e resgata a
+definição fundamental da computação:
+
+> 💡 **A Verdadeira Essência do Polimorfismo:**
+>
+> Polimorfismo **não é sobre herança de classes nem sobre burocracia de tipos
+> nominais**.
+>
+> Polimorfismo significa simplesmente **múltiplas formas**: a capacidade de
+> diferentes objetos responderem ao **mesmo evento ou mensagem (chamada de
+> método)** de maneiras distintas, cada um de acordo com a sua própria natureza.
+
+### Polimorfismo sem Herança na Prática
+
+Observe como três entidades com origens e estruturas completamente diferentes
+podem ser tratadas polimorficamente sem nenhuma relação de parentesco nominal:
+
+```typescript
+// Contrato estrutural que define o 'evento' ou 'mensagem' esperado:
+interface Notifier {
+  send(message: string): void;
+}
+
+// 1. Uma classe tradicional
+class EmailService {
+  send(message: string): void {
+    console.log(`[Email] Enviando mensagem via SMTP: ${message}`);
+  }
+}
+
+// 2. Um objeto literal criado dinamicamente
+const slackWebhookNotifier = {
+  webhookUrl: "https://hooks.slack.com/services/...",
+  channel: "#dev-alerts",
+  send(message: string): void {
+    console.log(`[Slack] Postando no canal #dev-alerts: ${message}`);
+  },
+};
+
+// 3. Uma função construtora ou biblioteca legada
+class SMSGateway {
+  public provider = "Twilio";
+  send(message: string): void {
+    console.log(
+      `[SMS/Twilio] Disparando SMS para número cadastrado: ${message}`,
+    );
+  }
+}
+
+// Função consumidora polimórfica: ela só se importa com a capacidade de responder a `send`
+function broadcastSystemAlert(notifier: Notifier, alertMessage: string): void {
+  notifier.send(alertMessage);
+}
+
+// ✅ Polimorfismo em ação: três objetos distintos respondendo ao mesmo evento de formas diferentes!
+const email = new EmailService();
+const sms = new SMSGateway();
+
+broadcastSystemAlert(email, "Servidor em alta carga de CPU!");
+broadcastSystemAlert(
+  slackWebhookNotifier,
+  "Deploy da versão 2.4 concluído com sucesso.",
+);
+broadcastSystemAlert(sms, "Alerta crítico: banco de dados inacessível!");
+```
+
+Nenhum desses três emissores precisou escrever `implements Notifier` nem herdar
+de uma classe base comum. Ainda assim, todos se comportam de maneira polimórfica
+sob a perspectiva da função consumidora `broadcastSystemAlert`.
 
 ## Demonstração Prática de Subtipagem Estrutural
 
@@ -165,10 +242,10 @@ literais criados no momento exato da chamada ou atribuição**:
    propriedade inexistente (`timeoutMs`) tem 99% de chance de ser um **erro de
    digitação (_typo_)** ou um mal-entendido sobre os parâmetros aceitos pela
    função.
-2. **Objetos Armazenados em Variáveis (`const config = { ... }; startServer(config)`):**
-   Como a variável pode ter sido originada em outro contexto ou módulo mais
-   amplo, o compilador suspende a checagem de propriedades excessivas e aplica a
-   regra pura da tipagem estrutural.
+2. **Objetos Armazenados em Variáveis (`const config = { ... };
+startServer(config)`):** Como a variável pode ter sido originada em outro
+   contexto ou módulo mais amplo, o compilador suspende a checagem de
+   propriedades excessivas e aplica a regra pura da tipagem estrutural.
 
 ```typescript
 // ✅ Caso 1: Passagem via variável intermediária (quando campos extras são intencionais)
@@ -212,8 +289,8 @@ Compreendida a flexibilidade da tipagem estrutural e a modelagem com
 `interface`, estamos prontos para explorar como representar dados que podem
 assumir múltiplos estados válidos e regras de negócio complexas.
 
-No **[Capítulo 24: Uniões Literais e Discriminated
-Unions](24-unioes-literais-e-discriminated-unions.md)**, aprenderemos a combinar
+No **[Capítulo 27: Uniões Literais e Discriminated
+Unions](27-unioes-literais-e-discriminated-unions.md)**, aprenderemos a combinar
 tipos com operadores de união (`|`) e interseção (`&`), restringir valores com
 tipos literais e construir máquinas de estado infalíveis com o padrão de
 **Uniões Discriminadas**.

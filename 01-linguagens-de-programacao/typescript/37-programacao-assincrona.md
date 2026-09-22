@@ -1,4 +1,4 @@
-# 36. Programação Assíncrona: Promises e Async/Await
+# 37. Programação Assíncrona: Promises e Async/Await
 
 Chegamos ao capítulo de fechamento do **Módulo 01: TypeScript**! Ao longo de
 nossa jornada, construímos uma base sólida: desde o sistema de tipos, funções e
@@ -242,7 +242,9 @@ independentes:
 2. Fritar a Porção de Batatas (demora 0.6s)
 3. Encher o Copo de Refrigerante (demora 0.4s)
 
-Se usarmos `await` em sequência, o tempo total será a soma dos três: `1.0 + 0.6 - 0.4 = 2.0s`!
+Se usarmos `await` em sequência, o tempo total será a soma dos três: `1.0 + 0.6
+
+- 0.4 = 2.0s`!
 
 ```typescript
 // ⚠️ Desempenho Lento (Execução Sequencial Inútil):
@@ -372,5 +374,4 @@ prioridade:
 
 ---
 
-<a href="35-heranca-e-classes-abstratas.md">← Herança, Classes Abstratas e Polimorfismo</a>
-
+<a href="36-classes-abstratas.md">← Classes Abstratas e Template Method</a>

@@ -591,16 +591,15 @@ calculados dinamicamente.
 
 Agora que dominamos os modificadores de acesso, propriedades de parâmetro,
 membros estáticos e encapsulamento, estamos prontos para explorar como
-reutilizar código e construir hierarquias polimórficas.
+reutilizar código e estruturar hierarquias entre classes.
 
-No **[Capítulo 32: Herança e Classes
-Abstratas](32-heranca-e-classes-abstratas.md)**, aprenderemos a estender classes
-com `extends` e `super()`, implementar contratos com `implements` a partir de
-interfaces e estruturar moldes base utilizando classes e métodos abstratos
-(`abstract`).
+No **[Capítulo 35: Herança e Sobrescrita de
+Métodos](35-heranca-e-sobrescrita-de-metodos.md)**, aprenderemos a estender
+classes com `extends` e `super()`, compartilhar estado com visibilidade
+`protected` e aplicar sobrescrita segura com o modificador `override`.
 
 ---
 
 <a href="33-classes.md">← Classes em TypeScript</a>
 
-<p align="right"><a href="35-heranca-e-classes-abstratas.md">Próximo: Herança, Classes Abstratas e Polimorfismo →</a></p>
+<p align="right"><a href="35-heranca-e-sobrescrita-de-metodos.md">Próximo: Herança e Sobrescrita de Métodos →</a></p>

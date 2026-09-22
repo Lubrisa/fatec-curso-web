@@ -68,6 +68,57 @@ const consoleLogger: Logger = {
 consoleLogger.log("Serviço de autenticação iniciado.");
 ```
 
+## Desacoplando Código e a Introdução ao Polimorfismo
+
+A maior vantagem de definir interfaces não é apenas descrever objetos isolados,
+mas sim **desacoplar o código que consome o serviço da sua implementação
+concreta**.
+
+Quando tipamos os parâmetros de uma função usando uma `interface`, a função não
+se importa com a origem do objeto — ela apenas confia que o objeto cumprirá o
+contrato estabelecido:
+
+```typescript
+// 1. Função consumidora tipada exclusivamente pela Interface:
+function registerUser(user: User, logger: Logger): void {
+  // Lógica de cadastro...
+  logger.log(
+    `Novo usuário registrado com sucesso: ${user.name} (${user.email})`,
+  );
+}
+
+// 2. Implementação alternativa do contrato (ex.: saída formatada em JSON):
+const jsonLogger: Logger = {
+  log(message: string) {
+    const payload = {
+      level: "INFO",
+      timestamp: new Date().toISOString(),
+      message,
+    };
+    console.log(JSON.stringify(payload));
+  },
+};
+
+// 3. O consumidor pode receber QUALQUER objeto que cumpra o contrato Logger:
+registerUser(userAlice, consoleLogger);
+registerUser(userAlice, jsonLogger);
+```
+
+### O Que É Polimorfismo Aqui?
+
+Observe o que aconteceu no exemplo acima: a função `registerUser` recebeu dois
+objetos completamente distintos (`consoleLogger` e `jsonLogger`). Embora cada um
+execute o método `log()` de maneira diferente (um imprime texto simples e o
+outro emite JSON), ambos respondem com sucesso ao mesmo contrato.
+
+Essa capacidade de **tratar objetos diferentes sob uma mesma interface comum e
+obter comportamentos específicos** é a essência do **Polimorfismo** (do grego,
+_"múltiplas formas"_).
+
+No TypeScript, esse polimorfismo ocorre de forma **estrutural**: qualquer objeto
+que tenha a forma compatível com a interface pode ser utilizado de maneira
+intercambiável.
+
 ## Extensão de Contratos com `extends`
 
 Uma das maiores forças das interfaces é a capacidade de reutilizar e
