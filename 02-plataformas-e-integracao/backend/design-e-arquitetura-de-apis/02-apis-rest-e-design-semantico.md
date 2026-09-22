@@ -421,6 +421,22 @@ de produtividade e pragmatismo na indústria mundial.
 
 </details>
 
+## O Que Vem a Seguir?
+
+Compreender o estilo arquitetural REST e dominar o design semântico de recursos,
+verbos HTTP e códigos de status é a competência mais demandada na criação de
+serviços web comerciais.
+
+No entanto, o REST com JSON textual não é uma bala de prata. À medida que os
+sistemas escalam para centenas de microsserviços internos ou aplicações móveis
+complexas, outros modelos se destacam.
+
+No **[Capítulo 03: Paradigmas Alternativos: SOAP, GraphQL e
+gRPC](03-paradigmas-alternativos-soap-graphql-e-grpc.md)**, vamos analisar as
+forças e limitações de três alternativas consagradas: o legado formal do
+**SOAP**, a flexibilidade orientada a consultas do **GraphQL** e a altíssima
+performance binária do **gRPC**!
+
 ---
 
 <a href="01-o-que-sao-apis-e-boas-praticas-de-design.md">← O Que São APIs e Boas

@@ -356,6 +356,23 @@ mesma forma na memória:
 
 </details>
 
+## O Que Vem a Seguir?
+
+Agora que você compreende a jornada completa de uma requisição — desde a chegada
+dos bytes brutos no socket TCP do sistema operacional, passando pelo parsing e
+roteamento, até a serialização e entrega da resposta HTTP —, precisamos
+responder a uma pergunta prática de arquitetura:
+
+_Como adicionar comportamentos transversais (como autenticação, auditoria de
+logs, medição de tempo e tratamento global de erros) sem poluir o código de cada
+rota individual?_
+
+No **[Capítulo 02: Middlewares e Pipeline de
+Execução](02-middlewares-e-pipeline-de-execucao.md)**, vamos mergulhar no
+poderoso padrão em camadas conhecido como **Pipeline** (ou arquitetura _Onion_),
+que é o alicerce de praticamente todos os frameworks backend modernos do
+mercado!
+
 ---
 
 <p align="right"><a href="02-middlewares-e-pipeline-de-execucao.md">Próximo: Middlewares e Pipeline de Execução →</a></p>

@@ -394,6 +394,19 @@ internacional.
 
 </details>
 
+## O Que Vem a Seguir?
+
+Neste capítulo, você conheceu a anatomia de uma API machine-to-machine e os
+padrões universais de engenharia que garantem estabilidade, previsibilidade e
+escalabilidade para quem consome seus serviços — desde contratos estáveis e
+versionamento até estratégias de paginação por offset e cursor.
+
+No **[Capítulo 02: APIs REST e Design
+Semântico](02-apis-rest-e-design-semantico.md)**, daremos um passo adiante no
+estilo arquitetural mais utilizado na Web: exploraremos a fundo os princípios do
+**REST**, a semântica de recursos substantivos, verbos HTTP, idempotência e o
+famoso Modelo de Maturidade de Richardson!
+
 ---
 
 <p align="right"><a href="02-apis-rest-e-design-semantico.md">Próximo: APIs REST e Design Semântico →</a></p>
