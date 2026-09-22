@@ -360,7 +360,6 @@ ecossistema Composer._
   Repositories](02-plataformas-e-integracao/padroes-de-arquitetura/02-arquitetura-em-camadas-controllers-services-repositories.md)
 - [03. DTOs e Transferência de
   Dados](02-plataformas-e-integracao/padroes-de-arquitetura/03-dtos-e-transferencia-de-dados.md)
-  _(⚪ Planejado)_
 - [04. Inversão de Controle e Injeção de
   Dependências](02-plataformas-e-integracao/padroes-de-arquitetura/04-inversao-de-controle-e-injecao-de-dependencias.md)
   _(⚪ Planejado)_
