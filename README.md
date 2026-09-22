@@ -354,7 +354,6 @@ ecossistema Composer._
 - **Padrões de Arquitetura (`padroes-de-arquitetura/`):**
   - [01. O Padrão MVC no Contexto de
     APIs](02-plataformas-e-integracao/backend/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
-    _(⚪ Planejado)_
   - [02. Arquitetura em Camadas: Controllers, Services e
     Repositories](02-plataformas-e-integracao/backend/padroes-de-arquitetura/02-arquitetura-em-camadas-controllers-services-repositories.md)
     _(⚪ Planejado)_
