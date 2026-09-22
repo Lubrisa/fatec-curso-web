@@ -344,7 +344,6 @@ ecossistema Composer._
     Servidor](02-plataformas-e-integracao/backend/fundamentos-e-ciclo-de-vida/01-o-ciclo-de-vida-de-uma-requisicao-no-servidor.md)
   - [02. Middlewares e Pipeline de
     Execução](02-plataformas-e-integracao/backend/fundamentos-e-ciclo-de-vida/02-middlewares-e-pipeline-de-execucao.md)
-    _(⚪ Planejado)_
 - **Design & Arquitetura de APIs (`design-e-arquitetura-de-apis/`):**
   - [01. Design de APIs e REST
     Semântico](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/01-design-de-apis-e-rest-semantico.md)
