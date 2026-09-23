@@ -415,46 +415,34 @@ ecossistema Composer._
   - [05. Estado e Reatividade com
     useState](ecossistema/typescript/react/05-estado-e-reatividade-com-usestate.md)
 
-#### 🐘 Eixo PHP: Laravel (`ecossistema/php/laravel/`) ⚪
+#### 🐘 Eixo PHP: Laravel (`ecossistema/php/laravel/`) 🟡
 
 - **Base & Arquitetura:**
-  - [01. Introdução ao Laravel e Arquitetura do
-    Framework](ecossistema/php/laravel/01-introducao-ao-laravel-e-arquitetura.md)
-    _(⚪ Planejado)_
+  - [01. Introdução ao Laravel, Arquitetura e
+    Artisan](ecossistema/php/laravel/01-introducao-ao-laravel-e-arquitetura.md)
   - [02. O Padrão MVC no Laravel para
-    APIs](ecossistema/php/laravel/02-o-padrao-mvc-no-laravel.md) _(⚪ Planejado)_
-- **Rotas & Controllers (`rotas-e-controllers/`):**
-  - [01. Definição de Rotas de
-    API](ecossistema/php/laravel/rotas-e-controllers/01-definicao-de-rotas-de-api.md)
-    _(⚪ Planejado)_
-  - [02. Controllers e Métodos de
-    Ação](ecossistema/php/laravel/rotas-e-controllers/02-controllers-e-metodos.md)
-    _(⚪ Planejado)_
-  - [03. Form Requests e
-    Validação](ecossistema/php/laravel/rotas-e-controllers/03-form-requests-e-validacao.md)
-    _(⚪ Planejado)_
-  - [04. API Resources e Transformação de
-    Respostas](ecossistema/php/laravel/rotas-e-controllers/04-api-resources-e-transformacao-de-respostas.md)
-    _(⚪ Planejado)_
+    APIs](ecossistema/php/laravel/02-o-padrao-mvc-no-laravel.md)
 - **ORM & Banco de Dados (`orm-e-banco-de-dados/`):**
-  - [01. Migrations e Versionamento de Banco de
-    Dados](ecossistema/php/laravel/orm-e-banco-de-dados/01-migrations-e-esquemas-de-banco.md)
+  - [01. O Conceito de Model e
+    Entidades](ecossistema/php/laravel/orm-e-banco-de-dados/01-o-conceito-de-model-e-entidades.md)
+  - [02. Eloquent ORM e Métodos do
+    Model](ecossistema/php/laravel/orm-e-banco-de-dados/02-eloquent-orm-e-metodos-do-model.md)
+  - [03. Migrations e Esquemas de
+    Banco](ecossistema/php/laravel/orm-e-banco-de-dados/03-migrations-e-esquemas-de-banco.md)
+  - [04. Seeders e Factories para
+    Testes](ecossistema/php/laravel/orm-e-banco-de-dados/04-seeders-e-factories-para-testes.md)
+  - [05. Relacionamentos no Eloquent e
+    JOINs](ecossistema/php/laravel/orm-e-banco-de-dados/05-relacionamentos-no-eloquent-e-joins.md)
     _(⚪ Planejado)_
-  - [02. Eloquent ORM e Modelos de
-    Domínio](ecossistema/php/laravel/orm-e-banco-de-dados/02-eloquent-orm-e-modelos.md)
+- **Rotas & Controllers (`rotas-e-controllers/`):**
+  - [01. Rotas de API e Verbos
+    HTTP](ecossistema/php/laravel/rotas-e-controllers/01-rotas-de-api-e-verbos-http.md)
     _(⚪ Planejado)_
-  - [03. Relacionamentos no
-    Eloquent](ecossistema/php/laravel/orm-e-banco-de-dados/03-relacionamentos-no-eloquent.md)
+  - [02. Controllers e Ações
+    CRUD](ecossistema/php/laravel/rotas-e-controllers/02-controllers-e-acoes-crud.md)
     _(⚪ Planejado)_
-  - [04. Seeders e Factories para Povoamento de
-    Dados](ecossistema/php/laravel/orm-e-banco-de-dados/04-seeders-e-factories-para-testes.md)
-    _(⚪ Planejado)_
-- **Segurança & Middlewares (`seguranca-e-middlewares/`):**
-  - [01. Middlewares Customizados no
-    Pipeline](ecossistema/php/laravel/seguranca-e-middlewares/01-middlewares-customizados.md)
-    _(⚪ Planejado)_
-  - [02. Autenticação Stateless de APIs com Laravel
-    Sanctum](ecossistema/php/laravel/seguranca-e-middlewares/02-autenticacao-de-apis-com-sanctum.md)
+  - [03. Route Model Binding e Respostas
+    Semânticas](ecossistema/php/laravel/rotas-e-controllers/03-route-model-binding-e-respostas.md)
     _(⚪ Planejado)_
 
 ---
