@@ -352,7 +352,7 @@ ecossistema Composer._
   - [03. Paradigmas Alternativos: SOAP, GraphQL e
     gRPC](02-plataformas-e-integracao/backend/design-e-arquitetura-de-apis/03-paradigmas-alternativos-soap-graphql-e-grpc.md)
 
-#### 🏛️ Submódulo: Padrões de Arquitetura (`02-plataformas-e-integracao/padroes-de-arquitetura/`) ⚪
+#### 🏛️ Submódulo: Padrões de Arquitetura (`02-plataformas-e-integracao/padroes-de-arquitetura/`) ✅
 
 - [01. O Padrão MVC no Contexto de
   APIs](02-plataformas-e-integracao/padroes-de-arquitetura/01-o-padrao-mvc-no-contexto-de-apis.md)
@@ -364,7 +364,6 @@ ecossistema Composer._
   Dependências](02-plataformas-e-integracao/padroes-de-arquitetura/04-inversao-de-controle-e-injecao-de-dependencias.md)
 - [05. Padrões de Apresentação e Reatividade:
   MVVM](02-plataformas-e-integracao/padroes-de-arquitetura/05-padroes-de-apresentacao-e-reatividade-mvvm.md)
-  _(⚪ Planejado)_
 
 #### 🔒 Submódulo: Segurança & Sessão (`02-plataformas-e-integracao/seguranca-e-sessao/`) ✅
 
