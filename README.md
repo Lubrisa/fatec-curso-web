@@ -362,7 +362,6 @@ ecossistema Composer._
   Dados](02-plataformas-e-integracao/padroes-de-arquitetura/03-dtos-e-transferencia-de-dados.md)
 - [04. Inversão de Controle e Injeção de
   Dependências](02-plataformas-e-integracao/padroes-de-arquitetura/04-inversao-de-controle-e-injecao-de-dependencias.md)
-  _(⚪ Planejado)_
 - [05. Padrões de Apresentação e Reatividade:
   MVVM](02-plataformas-e-integracao/padroes-de-arquitetura/05-padroes-de-apresentacao-e-reatividade-mvvm.md)
   _(⚪ Planejado)_
