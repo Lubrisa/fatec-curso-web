@@ -1,0 +1,6 @@
+{
+  "name": "Desenvolvimento Web Fullstack — FATEC",
+  "description": "Material didático completo e leitor interativo do curso de Desenvolvimento Web Fullstack da FATEC",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
